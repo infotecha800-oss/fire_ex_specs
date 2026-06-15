@@ -1,1 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>8A Fire Safety — Professional Fire Extinguishers</title>
+  <meta name="description" content="8A Fire Safety — Philippine-made fire extinguishers. HFC-235, Dry Chemical, and Foam types from 1 to 100 lbs. ISO 9001:2015 certified." />
 
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════
+     HERO
+     ══════════════════════════════════════════ -->
+<section id="hero" class="section-pad" style="padding-top:140px;">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6">
+        <div class="hero-label reveal-on-scroll"><span class="label-line"></span>Philippine-Made &middot; ISO 9001:2015</div>
+        <h1 class="hero-title reveal-on-scroll" data-delay="100">Professional Fire<br/><span class="stroke">Extinguishers</span></h1>
+        <p class="hero-sub reveal-on-scroll" data-delay="200">
+          8A Fire Safety manufactures HFC-235 clean agent, ABC dry chemical, and AFFF foam extinguishers from 1 to 100 lbs. ISO 9001:2015 certified and BFP compliant — protecting Philippine industry since 2021.
+        </p>
+        <div class="d-flex gap-3 flex-wrap reveal-on-scroll" data-delay="300">
+          <a href="#products" class="neu-btn neu-btn-accent">View Company Profile</a>
+          <a href="#specifications" class="neu-btn">Technical Specs</a>
+        </div>
+        <div class="hero-stats reveal-on-scroll" data-delay="400">
+          <div class="stat-pill"><span class="num" data-target="2019" data-suffix="">0</span><span class="label">Est. Year</span></div>
+          <div class="stat-pill"><span class="num" data-target="3" data-suffix=" Types">0</span><span class="label">Agent Types</span></div>
+        </div>
+      </div>
+      <div class="col-lg-6 d-flex justify-content-center">
+        <div class="reveal-on-scroll" data-delay="300" style="position:relative;">
+          <div id="revealContainer" class="reveal-container">
+            <img id="img-sketch" class="img-sketch" src="img/draw.png" alt="8A Fire Safety Extinguisher Technical Drawing" />
+            <img id="img-color" src="img/org.png" alt="" style="display:none;" />
+            <canvas id="reveal-canvas"></canvas>
+          </div>
+          <div class="reveal-hint"><span class="dot"></span>Hover to reveal</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     ABOUT
+     ══════════════════════════════════════════ -->
+<section id="about" class="section-pad">
+  <div class="container">
+    <div class="section-label reveal-on-scroll">Company Overview</div>
+    <h2 class="section-title reveal-on-scroll" data-delay="100">Engineered for Safety.<br/>Manufactured in the Philippines.</h2>
+    <p class="section-sub reveal-on-scroll" data-delay="200">
+      Every 8A Fire Safety extinguisher is engineered to meet international standards while supporting local Philippine industry. From compact 1-lb units to industrial 100-lb systems — complete fire protection coverage.
+    </p>
+    <div class="info-grid" data-stagger>
+      <div class="info-card">
+        <div class="ic-icon"><i class="fa-solid fa-industry"></i></div>
+        <h4>Philippine Manufacturing</h4>
+        <p>Manufactured at <strong> Purok Mansanas Sabang Naic CAvite Philippines</strong> — 8QCM+PXV, Purok Mansanas, Naic, Cavite</p>
+      </div>
+      <div class="info-card">
+        <div class="ic-icon"><i class="fa-solid fa-flask"></i></div>
+        <h4>Three Agent Types</h4>
+        <p><strong>HFC-235 (FE-36)</strong> clean agent for electronics, <strong>ABC Dry Chemical</strong> (MAP) for general purpose, and <strong>AFFF Foam</strong> for flammable liquids.</p>
+      </div>
+      <div class="info-card">
+        <div class="ic-icon"><i class="fa-solid fa-weight-hanging"></i></div>
+        <h4>Seven Weight Classes</h4>
+        <p>Available in <strong>1, 3, 5, 10, 20, 50, and 100 lbs</strong> capacities. From personal vehicle units to industrial total-flood systems.</p>
+      </div>
+      <div class="info-card">
+        <div class="ic-icon"><i class="fa-solid fa-fire"></i></div>
+        <h4>Fire Classes Covered</h4>
+        <div class="class-badges mt-2">
+          <div class="class-badge a">A</div>
+          <div class="class-badge b">B</div>
+          <div class="class-badge c">C</div>
+        </div>
+        <p class="mt-2" style="font-size:0.78rem;">A = Ordinary Combustibles &middot; B = Flammable Liquids &middot; C = Electrical Equipment</p>
+      </div>
+      <div class="info-card">
+        <div class="ic-icon"><i class="fa-solid fa-gauge-high"></i></div>
+        <h4>Pressure Systems</h4>
+        <p><strong>Stored Pressure</strong> design — no separate cartridge. Working pressure: <strong>1.2 MPa at 27°C</strong>. Test pressure: <strong>2.1 MPa</strong>.</p>
+      </div>
+      <div class="info-card">
+        <div class="ic-icon"><i class="fa-solid fa-circle-check"></i></div>
+        <h4>Certifications</h4>
+        <p><strong>ISO 9001:2015</strong> certified. <strong>BFP Compliant</strong> Bureau of Fire Protection Philippines. Product Safety License <strong>No. 0-0964</strong>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     SPECIFICATIONS
+     ══════════════════════════════════════════ -->
+<section id="specifications" class="section-pad">
+  <div class="container">
+    <div class="section-label reveal-on-scroll">Technical Data</div>
+    <h2 class="section-title reveal-on-scroll" data-delay="100">Complete Specifications</h2>
+    <p class="section-sub reveal-on-scroll" data-delay="200">
+      All technical parameters per ISO 9001:2015 manufacturing standards. Specifications vary by product type and capacity.
+    </p>
+    <div class="spec-table-wrapper reveal-on-scroll" data-delay="300">
+      <table class="spec-table">
+        <thead><tr><th>Parameter</th><th>HFC-235 (FE-36)</th><th>Dry Chemical (MAP)</th><th>AFFF Foam</th></tr></thead>
+        <tbody>
+          <tr><td>Product Type</td><td>Clean Agent Fire Extinguisher</td><td>Dry Chemical Stored Pressure</td><td>AFFF Foam Fire Extinguisher</td></tr>
+          <tr><td>Agent</td><td>HFC-236fa (FE-36) — 100%</td><td>Monoammonium Phosphate (MAP) — 40%</td><td>Aqueous Film Forming Foam (AFFF) — 3%</td></tr>
+          <tr><td>Capacity Range</td><td>1, 3, 5, 10, 20, 50, 100 lbs</td><td>1, 3, 5, 10, 20, 50, 100 lbs</td><td>1, 3, 5, 10, 20, 50, 100 lbs</td></tr>
+          <tr><td>Fire Classes</td><td><span class="spec-badge blue">Class B, C</span></td><td><span class="spec-badge green">Class A, B, C</span></td><td><span class="spec-badge orange">Class A, B</span></td></tr>
+          <tr><td>Working Pressure</td><td>1.34 MPa at 21°C (195 psi at 70°F)</td><td>1.2 MPa at 27°C (175 psi at 70°F)</td><td>1.2 MPa at 27°C (175 psi at 70°F)</td></tr>
+          <tr><td>Test Pressure</td><td>2.4 MPa</td><td>2.1 MPa</td><td>2.1 MPa</td></tr>
+          <tr><td>Cylinder Material</td><td>Seamless steel, DOT approved</td><td>Cold-rolled steel, powder-coated</td><td>Stainless steel 304/316</td></tr>
+          <tr><td>Operating Temperature</td><td>-40°C to +54°C</td><td>-20°C to +60°C</td><td>-10°C to +49°C</td></tr>
+          <tr><td>Residue</td><td><span class="spec-badge green">Zero Residue</span></td><td><span class="spec-badge orange">Powder Residue</span></td><td><span class="spec-badge blue">Foam Residue</span></td></tr>
+          <tr><td>Safe for Electronics</td><td><span class="spec-badge green">Yes — Non-Conductive</span></td><td><span class="spec-badge orange">Caution — Residue</span></td><td><span class="spec-badge orange">Caution — Liquid</span></td></tr>
+          <tr><td>Ideal Applications</td><td>Data centers, server rooms, labs, museums</td><td>Offices, warehouses, vehicles, general industry</td><td>Kitchens, fuel depots, hangars, petrochemical</td></tr>
+          <tr><td>ISO Certification</td><td><span class="spec-badge green">ISO 9001:2015</span></td><td><span class="spec-badge green">ISO 9001:2015</span></td><td><span class="spec-badge green">ISO 9001:2015</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     HOW TO USE (PASS)
+     ══════════════════════════════════════════ -->
+<section id="how-to-use" class="section-pad alt-bg">
+  <div class="container">
+    <div class="section-label reveal-on-scroll">Operating Guide</div>
+    <h2 class="section-title reveal-on-scroll" data-delay="100">The PASS Method</h2>
+    <p class="section-sub reveal-on-scroll" data-delay="200">Four standard operating steps for all 8A Fire Safety extinguishers. Remember: Pull, Aim, Squeeze, Sweep.</p>
+    <div class="pass-steps" data-stagger>
+      <div class="pass-step">
+        <div class="step-num">1</div>
+        <div class="step-icon"><i class="fa-solid fa-lock-open"></i></div>
+        <h4>PULL the Pin</h4>
+        <p>Break the tamper seal and pull the safety pin from the handle. This unlocks the operating lever.</p>
+      </div>
+      <div class="pass-step">
+        <div class="step-num">2</div>
+        <div class="step-icon"><i class="fa-solid fa-crosshairs"></i></div>
+        <h4>AIM at Base</h4>
+        <p>Stand 2–3 meters back. Point the nozzle at the <strong>base of the fire</strong>, not at the flames.</p>
+      </div>
+      <div class="pass-step">
+        <div class="step-num">3</div>
+        <div class="step-icon"><i class="fa-solid fa-hand-fist"></i></div>
+        <h4>SQUEEZE the Lever</h4>
+        <p>Squeeze the handle lever firmly to discharge the agent. Release to stop the flow.</p>
+      </div>
+      <div class="pass-step">
+        <div class="step-num">4</div>
+        <div class="step-icon"><i class="fa-solid fa-arrows-left-right"></i></div>
+        <h4>SWEEP Side to Side</h4>
+        <p>Move the nozzle slowly side-to-side across the base until the fire is completely out.</p>
+      </div>
+    </div>
+    <div class="row mt-5 g-4">
+      <div class="col-md-6 reveal-on-scroll">
+        <div class="neu-card p-4">
+          <h5 class="card-label"><i class="fa-solid fa-check-circle"></i> Suitable For</h5>
+          <ul class="check-list">
+            <li><i class="fa-solid fa-tree"></i> Class A — Wood, Paper, Cloth, Trash</li>
+            <li><i class="fa-solid fa-oil-can"></i> Class B — Flammable Liquids, Grease</li>
+            <li><i class="fa-solid fa-bolt"></i> Class C — Energized Electrical Equipment</li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-6 reveal-on-scroll" data-delay="100">
+        <div class="neu-card p-4">
+          <h5 class="card-label red"><i class="fa-solid fa-triangle-exclamation"></i> Do NOT Use On</h5>
+          <ul class="check-list red">
+            <li><i class="fa-solid fa-circle-xmark"></i> Combustible metal fires (Class D)</li>
+            <li><i class="fa-solid fa-circle-xmark"></i> Cooking oil fires without proper agent</li>
+            <li><i class="fa-solid fa-circle-xmark"></i> Do not test discharge unnecessarily</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     CERTIFICATES
+     ══════════════════════════════════════════ -->
+<section id="certificates" class="section-pad">
+  <div class="container">
+    <div class="section-label reveal-on-scroll">Compliance & Standards</div>
+    <h2 class="section-title reveal-on-scroll" data-delay="100">Certificates &amp; Documentation</h2>
+    <p class="section-sub reveal-on-scroll" data-delay="200">All 8A Fire Safety products are manufactured under strict quality management systems and Philippine regulatory compliance.</p>
+    <div class="cert-grid" data-stagger>
+      <div class="cert-card">
+        <div class="cert-icon-wrap"><i class="fa-solid fa-award"></i></div>
+        <div>
+          <h4>ISO 9001:2015</h4>
+          <p>Certified Quality Management System covering the full production lifecycle — from raw material sourcing to finished unit inspection.</p>
+          <small class="cert-number">Ref: License No. 0-0964</small>
+          <div class="cert-status">CERTIFIED — ACTIVE</div>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon-wrap"><i class="fa-solid fa-shield-halved"></i></div>
+        <div>
+          <h4>Product Safety License (PH)</h4>
+          <p>Registered with Philippine regulatory authorities. Product Safety License No. 0-0964 issued under the Philippine Consumer Act.</p>
+          <div class="cert-status">LICENSED</div>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon-wrap"><i class="fa-solid fa-clipboard-check"></i></div>
+        <div>
+          <h4>BFP Compliance</h4>
+          <p>Compliant with Bureau of Fire Protection (BFP) of the Philippines standards and requirements for fire suppression equipment.</p>
+          <div class="cert-status">COMPLIANT</div>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon-wrap"><i class="fa-solid fa-fire-extinguisher"></i></div>
+        <div>
+          <h4>Technical Inspection Record</h4>
+          <p>Each unit undergoes hydraulic pressure testing at 2.1 MPa, valve integrity check, and label verification before shipment.</p>
+          <div class="cert-status">TEST PASSED</div>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon-wrap"><i class="fa-solid fa-globe"></i></div>
+        <div>
+          <h4>Made in the Philippines</h4>
+          <p>Proudly manufactured locally at Purok Manasanas Sabang Naic Cavite. Supporting Philippine industry and local employment since 2019.</p>
+          <div class="cert-status">LOCAL MANUFACTURE</div>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon-wrap"><i class="fa-solid fa-sync"></i></div>
+        <div>
+          <h4>Recharge &amp; Service Certification</h4>
+          <p>After any discharge, a recharge service form must be completed. Recharge available through 8A authorized service centers.</p>
+          <div class="cert-status">SERVICE AVAILABLE</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     PRODUCTION TIMELINE
+     ══════════════════════════════════════════ -->
+<section id="timeline" class="section-pad alt-bg">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-5 reveal-on-scroll">
+        <div class="section-label">Production Process</div>
+        <h2 class="section-title">From Raw Materials<br/>to Your Facility</h2>
+        <p class="section-sub">Every 8A Fire Safety extinguisher undergoes a rigorous five-stage production process with quality checks at each stage.</p>
+        <div class="process-highlight">
+          <div class="ph-item"><span class="ph-num">2.1</span><span class="ph-unit">MPa</span><span class="ph-label">Hydraulic Test</span></div>
+          <div class="ph-item"><span class="ph-num">100%</span><span class="ph-label">Gauge Check</span></div>
+          <div class="ph-item"><span class="ph-num">ISO</span><span class="ph-unit">9001</span><span class="ph-label">Quality Standard</span></div>
+        </div>
+      </div>
+      <div class="col-lg-7">
+        <div class="timeline">
+          <div class="tl-item reveal-on-scroll">
+            <span class="tl-year">Stage 01</span>
+            <h4>Material Sourcing</h4>
+            <p>Monoammonium Phosphate (MAP) and HFC-236fa agents are sourced from certified international suppliers. Steel and stainless steel cylinder blanks are procured from ISO-certified local mills.</p>
+          </div>
+          <div class="tl-item reveal-on-scroll" data-delay="100">
+            <span class="tl-year">Stage 02</span>
+            <h4>Cylinder Fabrication &amp; Testing</h4>
+            <p>Cylinders are formed, welded, and hydraulically tested at 2.1 MPa to confirm structural integrity before any filling.</p>
+          </div>
+          <div class="tl-item reveal-on-scroll" data-delay="200">
+            <span class="tl-year">Stage 03</span>
+            <h4>Agent Filling &amp; Pressurization</h4>
+            <p>The specified amount of fire suppression agent is loaded precisely, then the unit is pressurized to the working level.</p>
+          </div>
+          <div class="tl-item reveal-on-scroll" data-delay="300">
+            <span class="tl-year">Stage 04</span>
+            <h4>Quality Inspection &amp; Labeling</h4>
+            <p>Each unit receives comprehensive final inspection including pressure gauge calibration, ISO label, date stamp, and serial number engraving.</p>
+          </div>
+          <div class="tl-item reveal-on-scroll" data-delay="400">
+            <span class="tl-year">Stage 05</span>
+            <h4>Distribution &amp; Post-Sale Service</h4>
+            <p>Units are carefully packaged and distributed from our Quezon City facility. Post-sale recharge and recertification services available nationwide.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     CONTACT
+     ══════════════════════════════════════════ -->
+<section id="contact" class="section-pad">
+  <div class="container">
+    <div class="contact-box reveal-on-scroll">
+      <div class="section-label" style="justify-content:center;">Get In Touch</div>
+      <h2>Need a Quote or<br/>Recharge Service?</h2>
+      <p>Contact 8A Fire Safety Maintenance &amp; Manufacturing Corporation for product inquiries, volume pricing, recharge services, or certification documentation.</p>
+      <div class="d-flex justify-content-center gap-3 flex-wrap">
+        <a href="tel:09676615730" class="neu-btn neu-btn-accent"><i class="fa-solid fa-phone"></i> Call Us</a>
+        <a href="https://8agroup.org" target="_blank" class="neu-btn"><i class="fa-solid fa-globe"></i> Website</a>
+      </div>
+      <div class="contact-details">
+        <div class="contact-pill"><span class="icon"><i class="fa-solid fa-location-dot"></i></span><span>Purok Mansanas Sabang Naic Cavite</span></div>
+        <div class="contact-pill"><span class="icon"><i class="fa-solid fa-phone"></i></span><span>0967-661-5730 / 0965-096-1966</span></div>
+        <div class="contact-pill"><span class="icon"><i class="fa-solid fa-globe"></i></span><span>https://8agroup.org</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     FOOTER
+     ══════════════════════════════════════════ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="index.html" class="brand"><span class="brand-text">8A Fire Safety</span></a>
+      <p class="footer-tagline">Protecting Lives and Property Since 2019</p>
+    </div>
+    <div class="footer-links">
+      <a href="#about">About</a>
+      <a href="#products">Products</a>
+      <a href="#specifications">Specifications</a>
+      <a href="#how-to-use">How to Use</a>
+      <a href="#certificates">Certificates</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="footer-contact">
+      <a href="tel:09676615730" class="footer-link"><i class="fa-solid fa-phone"></i> 0967-661-5730</a>
+      <a href="mailto:info@8afiresafety.com" class="footer-link"><i class="fa-solid fa-envelope"></i> info@8afiresafety.com</a>
+      <a href="https://8agroup.org" target="_blank" class="footer-link"><i class="fa-solid fa-globe"></i> 8agroup.org</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-badges">
+      <span class="footer-badge"><i class="fa-solid fa-certificate"></i> ISO 9001:2015</span>
+      <span class="footer-badge"><i class="fa-solid fa-shield-halved"></i> BFP Compliant</span>
+      <span class="footer-badge"><i class="fa-solid fa-flag"></i> Made in Philippines</span>
+    </div>
+    <p class="copyright">&copy; 2026 8A Fire Safety Maintenance &amp; Manufacturing Corporation. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc4s9bIOgUxi8T/AgQF0uTAlC2B7qCBx0u9P8xK2B0" crossorigin="anonymous"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
