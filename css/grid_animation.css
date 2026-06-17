@@ -1,0 +1,50 @@
+/* ================================================================
+   8A FIRE SAFETY — ANIMATED GRID CSS
+   Add to css/styles.css (or link as separate file)
+   ================================================================ */
+
+/* Canvas sits directly behind all hero content */
+#h8a-grid-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;   /* canvas receives no mouse events by default */
+  z-index: 0;
+}
+
+/* Allow the hero section to receive mouse events for the animation.
+   The section itself must be position:relative (already set). */
+.h8a-hero-section {
+  cursor: default;
+}
+
+/* Re-enable pointer events on the canvas for hover + click effects */
+#h8a-grid-canvas {
+  pointer-events: all;
+}
+
+/* Make sure all hero children float above the canvas */
+.h8a-inner,
+.h8a-grid-bg,   /* keep but hide — canvas replaces it */
+.h8a-orb {
+  z-index: 1;
+}
+
+/* Optional: hide the static CSS grid-bg since the canvas replaces it */
+.h8a-grid-bg {
+  display: none;
+}
+
+/* ── REDUCED MOTION: disable canvas animation ── */
+@media (prefers-reduced-motion: reduce) {
+  #h8a-grid-canvas { display: none; }
+  .h8a-grid-bg     { display: block; } /* restore static bg */
+}
+
+/* ── MOBILE: lighter grid, smaller step feel ── */
+@media (max-width: 640px) {
+  #h8a-grid-canvas {
+    opacity: 0.7;
+  }
+}
