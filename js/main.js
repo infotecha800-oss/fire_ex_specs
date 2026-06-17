@@ -1,6 +1,7 @@
 /* ============================================================
    8A FIRE SAFETY — Main JavaScript
-   Paint Reveal + Scroll Animations + Product Tabs + UI
+   Dry Chemical Only Version
+   Paint Reveal + Scroll Animations + Product Detail Tabs + UI
    ============================================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -269,10 +270,11 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('[data-target]').forEach(el => counterObs.observe(el));
 
   /* ════════════════════════════════════════════════
-     7. PRODUCT TABS
+     7. PRODUCT DETAIL TABS
+     Tab switching for product size panels
   ════════════════════════════════════════════════ */
   const tabBtns = document.querySelectorAll('.tab-btn');
-  const tabPanels = document.querySelectorAll('.product-grid');
+  const tabPanels = document.querySelectorAll('.product-detail-panel');
 
   tabBtns.forEach(btn => {
     btn.addEventListener('click', () => {
@@ -340,5 +342,171 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  console.log('8A Fire Safety — All systems initialized');
+  /* ════════════════════════════════════════════════
+     ANATOMY SCROLL ANIMATION — Hero Section
+     Scroll-driven part reveal with progress dots
+     ════════════════════════════════════════════════ */
+  (function() {
+    const stage = document.getElementById('anatomyStage');
+    const dots = document.getElementById('anatomyDots');
+    const nudge = document.getElementById('anatomyNudge');
+    const counter = document.getElementById('partCounter');
+    const img = document.getElementById('anatomyImg');
+
+    if (!stage) return;
+
+    const parts = [
+      'safety-pin',
+      'press-handle', 
+      'pressure-gauge',
+      'florescent-ring',
+      'nozzle-hose',
+      'cylinder',
+      'label-sticker',
+      'zip-tie'
+    ];
+
+    let currentIndex = -1;
+    let hasScrolled = false;
+
+    function updateAnatomy(scrollProgress) {
+      // Calculate which part should be active (0-7)
+      const totalParts = parts.length;
+      const index = Math.min(Math.floor(scrollProgress * totalParts), totalParts - 1);
+
+      if (index !== currentIndex) {
+        currentIndex = index;
+
+        // Update counter
+        if (counter) {
+          counter.textContent = String(index + 1).padStart(2, '0');
+        }
+
+        // Update dots
+        document.querySelectorAll('.a-dot').forEach((dot, i) => {
+          dot.classList.toggle('lit', i === index);
+        });
+
+        // Show/hide labels
+        parts.forEach((part, i) => {
+          const label = document.getElementById('label-' + part);
+          if (label) {
+            if (i <= index) {
+              label.classList.add('is-visible');
+            } else {
+              label.classList.remove('is-visible');
+            }
+          }
+        });
+
+        // Subtle image pulse on new part
+        if (img) {
+          img.classList.add('highlighted');
+          setTimeout(() => img.classList.remove('highlighted'), 400);
+        }
+      }
+    }
+
+    function onScroll() {
+      if (!hasScrolled && nudge) {
+        nudge.style.opacity = '0';
+        hasScrolled = true;
+      }
+
+      const rect = stage.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+
+      // Show dots when in view
+      if (dots) {
+        if (rect.top < windowHeight && rect.bottom > 0) {
+          dots.classList.add('is-active');
+        } else {
+          dots.classList.remove('is-active');
+        }
+      }
+
+      // Calculate scroll progress through the stage
+      const stageTop = rect.top;
+      const stageHeight = rect.height; 
+      const progress = Math.max(0, Math.min(1, -stageTop / (stageHeight - windowHeight)));
+
+      updateAnatomy(progress);
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // Dot click navigation
+    document.querySelectorAll('.a-dot').forEach((dot, i) => {
+      dot.addEventListener('click', () => {
+        const stageRect = stage.getBoundingClientRect();
+        const stageHeight = stageRect.height;
+        const windowHeight = window.innerHeight;
+        const targetScroll = window.scrollY + stageRect.top + (stageHeight - windowHeight) * (i / (parts.length - 1));
+        window.scrollTo({ top: targetScroll, behavior: 'smooth' });
+      });
+    });
+
+    // Initial state
+    onScroll();
+  })();
+
+  console.log('8A Fire Safety — Dry Chemical Edition — All systems initialized');
 });
+
+/*hero*/
+/* ══════════════════════════════════════════════════════════════
+   8A FIRE SAFETY — HERO REDESIGN: JavaScript
+   Paste this block INSIDE the existing DOMContentLoaded callback
+   in js/main.js, right before the final console.log() line.
+   ══════════════════════════════════════════════════════════════ */
+
+/* ── Staggered card entrance ── */
+(function h8aCardEntrance() {
+  const cards = document.querySelectorAll('.h8a-card');
+  if (!cards.length) return;
+  cards.forEach((card, i) => {
+    setTimeout(() => card.classList.add('h8a-vis'), 300 + i * 130);
+  });
+})();
+
+/* ── SVG dashed connector lines (dot → stage centre) ── */
+(function h8aDrawLines() {
+  const stage = document.getElementById('h8aStage');
+  const svg   = document.getElementById('h8aLines');
+  if (!stage || !svg) return;
+
+  const dotClasses = [
+    'h8a-dot-tl','h8a-dot-tr',
+    'h8a-dot-ml','h8a-dot-mr',
+    'h8a-dot-bl','h8a-dot-br',
+  ];
+
+  function draw() {
+    svg.innerHTML = '';
+    const sr = stage.getBoundingClientRect();
+    const cx = sr.width  / 2;
+    const cy = sr.height / 2;
+
+    dotClasses.forEach(cls => {
+      const el = stage.querySelector('.' + cls);
+      if (!el) return;
+      const dr = el.getBoundingClientRect();
+      const dx = dr.left - sr.left + dr.width  / 2;
+      const dy = dr.top  - sr.top  + dr.height / 2;
+
+      const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+      line.setAttribute('x1', dx);
+      line.setAttribute('y1', dy);
+      line.setAttribute('x2', cx);
+      line.setAttribute('y2', cy);
+      line.setAttribute('stroke', 'rgba(185,28,28,0.18)');
+      line.setAttribute('stroke-width', '1');
+      line.setAttribute('stroke-dasharray', '5 4');
+      svg.appendChild(line);
+    });
+  }
+
+  /* Draw after cards have had a moment to settle */
+  setTimeout(draw, 500);
+  window.addEventListener('resize', draw);
+})();
