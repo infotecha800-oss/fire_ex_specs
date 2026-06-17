@@ -1,7 +1,7 @@
 /* ============================================================
    8A FIRE SAFETY — Professional Neumorphism Design
-   Formal, Corporate UI/UX Interface
-   All hover effects preserved and enhanced
+   Dry Chemical Only Version — Product Detail Panels Added
+   All original styles preserved + new product card styles
    ============================================================ */
 
 /* ── Google Fonts Import via HTML ── */
@@ -483,22 +483,36 @@ img {
 }
 
 .neu-btn:hover {
-  box-shadow: var(--neu-shadow-inset);
-  color: var(--accent);
-  transform: translateY(-1px);
-}
-
-.neu-btn-accent {
-  background: linear-gradient(135deg, var(--accent), #dc2626);
+   background: linear-gradient(135deg, var(--accent-hover), #dc2626);
   color: #fff;
   box-shadow: 4px 4px 14px rgba(185, 28, 28, 0.35), -2px -2px 8px rgba(255,255,255,0.4);
   border: none;
 }
 
+.neu-btn-accent {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--surface);
+  border-radius: var(--radius-pill);
+  box-shadow: var(--neu-shadow-sm);
+  border: 1px solid var(--border);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--text-primary);
+  padding: 14px 32px;
+  cursor: pointer;
+  transition: var(--transition);
+  text-decoration: none;
+  letter-spacing: 0.02em;
+}
+
 .neu-btn-accent:hover {
-  box-shadow: var(--neu-shadow-inset), inset 2px 2px 8px rgba(0,0,0,0.2);
-  transform: scale(0.97);
+   background: linear-gradient(135deg, var(--accent-hover), #dc2626);
   color: #fff;
+  box-shadow: 4px 4px 14px rgba(185, 28, 28, 0.35), -2px -2px 8px rgba(255,255,255,0.4);
+  border: none;
 }
 
 /* ── Neumorphism Card ── */
@@ -620,7 +634,7 @@ img {
 .class-badge.b { background: linear-gradient(135deg, #1d4ed8, #3b82f6); }
 .class-badge.c { background: linear-gradient(135deg, #7c3aed, #a855f7); }
 
-/* ── Product Catalog ── */
+/* ── Product Tabs ── */
 .product-tabs {
   display: flex;
   gap: 8px;
@@ -662,14 +676,14 @@ img {
   color: #fff;
 }
 
-/* Product Grid */
-.product-grid {
+/* ── Product Detail Panels ── */
+.product-detail-panel {
   display: none;
+  animation: fadeIn 0.4s ease;
 }
 
-.product-grid.active {
+.product-detail-panel.active {
   display: block;
-  animation: fadeIn 0.4s ease;
 }
 
 @keyframes fadeIn {
@@ -677,328 +691,161 @@ img {
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* Featured Product Cards */
-#tab-all {
-  display: none;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 24px;
-}
-
-#tab-all.active {
-  display: grid;
-}
-
-.product-card {
+.product-detail-card {
   background: var(--surface);
-  border-radius: var(--radius);
-  box-shadow: var(--neu-shadow);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--neu-shadow-lg);
   border: 1px solid var(--border);
-  padding: 28px;
+  padding: 40px;
   transition: var(--transition);
-  position: relative;
-  overflow: hidden;
 }
 
-.product-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, var(--accent), #dc2626);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.4s ease;
-}
-
-.product-card:hover::before {
-  transform: scaleX(1);
-}
-
-.product-card:hover {
-  box-shadow: var(--neu-shadow-inset);
-  transform: translateY(-4px);
-}
-
-.product-header {
+/* Product Image Box */
+.product-image-box {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 16px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 24px;
+  border-radius: var(--radius);
+  box-shadow: var(--neu-shadow-inset);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  height: 100%;
+  min-height: 320px;
+  position: relative;
 }
 
-.product-icon {
-  width: 48px;
-  height: 48px;
+.product-size-badge {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: linear-gradient(135deg, var(--accent), #dc2626);
+  color: #fff;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 0.9rem;
+  padding: 8px 16px;
+  border-radius: var(--radius-pill);
+  box-shadow: 0 4px 12px rgba(185, 28, 28, 0.3);
+}
+
+.product-icon-large {
+  font-size: 6rem;
+  color: var(--accent);
+  margin-bottom: 20px;
+  filter: drop-shadow(4px 4px 8px rgba(185, 28, 28, 0.2));
+}
+
+.product-agent-tag {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: var(--accent-light);
+  padding: 6px 16px;
+  border-radius: var(--radius-pill);
+}
+
+/* Product Info Grid */
+.product-info-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+.info-block {
+  display: flex;
+  gap: 16px;
+  padding: 20px 24px;
+  border-radius: var(--radius);
+  box-shadow: var(--neu-shadow-sm);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  transition: var(--transition);
+}
+
+.info-block:hover {
+  box-shadow: var(--neu-shadow-inset);
+  transform: translateX(4px);
+}
+
+.info-block-icon {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
   border-radius: var(--radius-sm);
   background: var(--surface);
   box-shadow: var(--neu-shadow-sm);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   color: var(--accent);
   transition: var(--transition);
 }
 
-.product-card:hover .product-icon {
+.info-block:hover .info-block-icon {
   box-shadow: var(--neu-shadow-inset);
 }
 
-.product-badges {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 6px;
-}
-
-.product-cat {
-  font-size: 0.68rem;
+.info-block-content h5 {
+  font-size: 0.85rem;
   font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  background: var(--bg);
-  padding: 3px 10px;
-  border-radius: var(--radius-pill);
-  box-shadow: var(--neu-shadow-sm);
-}
-
-.stock-badge {
-  display: inline-block;
-  padding: 3px 10px;
-  border-radius: var(--radius-pill);
-  font-size: 0.68rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-
-.status-instock  { background: var(--success-bg); color: var(--success); }
-.status-low      { background: var(--warning-bg); color: var(--warning); }
-.status-out      { background: var(--danger-bg);  color: var(--danger); }
-.status-preorder { background: var(--info-bg);    color: var(--info); }
-
-.product-name {
-  font-size: 0.95rem;
-  font-weight: 700;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
   color: var(--text-primary);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
-.product-desc {
+.info-block-content p {
   font-size: 0.82rem;
   color: var(--text-secondary);
-  line-height: 1.6;
-  margin-bottom: 14px;
+  line-height: 1.65;
+  margin: 0;
 }
 
-.product-meta {
+.info-block-content strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+/* Product Meta Row */
+.product-meta-row {
   display: flex;
   gap: 12px;
-  margin-bottom: 14px;
   flex-wrap: wrap;
-}
-
-.meta-item {
-  font-size: 0.78rem;
-  color: var(--text-muted);
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
-.meta-item i {
-  color: var(--accent);
-  font-size: 0.7rem;
-}
-
-.product-price {
-  font-family: var(--font-display);
-  font-size: 1.2rem;
-  font-weight: 800;
-  color: var(--accent);
-  margin-bottom: 12px;
-}
-
-.product-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-top: 14px;
+  margin-top: 24px;
+  padding-top: 24px;
   border-top: 1px solid var(--border);
 }
 
-.sku-label {
-  font-family: monospace;
-  font-size: 0.72rem;
-  color: var(--text-faint);
-  font-weight: 600;
-  letter-spacing: 0.05em;
-}
-
-.agent-label {
-  font-size: 0.68rem;
-  color: var(--text-muted);
-  font-weight: 600;
-  max-width: 55%;
-  text-align: right;
-}
-
-/* ── Category Intro ── */
-.category-intro {
-  display: flex;
+.meta-badge {
+  display: inline-flex;
   align-items: center;
-  gap: 28px;
-  margin-bottom: 32px;
-  padding: 28px 32px;
-  border-radius: var(--radius);
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: var(--radius-pill);
   box-shadow: var(--neu-shadow-sm);
   background: var(--surface);
   border: 1px solid var(--border);
-}
-
-.category-icon-large {
-  width: 72px;
-  height: 72px;
-  border-radius: var(--radius);
-  background: var(--surface);
-  box-shadow: var(--neu-shadow);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 2rem;
-  color: var(--accent);
-  flex-shrink: 0;
-}
-
-.category-info h3 {
-  font-size: 1.2rem;
-  margin-bottom: 6px;
-}
-
-.category-info p {
-  font-size: 0.85rem;
+  font-size: 0.78rem;
+  font-weight: 600;
   color: var(--text-secondary);
-  line-height: 1.6;
-  margin-bottom: 8px;
-}
-
-.agent-badge {
-  display: inline-block;
-  padding: 4px 12px;
-  border-radius: var(--radius-pill);
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  background: var(--accent-light);
-  color: var(--accent);
-}
-
-/* ── Product Comparison Table ── */
-.product-table-wrapper {
-  border-radius: var(--radius);
-  box-shadow: var(--neu-shadow);
-  background: var(--surface);
-  overflow: hidden;
-  border: 1px solid var(--border);
-  margin-bottom: 40px;
-}
-
-.product-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.product-table thead th {
-  background: linear-gradient(135deg, var(--accent), #dc2626);
-  color: #fff;
-  padding: 16px 20px;
-  font-family: var(--font-display);
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  text-align: left;
-  border: none;
-}
-
-.product-table tbody tr {
-  border-bottom: 1px solid rgba(0,0,0,0.05);
   transition: var(--transition);
 }
 
-.product-table tbody tr:last-child {
-  border-bottom: none;
-}
-
-.product-table tbody tr:hover {
-  background: rgba(185, 28, 28, 0.02);
-}
-
-.product-table tbody td {
-  padding: 14px 20px;
-  font-size: 0.82rem;
-  color: var(--text-primary);
-  vertical-align: middle;
-}
-
-.sku-cell {
-  font-family: monospace;
-  font-weight: 700;
-  color: var(--text-muted);
-  font-size: 0.75rem !important;
-  letter-spacing: 0.03em;
-}
-
-.model-cell strong {
-  display: block;
-  font-size: 0.85rem;
-  margin-bottom: 2px;
-}
-
-.model-cell small {
-  color: var(--text-muted);
-  font-size: 0.72rem;
-  line-height: 1.4;
-  display: block;
-}
-
-.weight-cell {
-  font-weight: 700;
-  font-family: var(--font-display);
-}
-
-.price-cell {
-  font-family: var(--font-display);
-  font-weight: 800;
+.meta-badge:hover {
+  box-shadow: var(--neu-shadow-inset);
   color: var(--accent);
-  font-size: 0.9rem !important;
-  white-space: nowrap;
 }
 
-/* Fire Class Badges in Table */
-.fire-class-badges {
-  display: flex;
-  gap: 4px;
+.meta-badge i {
+  color: var(--accent);
+  font-size: 0.85rem;
 }
-
-.fc-badge {
-  width: 24px;
-  height: 24px;
-  border-radius: 6px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: 0.72rem;
-  color: #fff;
-}
-
-.fc-a { background: linear-gradient(135deg, #15803d, #22c55e); }
-.fc-b { background: linear-gradient(135deg, #1d4ed8, #3b82f6); }
-.fc-c { background: linear-gradient(135deg, #7c3aed, #a855f7); }
 
 /* ── Weight Comparison Guide ── */
 .weight-guide {
@@ -1146,7 +993,7 @@ img {
   font-size: 0.76rem;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  width: 20%;
+  width: 30%;
 }
 
 .spec-badge {
@@ -1680,21 +1527,20 @@ footer {
   .footer-contact {
     align-items: center;
   }
-  .product-table-wrapper {
+  .product-detail-card {
+    padding: 24px;
+  }
+  .product-image-box {
+    min-height: 240px;
+  }
+  .info-block {
+    padding: 16px 18px;
+  }
+  .spec-table-wrapper {
     overflow-x: auto;
   }
-  .product-table {
-    min-width: 700px;
-  }
-  .category-intro {
-    flex-direction: column;
-    text-align: center;
-  }
-  .category-info {
-    text-align: center;
-  }
-  .agent-badge {
-    display: inline-block;
+  .spec-table {
+    min-width: 600px;
   }
 }
 
@@ -1721,6 +1567,12 @@ footer {
   .weight-guide {
     padding: 24px 16px;
   }
+  .product-detail-card {
+    padding: 20px 16px;
+  }
+  .product-meta-row {
+    justify-content: center;
+  }
 }
 
 @media (max-width: 576px) {
@@ -1739,4 +1591,687 @@ footer {
     padding: 10px 18px;
     font-size: 0.75rem;
   }
+  .product-image-box {
+    padding: 30px 16px;
+  }
+  .product-icon-large {
+    font-size: 4rem;
+  }
+  .info-block {
+    flex-direction: column;
+    text-align: center;
+  }
+  .info-block-icon {
+    margin: 0 auto;
+  }
+}
+
+/* ══════════════════════════════════════════
+   ANATOMY SCROLL SECTION — Hero Replacement
+   ══════════════════════════════════════════ */
+
+#hero {
+  position: relative;
+  overflow: visible;
+}
+
+/* Scroll stage: tall enough for 8 steps */
+.anatomy-stage {
+  position: relative;
+  height: calc(8 * 70vh);
+}
+
+/* Sticky frame that holds everything */
+.anatomy-sticky {
+  position: sticky;
+  top: 80px;
+  height: calc(100vh - 80px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Header text inside sticky frame */
+.anatomy-sticky-header {
+  text-align: center;
+  margin-bottom: 8px;
+  z-index: 5;
+  pointer-events: none;
+}
+
+/* Canvas + label layout */
+.anatomy-canvas {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 70vh;
+}
+
+/* The sketch image */
+.anatomy-img {
+  width: clamp(180px, 22vw, 300px);
+  height: auto;
+  display: block;
+  position: relative;
+  z-index: 2;
+  flex-shrink: 0;
+  filter: drop-shadow(0 12px 40px rgba(0,0,0,0.08));
+  user-select: none;
+  transition: filter 0.5s ease, transform 0.5s ease;
+}
+
+.anatomy-img.highlighted {
+  filter: drop-shadow(0 12px 40px rgba(185, 28, 28, 0.15));
+  transform: scale(1.02);
+}
+
+/* Individual part labels */
+.a-label {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  opacity: 0;
+  transform: translateX(0) translateY(6px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.a-label.a-left  { flex-direction: row-reverse; }
+.a-label.a-right { flex-direction: row; }
+
+.a-label.is-visible {
+  opacity: 1;
+  transform: translateX(0) translateY(0);
+}
+
+/* Connector line */
+.a-line {
+  height: 2px;
+  background: var(--accent, #b91c1c);
+  width: 0;
+  flex-shrink: 0;
+  position: relative;
+  transition: width 0.45s cubic-bezier(.4,0,.2,1) 0.1s;
+}
+
+.a-label.is-visible .a-line {
+  width: clamp(40px, 6vw, 100px);
+}
+
+/* Dot at the end of the line that touches the image */
+.a-line::after {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: var(--accent, #b91c1c);
+  border-radius: 50%;
+  top: 50%;
+  transform: translateY(-50%);
+  box-shadow: 0 0 0 3px rgba(185, 28, 28, 0.15);
+}
+.a-label.a-left  .a-line::after { right: 0; }
+.a-label.a-right .a-line::after { left: 0; }
+
+/* Text block */
+.a-text {
+  padding: 0 14px;
+  max-width: 220px;
+}
+
+.a-label.a-left .a-text { text-align: right; }
+.a-label.a-right .a-text { text-align: left; }
+
+.a-name {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: clamp(0.75rem, 1vw, 0.95rem);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text, #1e293b);
+  white-space: nowrap;
+  line-height: 1.2;
+}
+
+.a-desc {
+  font-size: clamp(0.65rem, 0.8vw, 0.78rem);
+  color: #64748b;
+  line-height: 1.5;
+  margin-top: 4px;
+  font-weight: 400;
+}
+
+/* Progress dots — right side, fixed during scroll */
+.anatomy-dots {
+  position: fixed;
+  right: 28px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  opacity: 0;
+  transition: opacity 0.35s;
+}
+
+.anatomy-dots.is-active { opacity: 1; }
+
+.a-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #cbd5e1;
+  transition: background 0.3s, transform 0.3s;
+  cursor: pointer;
+}
+
+.a-dot.lit {
+  background: var(--accent, #b91c1c);
+  transform: scale(1.4);
+}
+
+/* Counter pill */
+.anatomy-counter {
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #94a3b8;
+  font-weight: 500;
+  white-space: nowrap;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.anatomy-counter b {
+  color: var(--accent, #b91c1c);
+  font-weight: 800;
+  font-size: 1.1rem;
+}
+
+/* Scroll nudge hint */
+.anatomy-nudge {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #94a3b8;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: opacity 0.4s;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 600;
+}
+
+.nudge-bar {
+  width: 1px;
+  height: 20px;
+  background: #cbd5e1;
+  animation: nudge-bounce 1.5s ease-in-out infinite;
+}
+
+@keyframes nudge-bounce {
+  0%,100% { transform: translateY(0); }
+  50%      { transform: translateY(6px); }
+}
+
+/* ── Part vertical positions (% of sticky height) ── */
+.a-label[data-p="safety-pin"]      { top: 10%; }
+.a-label[data-p="press-handle"]    { top: 8%;  }
+.a-label[data-p="pressure-gauge"]  { top: 26%; }
+.a-label[data-p="florescent-ring"] { top: 30%; }
+.a-label[data-p="nozzle-hose"]     { top: 46%; }
+.a-label[data-p="cylinder"]        { top: 48%; }
+.a-label[data-p="label-sticker"]   { top: 62%; }
+.a-label[data-p="zip-tie"]         { top: 74%; }
+
+/* Horizontal positioning relative to image center */
+/* left labels: anchored right of left edge */
+.a-label.a-left  { right: calc(50% + clamp(90px, 11vw, 150px)); }
+/* right labels: anchored left of right edge */
+.a-label.a-right { left: calc(50% + clamp(90px, 11vw, 150px)); }
+
+/* Mobile */
+@media (max-width: 768px) {
+  .anatomy-stage { height: calc(8 * 60vh); }
+  .anatomy-sticky { top: 60px; height: calc(100vh - 60px); }
+  .a-desc { display: none; }
+  .anatomy-dots { right: 12px; gap: 8px; }
+  .a-label.a-left  { right: calc(50% + 80px); }
+  .a-label.a-right { left: calc(50% + 80px); }
+  .a-label.is-visible .a-line { width: 30px; }
+  .anatomy-img { width: 160px; }
+  .a-name { font-size: 0.7rem; }
+}
+
+@media (max-width: 480px) {
+  .a-label.a-left  { right: calc(50% + 70px); }
+  .a-label.a-right { left: calc(50% + 70px); }
+  .anatomy-img { width: 140px; }
+}
+/* ══════════════════════════════════════════════════════════════
+   8A FIRE SAFETY — HERO REDESIGN  (v2 — spacing & sizing fix)
+   Paste this block at the END of css/styles.css
+   Replace the previous hero block entirely with this one.
+   ══════════════════════════════════════════════════════════════ */
+
+/* ── Hero section container ── */
+.h8a-hero-section {
+  position: relative;
+  min-height: 100vh;
+  padding-top: 10px;
+  padding-bottom: 60px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background-color: var(--bg);
+}
+
+.h8a-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 5;
+}
+
+/* ── Ambient background ── */
+.h8a-grid-bg {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(185,28,28,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(185,28,28,0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+  -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.h8a-orb {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+}
+.h8a-orb-1 {
+  width: 750px; height: 750px;
+  background: rgba(185,28,28,0.07);
+  filter: blur(80px);
+  top: -80px; right: -100px;
+}
+.h8a-orb-2 {
+  width: 520px; height: 520px;
+  background: rgba(185,28,28,0.05);
+  filter: blur(60px);
+  bottom: 20px; left: -80px;
+}
+
+/* ── Hero text block — SMALLER title, tighter spacing ── */
+.h8a-top-text {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.h8a-hero-label {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.h8a-hero-label-dash {
+  display: inline-block;
+  width: 24px;
+  height: 1.5px;
+  background: var(--accent);
+}
+
+/* ▼ Title reduced from clamp(2.2rem,5vw,4.2rem) → clamp(1.5rem,3vw,2.6rem) */
+.h8a-hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3vw, 2.6rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: var(--text-primary);
+  margin-bottom: 5px;
+}
+.h8a-hero-title-stroke {
+  -webkit-text-stroke: 2px var(--text-primary);
+  color: transparent;
+}
+
+.h8a-hero-sub {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  max-width: 420px;
+  line-height: 1.7;
+  margin: 0 auto;
+}
+
+/* ── Stage — TALLER + WIDER to give cards room ── */
+.h8a-stage {
+  position: relative;
+  /* Was 700px / 480px — now wider and taller for breathing room */
+  width: min(900px, 96vw);
+  height: 560px;
+  margin: 28px auto 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Rotating rings — scaled up to match larger stage */
+.h8a-ring {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  top: 50%;
+  left: 50%;
+}
+/* Was 460px → 520px */
+.h8a-ring-outer {
+  width: 720px; height: 720px;
+  border: 1px dashed rgba(185,28,28,0.12);
+  transform: translate(-50%, -50%);
+  animation: h8a-ring-spin 40s linear infinite;
+}
+/* Was 290px → 320px */
+.h8a-ring-inner {
+  width: 320px; height: 320px;
+  border: 1px solid rgba(185,28,28,0.08);
+  transform: translate(-50%, -50%);
+  animation: h8a-ring-spin-rev 28s linear infinite;
+}
+
+@keyframes h8a-ring-spin     { to { transform: translate(-50%,-50%) rotate(360deg);  } }
+@keyframes h8a-ring-spin-rev { to { transform: translate(-50%,-50%) rotate(-360deg); } }
+
+/* SVG connector lines */
+.h8a-svg-lines {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 8;
+}
+
+/* ── Pulse dots — moved further out to match bigger rings ── */
+.h8a-dot-pulse {
+  position: absolute;
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 0 rgba(185,28,28,0.35);
+  animation: h8a-pulse 2.2s ease-out infinite;
+  z-index: 11;
+}
+@keyframes h8a-pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(185,28,28,0.35); }
+  70%  { box-shadow: 0 0 0 9px rgba(185,28,28,0); }
+  100% { box-shadow: 0 0 0 0 rgba(185,28,28,0); }
+}
+
+/* Dots sit just inside the outer ring edge (±230px from centre) */
+.h8a-dot-tl { top:  68px;             left: calc(50% - 148px); }
+.h8a-dot-tr { top:  68px;             left: calc(50% + 140px); }
+.h8a-dot-ml { top:  calc(50% - 5px);  left: calc(50% - 222px); }
+.h8a-dot-mr { top:  calc(50% - 5px);  left: calc(50% + 214px); }
+.h8a-dot-bl { bottom: 80px;           left: calc(50% - 148px); }
+.h8a-dot-br { bottom: 80px;           left: calc(50% + 140px); }
+
+/* ── Floating info cards — pushed further from centre ── */
+.h8a-card {
+  position: absolute;
+  background: rgba(232,236,241,0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.85);
+  border-radius: 16px;
+  box-shadow:
+    7px 7px 18px var(--shadow-dark),
+    -7px -7px 18px var(--shadow-light);
+  padding: 18px 22px;
+  width: 200px;
+  opacity: 0;
+  transform: scale(0.9) translateY(10px);
+  transition: opacity 0.5s ease, transform 0.5s ease, box-shadow 0.3s ease;
+  z-index: 20;
+  cursor: default;
+}
+.h8a-card.h8a-vis {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+.h8a-card:hover {
+  transform: scale(1.04) translateY(-3px) !important;
+  box-shadow:
+    10px 10px 24px var(--shadow-dark),
+    -10px -10px 24px var(--shadow-light),
+    0 0 0 1.5px rgba(185,28,28,0.12);
+  z-index: 30;
+}
+
+/*
+  Card positions — key change: pushed well clear of centre.
+  Left cards:  right: calc(50% + Xpx)  →  larger X = further left
+  Right cards: left:  calc(50% + Xpx)  →  larger X = further right
+  Top/bottom offset controls vertical spread.
+
+  Old values were ≈90–110px from centre → cards overlapped.
+  New: 150–180px so they clear the inner ring (160px radius).
+*/
+.h8a-card-tl { top:  -50px;              right: calc(50% + 248px); }
+.h8a-card-tr { top:  -50px;              left:  calc(50% + 248px); }
+.h8a-card-ml { top:  calc(50% - 84px);  right: calc(50% + 278px); }
+.h8a-card-mr { top:  calc(50% - 84px);  left:  calc(50% + 278px); }
+.h8a-card-bl { bottom: -40px;            right: calc(50% + 248px); }
+.h8a-card-br { bottom: -40px;            left:  calc(50% + 248px); }
+
+/* Card internals */
+.h8a-card-icon {
+  width: 34px; height: 34px;
+  border-radius: 10px;
+  background: rgba(185,28,28,0.07);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+  color: var(--accent);
+  margin-bottom: 10px;
+  box-shadow: 3px 3px 8px var(--shadow-dark), -2px -2px 6px var(--shadow-light);
+}
+.h8a-card-title {
+  font-family: var(--font-display);
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  margin-bottom: 6px;
+}
+.h8a-card-value {
+  font-family: var(--font-display);
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.25;
+  margin-bottom: 5px;
+}
+.h8a-card-detail {
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+}
+
+/* ── Centre product — BIGGER image ── */
+.h8a-product-core {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.h8a-img-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Was clamp(110px,14vw,170px) → clamp(180px,20vw,260px) */
+.h8a-product-img {
+  width: clamp(180px, 30vw, 460px);
+  height: auto;
+  display: block;
+  filter:
+    drop-shadow(0 28px 56px rgba(185,28,28,0.20))
+    drop-shadow(0 6px 18px rgba(0,0,0,0.12));
+  animation: h8a-float 4.5s ease-in-out infinite;
+  user-select: none;
+  pointer-events: none;
+}
+.h8a-product-svg-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@keyframes h8a-float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-14px); }
+}
+
+.h8a-product-badge {
+  font-family: var(--font-display);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: rgba(185,28,28,0.07);
+  border: 1px solid rgba(185,28,28,0.14);
+  padding: 5px 14px;
+  border-radius: var(--radius-pill);
+  white-space: nowrap;
+}
+
+/* ── Cert pills ── */
+.h8a-certs-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 8px;
+  margin-top: 90px;
+}
+.h8a-cert-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 18px;
+  border-radius: var(--radius-pill);
+  background: var(--surface);
+  box-shadow: var(--neu-shadow-sm);
+  border: 1px solid var(--border);
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  letter-spacing: 0.04em;
+  transition: var(--transition);
+}
+.h8a-cert-pill:hover {
+  box-shadow: var(--neu-shadow-inset);
+  transform: translateY(-1px);
+}
+.h8a-pill-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.h8a-pill-dot.green { background: #15803d; }
+.h8a-pill-dot.red   { background: var(--accent); }
+.h8a-pill-dot.blue  { background: #1d4ed8; }
+.h8a-pill-dot.amber { background: #d97706; }
+
+/* ── Hero buttons ── */
+.h8a-hero-btns {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* ══════════════
+   RESPONSIVE
+   ══════════════ */
+
+/* Tablet */
+@media (max-width: 991px) {
+  .h8a-stage { height: 480px; width: 100%; }
+  .h8a-ring-outer { width: 420px; height: 420px; }
+  .h8a-ring-inner { width: 260px; height: 260px; }
+  .h8a-card { width: 172px; padding: 14px 16px; }
+  .h8a-card-detail { display: none; }
+  .h8a-card-tl { top: 24px;             right: calc(50% + 112px); }
+  .h8a-card-tr { top: 24px;             left:  calc(50% + 112px); }
+  .h8a-card-ml { top: calc(50% - 52px); right: calc(50% + 140px); }
+  .h8a-card-mr { top: calc(50% - 52px); left:  calc(50% + 140px); }
+  .h8a-card-bl { bottom: 32px;          right: calc(50% + 112px); }
+  .h8a-card-br { bottom: 32px;          left:  calc(50% + 112px); }
+  .h8a-dot-tl { top: 52px;             left: calc(50% - 118px); }
+  .h8a-dot-tr { top: 52px;             left: calc(50% + 110px); }
+  .h8a-dot-ml { top: calc(50% - 5px);  left: calc(50% - 178px); }
+  .h8a-dot-mr { top: calc(50% - 5px);  left: calc(50% + 170px); }
+  .h8a-dot-bl { bottom: 60px;          left: calc(50% - 118px); }
+  .h8a-dot-br { bottom: 60px;          left: calc(50% + 110px); }
+  .h8a-product-img { width: clamp(140px, 18vw, 200px); }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .h8a-hero-section { padding-top: 80px; }
+  .h8a-hero-title { font-size: clamp(1.3rem, 5vw, 1.8rem); }
+  .h8a-stage { height: 380px; }
+  .h8a-ring-outer { width: 320px; height: 320px; }
+  .h8a-ring-inner { width: 200px; height: 200px; }
+  .h8a-card { width: 136px; padding: 10px 12px; }
+  .h8a-card-value { font-size: 0.78rem; }
+  .h8a-card-icon { width: 26px; height: 26px; font-size: 0.75rem; }
+  .h8a-card-tl { top: 14px;             right: calc(50% + 76px); }
+  .h8a-card-tr { top: 14px;             left:  calc(50% + 76px); }
+  .h8a-card-ml { top: calc(50% - 42px); right: calc(50% + 94px); }
+  .h8a-card-mr { top: calc(50% - 42px); left:  calc(50% + 94px); }
+  .h8a-card-bl { bottom: 20px;          right: calc(50% + 76px); }
+  .h8a-card-br { bottom: 20px;          left:  calc(50% + 76px); }
+  .h8a-dot-tl { top: 32px;            left: calc(50% - 88px); }
+  .h8a-dot-tr { top: 32px;            left: calc(50% + 80px); }
+  .h8a-dot-ml { top: calc(50% - 5px); left: calc(50% - 112px); }
+  .h8a-dot-mr { top: calc(50% - 5px); left: calc(50% + 104px); }
+  .h8a-dot-bl { bottom: 40px;         left: calc(50% - 88px); }
+  .h8a-dot-br { bottom: 40px;         left: calc(50% + 80px); }
+  .h8a-product-img { width: 110px; }
+  .h8a-hero-btns { gap: 10px; }
 }
