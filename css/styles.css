@@ -1,12 +1,12 @@
-
 :root {
-
+  /* Base Colors — Cool, Professional Neumorphism */
   --bg:           #e8ecf1;
   --bg-alt:       #eef2f6;
   --surface:      #e8ecf1;
   --shadow-dark:  #c5c9d0;
   --shadow-light: #ffffff;
 
+  /* Brand Colors — Fire Safety Red */
   --accent:       #b91c1c;
   --accent-hover: #991b1b;
   --accent-light: #fee2e2;
@@ -27,7 +27,7 @@
   --info:         #1d4ed8;
   --info-bg:      #dbeafe;
 
-
+  /* Neumorphism Shadows */
   --neu-shadow:         8px 8px 20px var(--shadow-dark),
                        -8px -8px 20px var(--shadow-light);
   --neu-shadow-sm:      4px 4px 10px var(--shadow-dark),
@@ -1860,7 +1860,7 @@ footer {
 .h8a-hero-section {
   position: relative;
   min-height: 100vh;
-  padding-top: 10px;
+  padding-top: 90px;
   padding-bottom: 60px;
   display: flex;
   align-items: center;
@@ -1900,7 +1900,7 @@ footer {
   width: 750px; height: 750px;
   background: rgba(185,28,28,0.07);
   filter: blur(80px);
-  top: -80px; right: -100px;
+  top: -80px; right: -80px;
 }
 .h8a-orb-2 {
   width: 520px; height: 520px;
