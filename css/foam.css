@@ -2021,14 +2021,14 @@ footer {
   width: 9px; height: 9px;
   border-radius: 50%;
   background: var(--accent);
-  box-shadow: 0 0 0 0 rgba(185,28,28,0.35);
+  box-shadow: 0 0 0 0 rgba(57, 28, 185, 0.35);
   animation: h8a-pulse 2.2s ease-out infinite;
   z-index: 11;
 }
 @keyframes h8a-pulse {
-  0%   { box-shadow: 0 0 0 0 rgba(185,28,28,0.35); }
-  70%  { box-shadow: 0 0 0 9px rgba(185,28,28,0); }
-  100% { box-shadow: 0 0 0 0 rgba(185,28,28,0); }
+  0%   { box-shadow: 0 0 0 0 rgba(38, 28, 185, 0.35); }
+  70%  { box-shadow: 0 0 0 9px rgba(31, 28, 185, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(31, 28, 185, 0); }
 }
 
 /* Dots sit just inside the outer ring edge (±230px from centre) */
