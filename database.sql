@@ -1,246 +1,1079 @@
--- ============================================================
--- 8A FIRE SAFETY — MySQL Database Schema
--- Professional Fire Extinguisher Catalog
--- ============================================================
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>8A Fire Safety — Dry Chemical Fire Extinguishers</title>
+  <meta name="description" content="8A Fire Safety — Philippine-made ABC Dry Chemical fire extinguishers. Available in 1, 3, 5, 10, 20, 50, and 100 lbs. ISO 9001:2015 certified." />
 
-CREATE DATABASE IF NOT EXISTS fire_safety_db
-  CHARACTER SET utf8mb4
-  COLLATE utf8mb4_unicode_ci;
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/grid_animation.css" />
+<base target="_blank">
+<base target="_blank">
+</head>
+<body>
+<section id="hero" class="h8a-hero-section">
 
-USE fire_safety_db;
+  <!-- Ambient background grid + orbs -->
+  <div class="h8a-grid-bg"></div>
+  <div class="h8a-orb h8a-orb-1"></div>
+  <div class="h8a-orb h8a-orb-2"></div>
 
--- ============================================================
--- 1. PRODUCT CATEGORIES
--- ============================================================
-CREATE TABLE IF NOT EXISTS product_categories (
-  id            INT AUTO_INCREMENT PRIMARY KEY,
-  category_code VARCHAR(20)  NOT NULL UNIQUE COMMENT 'hfc235, dry_chem, foam',
-  category_name VARCHAR(100) NOT NULL COMMENT 'Display name',
-  description   TEXT         COMMENT 'Category description',
-  agent_type    VARCHAR(200) COMMENT 'Chemical agent used',
-  icon_class    VARCHAR(50)  DEFAULT 'fa-fire-extinguisher' COMMENT 'Font Awesome icon',
-  sort_order    INT          DEFAULT 0,
-  status        ENUM('active','inactive') DEFAULT 'active',
-  created_at    TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  updated_at    TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  <div class="container h8a-inner">
 
--- ============================================================
--- 2. WEIGHT CLASSES
--- ============================================================
-CREATE TABLE IF NOT EXISTS weight_classes (
-  id          INT AUTO_INCREMENT PRIMARY KEY,
-  weight_lbs  INT         NOT NULL UNIQUE COMMENT '1, 3, 5, 10, 20, 50, 100',
-  weight_kg   DECIMAL(6,2) COMMENT 'Approximate kg equivalent',
-  sort_order  INT         DEFAULT 0,
-  status      ENUM('active','inactive') DEFAULT 'active'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+    <!-- ── Top text block ── -->
+    <div class="h8a-top-text reveal-on-scroll">
+      <div class="h8a-hero-label">
+        <span class="h8a-hero-label-dash"></span>
+        8A Fire Safety
+        <span class="h8a-hero-label-dash"></span>
+      </div>
+      <h1 class="h8a-hero-title">
+        ABC Dry Chemical<br>
+        <span class="h8a-hero-title-stroke">Extinguisher</span>
+      </h1>
+     
+    </div>
 
--- ============================================================
--- 3. PRODUCTS (21 SKUs = 3 categories × 7 weights)
--- ============================================================
-CREATE TABLE IF NOT EXISTS products (
-  id              INT AUTO_INCREMENT PRIMARY KEY,
-  sku             VARCHAR(30)  NOT NULL UNIQUE COMMENT 'e.g., HFC235-001, DRY-010, FOAM-050',
-  category_id     INT          NOT NULL,
-  weight_id       INT          NOT NULL,
-  model_number    VARCHAR(50)  COMMENT 'Manufacturer model number',
-  name            VARCHAR(200) NOT NULL COMMENT 'Display name',
-  short_desc      VARCHAR(300) COMMENT 'Short description for cards',
-  description     TEXT         COMMENT 'Full description',
-  specifications  JSON         COMMENT 'Variable specs per product',
-  fire_classes    VARCHAR(20)  COMMENT 'A,B,C etc',
-  working_pressure    VARCHAR(50) COMMENT 'e.g., 1.2 MPa at 27°C',
-  test_pressure       VARCHAR(50) COMMENT 'e.g., 2.1 MPa',
-  cylinder_material   VARCHAR(100) COMMENT 'Steel, Alloy, etc',
-  valve_type      VARCHAR(100) COMMENT 'Valve specification',
-  discharge_time  VARCHAR(50)  COMMENT 'Discharge duration',
-  discharge_range VARCHAR(50)  COMMENT 'Effective range in meters',
-  operating_temp  VARCHAR(100) COMMENT 'Temperature range',
-  height_mm       INT          COMMENT 'Height in mm',
-  diameter_mm     INT          COMMENT 'Diameter in mm',
-  full_weight_kg  DECIMAL(6,2) COMMENT 'Total filled weight kg',
-  image_primary   VARCHAR(200) COMMENT 'Primary product image path',
-  image_gallery   JSON         COMMENT 'Array of gallery image paths',
-  datasheet_url   VARCHAR(200) COMMENT 'PDF datasheet link',
-  price_php       DECIMAL(12,2) COMMENT 'Price in Philippine Peso',
-  stock_status    ENUM('in_stock','low_stock','out_of_stock','pre_order') DEFAULT 'in_stock',
-  featured        BOOLEAN      DEFAULT FALSE,
-  status          ENUM('active','inactive','discontinued') DEFAULT 'active',
-  created_at      TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  updated_at      TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    <!-- ── Stage: floating cards + product center ── -->
+    <div class="h8a-stage reveal-on-scroll" data-delay="200" id="h8aStage">
 
-  FOREIGN KEY (category_id) REFERENCES product_categories(id) ON DELETE CASCADE,
-  FOREIGN KEY (weight_id)   REFERENCES weight_classes(id) ON DELETE CASCADE,
+      <!-- Rotating rings -->
+      <div class="h8a-ring h8a-ring-outer"></div>
+      <div class="h8a-ring h8a-ring-inner"></div>
 
-  INDEX idx_category (category_id),
-  INDEX idx_weight (weight_id),
-  INDEX idx_status (status),
-  INDEX idx_featured (featured),
-  INDEX idx_sku (sku)
+      <!-- SVG connector lines (drawn by JS) -->
+      <svg id="h8aLines" class="h8a-svg-lines" xmlns="http://www.w3.org/2000/svg"></svg>
 
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+      <!-- Pulse dots (anchor points on image perimeter) -->
+      <div class="h8a-dot-pulse h8a-dot-tl" style="animation-delay:0s"></div>
+      <div class="h8a-dot-pulse h8a-dot-tr" style="animation-delay:0.4s"></div>
+      <div class="h8a-dot-pulse h8a-dot-ml" style="animation-delay:0.8s"></div>
+      <div class="h8a-dot-pulse h8a-dot-mr" style="animation-delay:1.2s"></div>
+      <div class="h8a-dot-pulse h8a-dot-bl" style="animation-delay:1.6s"></div>
+      <div class="h8a-dot-pulse h8a-dot-br" style="animation-delay:2.0s"></div>
 
--- ============================================================
--- 4. COMPANY INFO (Single row for company details)
--- ============================================================
-CREATE TABLE IF NOT EXISTS company_info (
-  id              INT AUTO_INCREMENT PRIMARY KEY,
-  company_name    VARCHAR(200) NOT NULL DEFAULT '8A Fire Safety',
-  legal_name      VARCHAR(300) COMMENT 'Full legal entity name',
-  tagline         VARCHAR(200) COMMENT 'Company tagline',
-  description     TEXT         COMMENT 'Company description',
-  address         VARCHAR(300) COMMENT 'Full address',
-  city            VARCHAR(100),
-  region          VARCHAR(100) COMMENT 'State/Region',
-  zip_code        VARCHAR(20),
-  country         VARCHAR(100) DEFAULT 'Philippines',
-  phone_primary   VARCHAR(50),
-  phone_secondary VARCHAR(50),
-  phone_tertiary  VARCHAR(50),
-  email           VARCHAR(100),
-  website         VARCHAR(200),
-  iso_certificate VARCHAR(100) COMMENT 'ISO cert number',
-  license_number  VARCHAR(100) COMMENT 'Business license',
-  established_year INT,
-  logo_url        VARCHAR(200),
-  status          ENUM('active','inactive') DEFAULT 'active',
-  updated_at      TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+   <!-- CARD 0: Warranty Coverage -->
+<div class="h8a-card h8a-card-tl" id="h8a-card-0">
+    <div class="h8a-card-icon"><i class="fa-solid fa-shield-halved"></i></div>
+    <div class="h8a-card-title">Warranty Coverage</div>
+    <div class="h8a-card-value">1 Year Warranty</div>
+    <div class="h8a-card-detail">Guaranteed quality and performance backed by manufacturer support.</div>
+</div>
+      <!-- CARD 1: Origin (top-right) -->
+      <div class="h8a-card h8a-card-tr" id="h8a-card-1">
+        <div class="h8a-card-icon"><i class="fa-solid fa-map-location-dot"></i></div>
+        <div class="h8a-card-title">Origin</div>
+        <div class="h8a-card-value">Made in Philippines</div>
+        <div class="h8a-card-detail">Naic, Cavite. 100% local manufacturing &amp; employment.</div>
+      </div>
 
--- ============================================================
--- 5. CERTIFICATES
--- ============================================================
-CREATE TABLE IF NOT EXISTS certificates (
-  id          INT AUTO_INCREMENT PRIMARY KEY,
-  title       VARCHAR(200) NOT NULL,
-  issuer      VARCHAR(200) COMMENT 'Issuing body',
-  cert_number VARCHAR(100) COMMENT 'Certificate number',
-  description TEXT,
-  icon_class  VARCHAR(50) DEFAULT 'certificate',
-  status_label VARCHAR(50) COMMENT 'e.g., CERTIFIED, LICENSED, COMPLIANT',
-  issue_date  DATE,
-  expiry_date DATE,
-  status      ENUM('active','expired','renewing') DEFAULT 'active',
-  sort_order  INT DEFAULT 0,
-  created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+      <!-- CARD 2: Valid Period (mid-left) -->
+      <div class="h8a-card h8a-card-ml" id="h8a-card-2">
+        <div class="h8a-card-icon"><i class="fa-solid fa-clock-rotate-left"></i></div>
+        <div class="h8a-card-title">Valid Period</div>
+        <div class="h8a-card-value">1 Year</div>
+        <div class="h8a-card-detail">Annual ISO inspection</div>
+      </div>
 
--- ============================================================
--- 6. CONTACT MESSAGES (Form submissions)
--- ============================================================
-CREATE TABLE IF NOT EXISTS contact_messages (
-  id          INT AUTO_INCREMENT PRIMARY KEY,
-  name        VARCHAR(200) NOT NULL,
-  email       VARCHAR(200) NOT NULL,
-  phone       VARCHAR(50),
-  company     VARCHAR(200),
-  subject     VARCHAR(200),
-  message     TEXT         NOT NULL,
-  product_interest VARCHAR(100) COMMENT 'Which product they are interested in',
-  status      ENUM('new','read','replied','archived') DEFAULT 'new',
-  created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  INDEX idx_status (status),
-  INDEX idx_created (created_at)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+      <!-- CARD 3: Applicable Scenarios (mid-right) -->
+      <div class="h8a-card h8a-card-mr" id="h8a-card-3">
+        <div class="h8a-card-icon"><i class="fa-solid fa-building"></i></div>
+        <div class="h8a-card-title">Scenarios</div>
+        <div class="h8a-card-value">Class A · B · C</div>
+        <div class="h8a-card-detail">Offices, vehicles, warehouses, industrial plants &amp; more.</div>
+      </div>
 
--- ============================================================
--- 7. PRODUCTION TIMELINE STAGES
--- ============================================================
-CREATE TABLE IF NOT EXISTS timeline_stages (
-  id          INT AUTO_INCREMENT PRIMARY KEY,
-  stage_num   VARCHAR(20) NOT NULL COMMENT '01, 02, etc',
-  title       VARCHAR(200) NOT NULL,
-  description TEXT NOT NULL,
-  sort_order  INT DEFAULT 0,
-  status      ENUM('active','inactive') DEFAULT 'active'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+        <!-- CARD 4: Certifications (bottom-left) -->
+    <div class="h8a-card h8a-card-bl" id="h8a-card-4">
+      <div class="h8a-card-icon">
+        <i class="fa-solid fa-certificate"></i>
+      </div>
+      <div class="h8a-card-title">Certification</div>
+      <div class="h8a-card-value">PS Mark</div>
+      <div class="h8a-card-detail">License No. Q-4096</div>
+    </div>
 
--- ============================================================
--- SEED DATA
--- ============================================================
+      <!-- CARD 5: Working Pressure (bottom-right) -->
+      <div class="h8a-card h8a-card-br" id="h8a-card-5">
+        <div class="h8a-card-icon"><i class="fa-solid fa-gauge-high"></i></div>
+        <div class="h8a-card-title">Working Pressure</div>
+        <div class="h8a-card-value">1344(kPA) at 28°C</div>
+        <div class="h8a-card-detail">Test pressure 2.75 MPa. Range: 8–22 ft (varies by capacity)</div>
+      </div>
 
--- Categories
-INSERT INTO product_categories (category_code, category_name, description, agent_type, icon_class, sort_order) VALUES
-('hfc235',    'HFC-235',    'HFC-235 (FE-36) Clean Agent Fire Extinguisher — leaves no residue, safe for electronics and sensitive equipment.', 'HFC-236fa (FE-36) Clean Agent', 'fa-fire-extinguisher', 1),
-('dry_chem',  'Dry Chemical', 'ABC Dry Chemical Fire Extinguisher — Monoammonium Phosphate (MAP) agent, versatile for Class A, B, and C fires.', 'Monoammonium Phosphate (MAP) 40%', 'fa-fire', 2),
-('foam',      'Foam',       'AFFF Foam Fire Extinguisher — Aqueous Film Forming Foam for Class A and B fires, ideal for flammable liquid hazards.', 'Aqueous Film Forming Foam (AFFF)', 'fa-water', 3);
+      <!-- ── Centre product image ── -->
+      <div class="h8a-product-core">
+        <!-- Use your existing org.png; fallback icon if missing -->
+        <div class="h8a-img-wrap">
+          <img
+            src="img/org.png"
+            alt="8A Fire Safety ABC Dry Chemical Fire Extinguisher"
+            class="h8a-product-img"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
+          />
+          <!-- Fallback SVG (hidden unless img fails) -->
+          <div class="h8a-product-svg-fallback" style="display:none;">
+            <i class="fa-solid fa-fire-extinguisher" style="font-size:7rem;color:#b91c1c;filter:drop-shadow(0 8px 24px rgba(185,28,28,0.25));"></i>
+          </div>
+        </div>
+        <span class="h8a-product-badge">ABC Dry Chemical · MAP 75%</span>
+      </div>
 
--- Weight Classes
-INSERT INTO weight_classes (weight_lbs, weight_kg, sort_order) VALUES
-(1,   0.45,  1),
-(3,   1.36,  2),
-(5,   2.27,  3),
-(10,  4.54,  4),
-(20,  9.07,  5),
-(50,  22.68, 6),
-(100, 45.36, 7);
+    </div><!-- /.h8a-stage -->
 
--- Products: HFC-235 (Clean Agent - FE-36)
-INSERT INTO products (sku, category_id, weight_id, model_number, name, short_desc, description, specifications, fire_classes, working_pressure, test_pressure, cylinder_material, valve_type, discharge_time, discharge_range, operating_temp, height_mm, diameter_mm, full_weight_kg, price_php, stock_status, featured) VALUES
-('HFC235-001', 1, 1, 'HFC235-FA1', 'HFC-235 1 lbs Clean Agent', 'Compact clean agent extinguisher for electronics and server rooms.', 'The HFC-235 1 lbs FE-36 clean agent extinguisher is ideal for protecting sensitive electronic equipment, server racks, data centers, and laboratories. The HFC-236fa agent leaves absolutely no residue, making it perfect for areas where cleanup from traditional extinguisher agents would be costly or damaging.', '{"agent_capacity": "1 lbs (0.45 kg) FE-36", "agent_concentration": "HFC-236fa 100%", "operating_pressure": "195 psi at 70°F", "valve": "Anodized aluminum", "gauge": "Pressure indicator", " hose": "None — nozzle discharge", "bracket": "Vehicle / wall mount"}', 'B,C', '1.34 MPa at 21°C', '2.4 MPa', 'Seamless steel DOT approved', 'Anodized aluminum valve w/ safety pin', '8-10 seconds', '2.4-3.0 meters', '-40°C to +54°C', 280, 65, 1.8, 4850.00, 'in_stock', FALSE),
+    <!-- ── Bottom cert pills ── -->
+    <div class="h8a-certs-row reveal-on-scroll" data-delay="350">
+      <div class="h8a-cert-pill"><span class="h8a-pill-dot green"></span>ISO 9001:2015</div>
+      <div class="h8a-cert-pill"><span class="h8a-pill-dot blue"></span>Made in Philippines</div>
+      <div class="h8a-cert-pill"><span class="h8a-pill-dot amber"></span>7 Weight Classes</div>
+    </div> 
 
-('HFC235-003', 1, 2, 'HFC235-FA3', 'HFC-235 3 lbs Clean Agent', 'Portable clean agent protection for offices, control rooms, and medical equipment.', 'The HFC-235 3 lbs FE-36 clean agent extinguisher offers enhanced fire protection for office environments, medical facilities, control rooms, and areas with valuable electronics. The clean agent vaporizes completely after discharge, leaving zero residue and zero cleanup.', '{"agent_capacity": "3 lbs (1.36 kg) FE-36", "agent_concentration": "HFC-236fa 100%", "operating_pressure": "195 psi at 70°F", "valve": "Anodized aluminum", "gauge": "Pressure indicator", "hose": "None — nozzle discharge", "bracket": "Wall mount included"}', 'B,C', '1.34 MPa at 21°C', '2.4 MPa', 'Seamless steel DOT approved', 'Anodized aluminum valve w/ safety pin', '9-11 seconds', '3.0-4.0 meters', '-40°C to +54°C', 390, 90, 4.2, 9850.00, 'in_stock', TRUE),
+  </div><!-- /.container -->
+</section>
 
-('HFC235-005', 1, 3, 'HFC235-FA5', 'HFC-235 5 lbs Clean Agent', 'Mid-size clean agent for data centers, telecom rooms, and CNC machines.', 'The HFC-235 5 lbs FE-36 clean agent extinguisher provides robust protection for critical infrastructure including data centers, telecommunications facilities, CNC machining centers, and broadcast studios. Zero ozone depletion potential (ODP=0).', '{"agent_capacity": "5 lbs (2.27 kg) FE-36", "agent_concentration": "HFC-236fa 100%", "operating_pressure": "195 psi at 70°F", "valve": "Heavy-duty anodized aluminum", "gauge": "Pressure indicator", "hose": "Flexible discharge hose", "bracket": "Heavy-duty wall mount"}', 'A,B,C', '1.34 MPa at 21°C', '2.4 MPa', 'Seamless steel DOT approved', 'Heavy-duty anodized aluminum valve', '10-13 seconds', '3.6-4.5 meters', '-40°C to +54°C', 460, 110, 7.1, 14850.00, 'in_stock', FALSE),
 
-('HFC235-010', 1, 4, 'HFC235-FA10', 'HFC-235 10 lbs Clean Agent', 'Large capacity clean agent for server farms, laboratories, and clean rooms.', 'The HFC-235 10 lbs FE-36 clean agent extinguisher delivers substantial fire suppression capability for large server farms, pharmaceutical clean rooms, research laboratories, and museums with valuable artifacts. Electrically non-conductive and safe for occupied spaces.', '{"agent_capacity": "10 lbs (4.54 kg) FE-36", "agent_concentration": "HFC-236fa 100%", "operating_pressure": "195 psi at 70°F", "valve": "Heavy-duty anodized aluminum", "gauge": "Pressure indicator", "hose": "5 ft flexible discharge hose", "bracket": "Heavy-duty wall mount", "wheels": "Optional transport cart"}', 'A,B,C', '1.34 MPa at 21°C', '2.4 MPa', 'Seamless steel DOT approved', 'Heavy-duty anodized aluminum valve', '12-15 seconds', '4.5-5.5 meters', '-40°C to +54°C', 560, 140, 13.5, 24850.00, 'in_stock', TRUE),
+<!-- ── SECTION: KEY INFO ── -->
+<section id="product-info" class="section-pad alt-bg reveal-on-scroll" data-delay="200">
+  <div class="container h8a-inner">
+    <div class="section-eyebrow">Manufacturing &amp; Identity</div>
+    <h2 class="section-title">Product Information</h2>
+    <div class="info-grid">
 
-('HFC235-020', 1, 5, 'HFC235-FA20', 'HFC-235 20 lbs Clean Agent', 'Industrial clean agent protection for aircraft hangars and marine engine rooms.', 'The HFC-235 20 lbs FE-36 clean agent extinguisher is designed for industrial-scale protection of aircraft hangars, marine engine rooms, power generation facilities, and large manufacturing plants with sensitive electronics. UL/ULC listed and approved for occupied spaces.', '{"agent_capacity": "20 lbs (9.07 kg) FE-36", "agent_concentration": "HFC-236fa 100%", "operating_pressure": "195 psi at 70°F", "valve": "Industrial brass valve", "gauge": "Large dial pressure gauge", "hose": "5 ft reinforced discharge hose", "bracket": "Floor stand / wheeled cart", "wheels": "Steel transport cart"}', 'A,B,C', '1.34 MPa at 21°C', '2.4 MPa', 'Seamless steel DOT approved', 'Industrial brass valve assembly', '15-18 seconds', '5.5-6.5 meters', '-40°C to +54°C', 720, 180, 25.2, 42850.00, 'in_stock', FALSE),
+      <div class="info-card">
+        <div class="ic-icon">📅</div>
+        <div class="ic-label" style="font-weight:700;">Production Date</div>
+        <div class="ic-value">July 2025</div>
+        <div class="ic-detail">Manufacturing timestamp verified by QC inspector. Date embossed on cylinder base.</div>
+      </div>
 
-('HFC235-050', 1, 6, 'HFC235-FA50', 'HFC-235 50 lbs Clean Agent', 'Commercial clean agent system for large facilities and critical infrastructure.', 'The HFC-235 50 lbs FE-36 clean agent extinguisher provides commercial-grade fire suppression for large data centers, telecommunications hubs, military command centers, and pharmaceutical manufacturing facilities. Wheeled unit for rapid deployment.', '{"agent_capacity": "50 lbs (22.68 kg) FE-36", "agent_concentration": "HFC-236fa 100%", "operating_pressure": "195 psi at 70°F", "valve": "Commercial brass valve", "gauge": "Large dial pressure gauge", "hose": "10 ft reinforced discharge hose", "bracket": "Steel wheeled cart with locking brake", "wheels": "10\" pneumatic wheels"}', 'A,B,C', '1.34 MPa at 21°C', '2.4 MPa', 'Seamless steel DOT/TC approved', 'Commercial brass valve assembly', '18-22 seconds', '6.5-8.0 meters', '-40°C to +54°C', 950, 240, 58.5, 89500.00, 'in_stock', FALSE),
+      <div class="info-card">
+        <div class="ic-icon">🌏</div>
+        <div class="ic-label" style="font-weight:700;">Country of Manufacture</div>
+        <div class="ic-value">Philippines 🇵🇭</div>
+        <div class="ic-detail">Produced at Purok Mansanas, Sabang, Naic, Cavite — 100% locally manufactured, supporting Philippine industry.</div>
+      </div>
 
-('HFC235-100', 1, 7, 'HFC235-FA100', 'HFC-235 100 lbs Clean Agent', 'Maximum capacity clean agent for industrial total flood applications.', 'The HFC-235 100 lbs FE-36 clean agent extinguisher is the ultimate portable solution for industrial total flood protection of large hangars, naval vessels, transformer stations, and critical national infrastructure. Heavy-duty wheeled unit with extended reach hose system.', '{"agent_capacity": "100 lbs (45.36 kg) FE-36", "agent_concentration": "HFC-236fa 100%", "operating_pressure": "195 psi at 70°F", "valve": "Industrial manifold valve system", "gauge": "Dual pressure gauge system", "hose": "25 ft reinforced discharge hose with wand", "bracket": "Heavy-duty steel wheeled platform", "wheels": "12\" solid rubber wheels"}', 'A,B,C', '1.34 MPa at 21°C', '2.4 MPa', 'Seamless steel DOT/TC/ASME approved', 'Industrial manifold brass valve system', '25-30 seconds', '8.0-10.0 meters', '-40°C to +54°C', 1200, 300, 112.0, 168500.00, 'pre_order', FALSE);
+      <div class="info-card">
+        <div class="ic-icon">🏭</div>
+        <div class="ic-label" style="font-weight:700;">Manufacturer</div>
+        <div class="ic-value">8A Fire Safety Maintenance &amp; Manufacturing Corp.</div>
+        <div class="ic-detail">Purok Mansanas Sabang Naic Cavite, Philippines. Established 2019. Product Safety License No. Q-4096.</div>
+      </div>
 
--- Products: Dry Chemical (ABC MAP)
-INSERT INTO products (sku, category_id, weight_id, model_number, name, short_desc, description, specifications, fire_classes, working_pressure, test_pressure, cylinder_material, valve_type, discharge_time, discharge_range, operating_temp, height_mm, diameter_mm, full_weight_kg, price_php, stock_status, featured) VALUES
-('DRY-001', 2, 1, '8A-FA1', 'Dry Chemical 1 lbs ABC', 'Compact ABC dry chemical extinguisher for vehicles, kitchens, and small offices.', 'The 1 lbs ABC dry chemical extinguisher uses Monoammonium Phosphate (MAP) to combat Class A (ordinary combustibles), Class B (flammable liquids), and Class C (energized electrical) fires. Compact size ideal for personal vehicles, kitchen cabinets, and small office spaces.', '{"agent_capacity": "1 lbs (0.45 kg) MAP", "agent_concentration": "Monoammonium Phosphate 40%", "operating_pressure": "150 psi at 70°F", "valve": "Brass valve", "gauge": "Pressure gauge", "hose": "None — top discharge", "bracket": "Vehicle mounting bracket"}', 'A,B,C', '1.2 MPa at 27°C', '2.1 MPa', 'Cold-rolled steel', 'Brass valve w/ safety pin & seal', '8 seconds', '2.4-3.0 meters', '-20°C to +60°C', 290, 70, 1.5, 1850.00, 'in_stock', FALSE),
+      <div class="info-card">
+        <div class="ic-icon">🔍</div>
+        <div class="ic-label" style="font-weight:700;">Last Inspection Date</div>
+        <div class="ic-value">July 2025</div>
+        <div class="ic-detail">Performed by 8A authorized QC inspector. Pressure, valve integrity, and label verification all passed.</div>
+      </div>
 
-('DRY-003', 2, 2, '8A-FA3', 'Dry Chemical 3 lbs ABC', 'Standard portable ABC extinguisher for homes, offices, and retail spaces.', 'The 3 lbs ABC dry chemical extinguisher is the most popular choice for residential, office, and retail environments. MAP agent smothers fires by interrupting the chemical chain reaction while the powder coating prevents re-ignition.', '{"agent_capacity": "3 lbs (1.36 kg) MAP", "agent_concentration": "Monoammonium Phosphate 40%", "operating_pressure": "175 psi at 70°F", "valve": "Brass valve", "gauge": "Pressure gauge", "hose": "None — top discharge", "bracket": "Wall hook included"}', 'A,B,C', '1.2 MPa at 27°C', '2.1 MPa', 'Cold-rolled steel', 'Brass valve w/ safety pin & seal', '9-10 seconds', '3.0-3.6 meters', '-20°C to +60°C', 380, 95, 4.0, 2850.00, 'in_stock', FALSE),
+      <div class="info-card">
+        <div class="ic-icon">📆</div>
+        <div class="ic-label" style="font-weight:700;">Next Service Due</div>
+        <div class="ic-value">August 2026</div>
+        <div class="ic-detail">Annual inspection required by Philippine regulatory standards. Shake monthly to prevent powder compaction.</div>
+      </div>
 
-('DRY-005', 2, 3, '8A-FA5', 'Dry Chemical 5 lbs ABC', 'Versatile ABC extinguisher for workshops, warehouses, and commercial kitchens.', 'The 5 lbs ABC dry chemical extinguisher provides reliable multi-purpose fire protection for workshops, warehouses, restaurants, and light industrial settings. Enhanced discharge duration and range for larger fire hazards.', '{"agent_capacity": "5 lbs (2.27 kg) MAP", "agent_concentration": "Monoammonium Phosphate 40%", "operating_pressure": "195 psi at 70°F", "valve": "Heavy-duty brass valve", "gauge": "Pressure gauge", "hose": "Flexible discharge hose", "bracket": "Wall mount bracket"}', 'A,B,C', '1.2 MPa at 27°C', '2.1 MPa', 'Cold-rolled steel, powder-coated', 'Heavy-duty brass valve w/ safety pin', '12-14 seconds', '3.6-4.5 meters', '-20°C to +60°C', 470, 115, 6.8, 4250.00, 'in_stock', TRUE),
+      <div class="info-card">
+        <div class="ic-icon">⚙️</div>
+        <div class="ic-label" style="font-weight:700;">Working Pressure</div>
+        <div class="ic-value">195 psi (1,344 kPa) at 21 °C</div>
+        <div class="ic-detail">Nitrogen-pressurized stored-pressure design. Hydrostatic test pressure: 2.75 MPa. All units 100% leak-tested before leaving the facility.</div>
+      </div>
 
-('DRY-010', 2, 4, '8A-FA10', 'Dry Chemical 10 lbs ABC', 'Heavy-duty ABC extinguisher for factories, construction sites, and fuel storage.', 'The 10 lbs ABC dry chemical extinguisher is built for demanding industrial environments. Extended discharge time and longer range make it suitable for factories, construction sites, fuel storage areas, and larger commercial spaces with elevated fire risk.', '{"agent_capacity": "10 lbs (4.54 kg) MAP", "agent_concentration": "Monoammonium Phosphate 40%", "operating_pressure": "195 psi at 70°F", "valve": "Heavy-duty brass valve", "gauge": "Large dial pressure gauge", "hose": "Flexible discharge hose", "bracket": "Heavy-duty wall bracket", "wheels": "Optional"}', 'A,B,C', '1.2 MPa at 27°C', '2.1 MPa', 'Cold-rolled steel, powder-coated', 'Heavy-duty brass valve assembly', '15-18 seconds', '4.5-5.5 meters', '-20°C to +60°C', 580, 145, 12.5, 7850.00, 'in_stock', TRUE),
+      <div class="info-card">
+        <div class="ic-icon">🧪</div>
+        <div class="ic-label" style="font-weight:700;">Agent</div>
+        <div class="ic-value">ABC Dry Chemical (Monoammonium Phosphate)</div>
+        <div class="ic-detail">Multipurpose dry chemical powder. Leaves a fine residue after discharge — not recommended for sensitive electronics.</div>
+      </div>
 
-('DRY-020', 2, 5, '8A-FA20', 'Dry Chemical 20 lbs ABC', 'Industrial ABC extinguisher for large manufacturing and petrochemical facilities.', 'The 20 lbs ABC dry chemical extinguisher provides extended fire-fighting capability for large manufacturing plants, petrochemical storage, loading docks, and heavy industrial applications. Wheeled configuration for rapid response across large facilities.', '{"agent_capacity": "20 lbs (9.07 kg) MAP", "agent_concentration": "Monoammonium Phosphate 40%", "operating_pressure": "195 psi at 70°F", "valve": "Industrial brass valve", "gauge": "Large dial pressure gauge", "hose": "5 ft reinforced discharge hose", "bracket": "Wheeled cart mount", "wheels": "Steel transport cart"}', 'A,B,C', '1.2 MPa at 27°C', '2.1 MPa', 'Cold-rolled steel, powder-coated', 'Industrial brass valve assembly', '18-22 seconds', '5.5-6.5 meters', '-20°C to +60°C', 740, 185, 24.0, 14250.00, 'in_stock', FALSE),
+      <div class="info-card">
+        <div class="ic-icon">🔥</div>
+        <div class="ic-label" style="font-weight:700;">Fire Classes</div>
+        <div class="ic-value">Class A · B · C</div>
+        <div class="ic-detail">Ordinary combustibles, flammable liquids &amp; gases, and energized electrical equipment. Not for Class D (combustible metals).</div>
+      </div>
 
-('DRY-050', 2, 6, '8A-FA50', 'Dry Chemical 50 lbs ABC', 'Commercial wheeled ABC unit for large industrial complexes and airports.', 'The 50 lbs ABC dry chemical extinguisher on a heavy-duty wheeled cart is designed for large industrial complexes, airport tarmacs, shipping terminals, and power plants. Maximum portable dry chemical capacity with extended range hose system.', '{"agent_capacity": "50 lbs (22.68 kg) MAP", "agent_concentration": "Monoammonium Phosphate 40%", "operating_pressure": "195 psi at 70°F", "valve": "Commercial brass manifold valve", "gauge": "Large dial pressure gauge", "hose": "10 ft reinforced discharge hose", "bracket": "Heavy-duty wheeled steel cart", "wheels": "10\" pneumatic wheels"}', 'A,B,C', '1.2 MPa at 27°C', '2.1 MPa', 'Cold-rolled steel, heavy gauge', 'Commercial brass manifold valve', '25-30 seconds', '6.5-8.0 meters', '-20°C to +60°C', 960, 250, 57.0, 32850.00, 'in_stock', FALSE),
+      <div class="info-card">
+        <div class="ic-icon">🏅</div>
+        <div class="ic-label" style="font-weight:700;">Certification</div>
+        <div class="ic-value">ISO 9001:2015 · PS Mark</div>
+        <div class="ic-detail">Product Safety License No. Q-4096 under the Philippine Consumer Act.</div>
+      </div>
 
-('DRY-100', 2, 7, '8A-FA100', 'Dry Chemical 100 lbs ABC', 'Maximum capacity portable ABC system for total facility protection.', 'The 100 lbs ABC dry chemical extinguisher is the largest portable unit available for total facility fire protection. Designed for oil refineries, chemical plants, military installations, and mega-facilities requiring maximum fire suppression capability.', '{"agent_capacity": "100 lbs (45.36 kg) MAP", "agent_concentration": "Monoammonium Phosphate 40%", "operating_pressure": "195 psi at 70°F", "valve": "Industrial manifold valve system", "gauge": "Dual pressure gauge system", "hose": "25 ft reinforced discharge hose with wand", "bracket": "Heavy-duty wheeled platform", "wheels": "12\" solid rubber wheels"}', 'A,B,C', '1.2 MPa at 27°C', '2.1 MPa', 'Cold-rolled steel, heavy gauge', 'Industrial manifold valve system', '35-40 seconds', '8.0-10.0 meters', '-20°C to +60°C', 1220, 310, 110.0, 62500.00, 'pre_order', FALSE);
+    </div>
+  </div>
+</section>
+<!-- ══════════════════════════════════════════
+     PRODUCTS — DRY CHEMICAL ONLY
+     ══════════════════════════════════════════ -->
+<section id="products" class="section-pad alt-bg">
+  <div class="container">
+    <div class="section-label reveal-on-scroll">Product Catalog</div>
+    <h2 class="section-title reveal-on-scroll" data-delay="100">ABC Dry Chemical Extinguishers</h2>
+    <p class="section-sub reveal-on-scroll" data-delay="200">
+      Select your capacity below. Each unit includes production date, origin, valid period, applicable scenarios, and certification details.
+    </p>
 
--- Products: Foam (AFFF)
-INSERT INTO products (sku, category_id, weight_id, model_number, name, short_desc, description, specifications, fire_classes, working_pressure, test_pressure, cylinder_material, valve_type, discharge_time, discharge_range, operating_temp, height_mm, diameter_mm, full_weight_kg, price_php, stock_status, featured) VALUES
-('FOAM-001', 3, 1, '8A-FOAM1', 'Foam 1 lbs AFFF', 'Compact foam extinguisher for marine vessels, small kitchens, and vehicles.', 'The 1 lbs AFFF foam extinguisher creates an aqueous film that blankets flammable liquid fires, suppressing vapors and preventing re-ignition. Ideal for marine vessels, small kitchens with grease hazards, and personal vehicles.', '{"agent_capacity": "1 lbs (0.45 kg) AFFF", "foam_concentration": "AFFF 3%", "operating_pressure": "150 psi at 70°F", "valve": "Brass valve", "gauge": "Pressure gauge", "nozzle": "Foam applicator nozzle", "bracket": "Marine/vehicle bracket"}', 'A,B', '1.2 MPa at 27°C', '2.1 MPa', 'Stainless steel 304', 'Brass valve w/ foam nozzle', '10-12 seconds', '2.0-2.5 meters', '-10°C to +49°C', 300, 72, 1.7, 2250.00, 'in_stock', FALSE),
+    <!-- Product Size Selector -->
+    <div class="product-tabs reveal-on-scroll" data-delay="300">
+      <button class="tab-btn active" data-tab="1lb">1 lbs</button>
+      <button class="tab-btn" data-tab="3lb">3 lbs</button>
+      <button class="tab-btn" data-tab="5lb">5 lbs</button>
+      <button class="tab-btn" data-tab="10lb">10 lbs</button>
+      <button class="tab-btn" data-tab="20lb">20 lbs</button>
+      <button class="tab-btn" data-tab="50lb">50 lbs</button>
+      <button class="tab-btn" data-tab="100lb">100 lbs</button>
+    </div>
 
-('FOAM-003', 3, 2, '8A-FOAM3', 'Foam 3 lbs AFFF', 'Standard foam extinguisher for restaurants, gas stations, and automotive shops.', 'The 3 lbs AFFF foam extinguisher is the standard choice for commercial kitchens, automotive repair shops, gas stations, and any environment with flammable liquid storage. The foam creates a cooling blanket that suppresses vapors and prevents reflash.', '{"agent_capacity": "3 lbs (1.36 kg) AFFF", "foam_concentration": "AFFF 3%", "operating_pressure": "175 psi at 70°F", "valve": "Brass valve", "gauge": "Pressure gauge", "nozzle": "Foam applicator nozzle", "bracket": "Wall hook included"}', 'A,B', '1.2 MPa at 27°C', '2.1 MPa', 'Stainless steel 304', 'Brass valve w/ foam nozzle', '12-14 seconds', '2.5-3.5 meters', '-10°C to +49°C', 395, 98, 4.5, 3850.00, 'in_stock', FALSE),
+    <!-- 1 lbs Product Card -->
+    <div id="tab-1lb" class="product-detail-panel active">
+      <div class="product-detail-card">
+        <div class="row g-4 reveal-on-scroll" data-delay="200">
+          <div class="col-lg-4">
+            <div class="product-image-box">
+              <div class="product-size-badge">1 lbs</div>
+              <img class="anatomy-img" id="anatomyImg" src="img/DRYCHEM/1.png" alt="8A Fire Safety Dry Chemical Extinguisher Technical Drawing" />
+              <div class="product-agent-tag">ABC Dry Chemical</div>
+            </div>
+          </div>
+          <div class="col-lg-8">
+            <div class="product-info-grid">
+              <div class="info-block">
+                <div class="info-block-icon"><i class="fa-solid fa-fire-extinguisher"></i></div>
+                <div class="info-block-content">
+                    <h5>Fire Classification</h5>
+                    <p>Suitable for <strong>Class A, B, and C fires</strong>, providing effective protection against common combustible materials, flammable liquids, and energized electrical equipment.</p>
+                </div>
+              </div>
+              <div class="info-block">
+                <div class="info-block-icon"><i class="fa-solid fa-map-location-dot"></i></div>
+                <div class="info-block-content">
+                  <h5>Origin</h5>
+                  <p><strong>Made in the Philippines</strong> at Purok Mansanas, Sabang, Naic, Cavite. 100% local manufacturing supporting Philippine industry and employment.</p>
+                </div>
+              </div>
+              <div class="info-block">
+                <div class="info-block-icon"><i class="fa-solid fa-clock-rotate-left"></i></div>
+                <div class="info-block-content">
+                  <h5>Valid Period</h5>
+                  <p><strong>1 year</strong> from production date for unused units. Annual inspection required. Recharge service available after discharge.</p>
+                </div>
+              </div>
+              <div class="info-block">
+                <div class="info-block-icon"><i class="fa-solid fa-building"></i></div>
+                <div class="info-block-content">
+                  <h5>Applicable Scenarios</h5>
+                  <p>Ideal for <strong>vehicles, small offices, kitchens, and home use</strong>. Compact size fits under car seats or in cabinets. Covers Class A (wood/paper), Class B (flammable liquids), and Class C (electrical) fires.</p>
+                </div>
+              </div>
+              <div class="info-block">
+                <div class="info-block-icon"><i class="fa-solid fa-certificate"></i></div>
+                <div class="info-block-content">
+                  <h5>Certifications</h5>
+                  <p><strong>ISO 9001:2015</strong> Quality Management | <strong>Product Safety License No. Q-4096</strong> | 2.75 MPa hydrostatic test passed.</p>
+                </div>
+              </div>
+            </div>
+            <div class="product-meta-row">
+              <div class="meta-badge"><i class="fa-solid fa-weight-hanging"></i> 1.0 lbs Agent</div>
+               <div class="meta-badge"><i class="fa-solid fa-gauge-high"></i>2.75 MPa Test Pressure</div>
+              <div class="meta-badge"><i class="fa-solid fa-gauge-high"></i> 1344(kPA) at 28°C Working Pressure</div>
+          
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-('FOAM-005', 3, 3, '8A-FOAM5', 'Foam 5 lbs AFFF', 'Enhanced foam protection for commercial kitchens and fuel depots.', 'The 5 lbs AFFF foam extinguisher provides extended discharge time for larger commercial kitchen installations, small fuel depots, paint shops, and solvent storage areas. The aspirated foam nozzle creates consistent foam blanket quality.', '{"agent_capacity": "5 lbs (2.27 kg) AFFF", "foam_concentration": "AFFF 3%", "operating_pressure": "195 psi at 70°F", "valve": "Heavy-duty brass valve", "gauge": "Pressure gauge", "nozzle": "Aspirated foam nozzle", "bracket": "Wall mount bracket"}', 'A,B', '1.2 MPa at 27°C', '2.1 MPa', 'Stainless steel 304', 'Heavy-duty brass valve w/ foam nozzle', '15-18 seconds', '3.5-4.5 meters', '-10°C to +49°C', 485, 118, 7.5, 5850.00, 'in_stock', TRUE),
+    <!-- 3 lbs Product Card -->
+    <div id="tab-3lb" class="product-detail-panel">
+      <div class="product-detail-card">
+        <div class="row g-4">
+          <div class="col-lg-4">
+            <div class="product-image-box">
+              <div class="product-size-badge">3 lbs</div>
+              <img class="anatomy-img" id="anatomyImg" src="img/DRYCHEM/3.png" alt="8A Fire Safety Dry Chemical Extinguisher Technical Drawing" />
+              <div class="product-agent-tag">ABC Dry Chemical</div>
+            </div>
+          </div>
+          <div class="col-lg-8">
+            <div class="product-info-grid">
+              <div class="info-block">
+                <div class="info-block-icon"><i class="fa-solid fa-fire-extinguisher"></i></div>
+                <div class="info-block-content">
+                    <h5>Fire Classification</h5>
+                    <p>Suitable for <strong>Class A, B, and C fires</strong>, providing effective protection against common combustible materials, flammable liquids, and energized electrical equipment.</p>
+                </div>
+              </div>
+              <div class="info-block">
+                <div class="info-block-icon"><i class="fa-solid fa-map-location-dot"></i></div>
+                <div class="info-block-content">
+                  <h5>Origin</h5>
+                  <p><strong>Made in the Philippines</strong> at Purok Mansanas, Sabang, Naic, Cavite. Local steel and components sourced from ISO-certified Philippine suppliers.</p>
+                </div>
+              </div>
+              <div class="info-block">
+                <div class="info-block-icon"><i class="fa-solid fa-clock-rotate-left"></i></div>
+                <div class="info-block-content">
+                  <h5>Valid Period</h5>
+                  <p><strong>1 year</strong> from production date for unused units. Annual pressure gauge inspection required. Recharge available through  8A .</p>
+                </div>
+              </div>
+              <div class="info-block">
+                <div class="info-block-icon"><i class="fa-solid fa-building"></i></div>
+                <div class="info-block-content">
+                  <h5>Applicable Scenarios</h5>
+                  <p>Perfect for <strong>small offices, retail shops, food carts, and residential units</strong>. Portable enough for vehicle mounting. Effective on Class A, B, and C fires with 8–10 ft discharge range.</p>
+                </div>
+              </div>
+              <div class="info-block">
+                <div class="info-block-icon"><i class="fa-solid fa-certificate"></i></div>
+                <div class="info-block-content">
+                  <h5>Certifications</h5>
+                  <p><strong>ISO 9001:2015</strong> Quality Management |  <strong>Product Safety License No. Q-4096</strong> | 2.75 MPa hydrostatic test passed.</p>
+                </div>
+              </div>
+            </div>
+            <div class="product-meta-row">
+              <div class="meta-badge"><i class="fa-solid fa-weight-hanging"></i> 3.0 lbs Agent</div>
+               <div class="meta-badge"><i class="fa-solid fa-gauge-high"></i>2.75 MPa Test Pressure</div>
+              <div class="meta-badge"><i class="fa-solid fa-gauge-high"></i> 1344(kPA) at 28°C Working Pressure</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-('FOAM-010', 3, 4, '8A-FOAM10', 'Foam 10 lbs AFFF', 'Industrial foam extinguisher for hangars, refineries, and chemical storage.', 'The 10 lbs AFFF foam extinguisher delivers industrial-grade protection for aircraft hangars, small oil refineries, chemical storage facilities, and large commercial kitchens. Extended range aspirated foam nozzle provides maximum coverage.', '{"agent_capacity": "10 lbs (4.54 kg) AFFF", "foam_concentration": "AFFF 3%", "operating_pressure": "195 psi at 70°F", "valve": "Heavy-duty brass valve", "gauge": "Large dial pressure gauge", "nozzle": "Extended aspirated foam nozzle", "bracket": "Heavy-duty wall bracket", "wheels": "Optional"}', 'A,B', '1.2 MPa at 27°C', '2.1 MPa', 'Stainless steel 304, heavy gauge', 'Heavy-duty brass valve w/ foam nozzle', '20-24 seconds', '4.5-5.5 meters', '-10°C to +49°C', 600, 150, 13.8, 10850.00, 'in_stock', FALSE),
+    <!-- 5 lbs Product Card -->
+    <div id="tab-5lb" class="product-detail-panel">
+      <div class="product-detail-card">
+        <div class="row g-4">
+          <div class="col-lg-4">
+            <div class="product-image-box">
+              <div class="product-size-badge">5 lbs</div>
+              <img class="anatomy-img" id="anatomyImg" src="img/DRYCHEM/5.png" alt="8A Fire Safety Dry Chemical Extinguisher Technical Drawing" />
+              <div class="product-agent-tag">ABC Dry Chemical</div>
+            </div>
+          </div>
+          <div class="col-lg-8">
+            <div class="product-info-grid">
+              <div class="info-block">
+                <div class="info-block-icon"><i class="fa-solid fa-fire-extinguisher"></i></div>
+                <div class="info-block-content">
+                    <h5>Fire Classification</h5>
+                    <p>Suitable for <strong>Class A, B, and C fires</strong>, providing effective protection against common combustible materials, flammable liquids, and energized electrical equipment.</p>
+                </div>
+              </div>
+              <div class="info-block">
+                <div class="info-block-icon"><i class="fa-solid fa-map-location-dot"></i></div>
+                <div class="info-block-content">
+                  <h5>Origin</h5>
+                  <p><strong>Made in the Philippines</strong> at Purok Mansanas, Sabang, Naic, Cavite. Cold-rolled steel cylinders from local ISO-certified mills with powder-coat finishing.</p>
+                </div>
+              </div>
+              <div class="info-block">
+                <div class="info-block-icon"><i class="fa-solid fa-clock-rotate-left"></i></div>
+                <div class="info-block-content">
+                  <h5>Valid Period</h5>
+                  <p><strong>5 years</strong> from production date for unused units. Recharge service available. </p>
+                </div>
+              </div>
+              <div class="info-block">
+                <div class="info-block-icon"><i class="fa-solid fa-building"></i></div>
+                <div class="info-block-content">
+                  <h5>Applicable Scenarios</h5>
+                  <p>Recommended for <strong>offices, restaurants, small warehouses, workshops, and commercial vehicles</strong>. Most popular size for general commercial compliance. 14-second discharge time, 14 ft range.</p>
+                </div>
+              </div>
+              <div class="info-block">
+                <div class="info-block-icon"><i class="fa-solid fa-certificate"></i></div>
+                <div class="info-block-content">
+                  <h5>Certifications</h5>
+                  <p><strong>ISO 9001:2015</strong> Quality Management |<strong>Product Safety License No. Q-4096</strong> | 2.75 MPa hydrostatic test passed.</p>
+                </div>
+              </div>
+            </div>
+            <div class="product-meta-row">
+              <div class="meta-badge"><i class="fa-solid fa-weight-hanging"></i> 5.0 lbs Agent</div>
+               <div class="meta-badge"><i class="fa-solid fa-gauge-high"></i>2.75 MPa Test Pressure</div>
+              <div class="meta-badge"><i class="fa-solid fa-gauge-high"></i> 1344(kPA) at 28°C Working Pressure</div>
 
-('FOAM-020', 3, 5, '8A-FOAM20', 'Foam 20 lbs AFFF', 'Large industrial foam unit for airports, docks, and petrochemical plants.', 'The 20 lbs AFFF foam extinguisher on wheeled cart provides mobile fire suppression for airport tarmacs, shipping docks, petrochemical loading stations, and large paint manufacturing facilities. Wheeled for rapid deployment across wide areas.', '{"agent_capacity": "20 lbs (9.07 kg) AFFF", "foam_concentration": "AFFF 3%", "operating_pressure": "195 psi at 70°F", "valve": "Industrial brass valve", "gauge": "Large dial pressure gauge", "nozzle": "Extended aspirated foam wand", "bracket": "Wheeled cart mount", "wheels": "Steel transport cart"}', 'A,B', '1.2 MPa at 27°C', '2.1 MPa', 'Stainless steel 316, heavy gauge', 'Industrial brass valve w/ foam wand', '25-30 seconds', '5.5-6.5 meters', '-10°C to +49°C', 760, 190, 25.5, 19500.00, 'in_stock', FALSE),
+             
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-('FOAM-050', 3, 6, '8A-FOAM50', 'Foam 50 lbs AFFF', 'Commercial foam system for large marine vessels and industrial tank farms.', 'The 50 lbs AFFF foam extinguisher provides commercial-scale foam suppression for large marine vessels, industrial tank farms, airport rescue & fire fighting (ARFF) operations, and large-scale petrochemical facilities. Heavy-duty wheeled platform.', '{"agent_capacity": "50 lbs (22.68 kg) AFFF", "foam_concentration": "AFFF 3%", "operating_pressure": "195 psi at 70°F", "valve": "Commercial brass manifold valve", "gauge": "Large dial pressure gauge", "nozzle": "Extended foam wand system", "bracket": "Heavy-duty wheeled steel cart", "wheels": "10\" pneumatic wheels"}', 'A,B', '1.2 MPa at 27°C', '2.1 MPa', 'Stainless steel 316, heavy gauge', 'Commercial brass manifold valve', '35-40 seconds', '6.5-8.0 meters', '-10°C to +49°C', 980, 255, 59.0, 42500.00, 'in_stock', FALSE),
+    <!-- 10 lbs Product Card -->
+    <div id="tab-10lb" class="product-detail-panel">
+      <div class="product-detail-card">
+        <div class="row g-4">
+          <div class="col-lg-4">
+            <div class="product-image-box">
+              <div class="product-size-badge">10 lbs</div>
+              <img class="anatomy-img" id="anatomyImg" src="img/DRYCHEM/10.png" alt="8A Fire Safety Dry Chemical Extinguisher Technical Drawing" />
+              <div class="product-agent-tag">ABC Dry Chemical</div>
+            </div>
+          </div>
+          <div class="col-lg-8">
+            <div class="product-info-grid">
+              <div class="info-block">
+                <div class="info-block-icon"><i class="fa-solid fa-fire-extinguisher"></i></div>
+                <div class="info-block-content">
+                    <h5>Fire Classification</h5>
+                    <p>Suitable for <strong>Class A, B, and C fires</strong>, providing effective protection against common combustible materials, flammable liquids, and energized electrical equipment.</p>
+                </div>
+              </div>
+              <div class="info-block">
+                <div class="info-block-icon"><i class="fa-solid fa-map-location-dot"></i></div>
+                <div class="info-block-content">
+                  <h5>Origin</h5>
+                  <p><strong>Made in the Philippines</strong> at Purok Mansanas, Sabang, Naic, Cavite. Seamless steel cylinders from local mills with dual-coat powder paint system for corrosion resistance.</p>
+                </div>
+              </div>
+              <div class="info-block">
+                <div class="info-block-icon"><i class="fa-solid fa-clock-rotate-left"></i></div>
+                <div class="info-block-content">
+                  <h5>Valid Period</h5>
+                  <p><strong>1 year</strong> from production date for unused units. Annual pressure gauge inspection required. Recharge available through  8A .</p>
+                </div>
+              </div>
+              <div class="info-block">
+                <div class="info-block-icon"><i class="fa-solid fa-building"></i></div>
+                <div class="info-block-content">
+                  <h5>Applicable Scenarios</h5>
+                  <p>Designed for <strong>medium warehouses, factories, hotels, schools, and multi-room commercial buildings</strong>. 21-second discharge time with 20 ft effective range. Wall-mount or vehicle bracket options.</p>
+                </div>
+              </div>
+              <div class="info-block">
+                <div class="info-block-icon"><i class="fa-solid fa-certificate"></i></div>
+                <div class="info-block-content">
+                  <h5>Certifications</h5>
+                  <p><strong>ISO 9001:2015</strong> Quality Management | <strong>Product Safety License No. Q-4096</strong> | 2.75 MPa hydrostatic test passed.</p>
+                </div>
+              </div>
+            </div>
+            <div class="product-meta-row">
+              <div class="meta-badge"><i class="fa-solid fa-weight-hanging"></i> 10.0 lbs Agent</div>
+               <div class="meta-badge"><i class="fa-solid fa-gauge-high"></i>2.75 MPa Test Pressure</div>
+              <div class="meta-badge"><i class="fa-solid fa-gauge-high"></i> 1344(kPA) at 28°C Working Pressure</div>
+ 
+             
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-('FOAM-100', 3, 7, '8A-FOAM100', 'Foam 100 lbs AFFF', 'Maximum capacity foam extinguisher for mega-facility and municipal fire departments.', 'The 100 lbs AFFF foam extinguisher is the ultimate portable foam suppression system designed for mega-facilities, municipal fire departments, offshore oil platforms, and military fuel depots. Maximum capacity with extended reach wand and heavy-duty mobility platform.', '{"agent_capacity": "100 lbs (45.36 kg) AFFF", "foam_concentration": "AFFF 3%", "operating_pressure": "195 psi at 70°F", "valve": "Industrial manifold valve system", "gauge": "Dual pressure gauge system", "nozzle": "25 ft foam wand with aspirator", "bracket": "Heavy-duty wheeled platform", "wheels": "12\" solid rubber wheels"}', 'A,B', '1.2 MPa at 27°C', '2.1 MPa', 'Stainless steel 316L, heavy gauge', 'Industrial manifold valve system', '45-55 seconds', '8.0-10.0 meters', '-10°C to +49°C', 1240, 315, 115.0, 82500.00, 'pre_order', FALSE);
+    <!-- 20 lbs Product Card -->
+    <div id="tab-20lb" class="product-detail-panel">
+      <div class="product-detail-card">
+        <div class="row g-4">
+          <div class="col-lg-4">
+            <div class="product-image-box">
+              <div class="product-size-badge">20 lbs</div>
+             <img class="anatomy-img" id="anatomyImg" src="img/DRYCHEM/20.png" alt="8A Fire Safety Dry Chemical Extinguisher Technical Drawing" />
+              <div class="product-agent-tag">ABC Dry Chemical</div>
+            </div>
+          </div>
+          <div class="col-lg-8">
+            <div class="product-info-grid">
+              <div class="info-block">
+                <div class="info-block-icon"><i class="fa-solid fa-fire-extinguisher"></i></div>
+                <div class="info-block-content">
+                    <h5>Fire Classification</h5>
+                    <p>Suitable for <strong>Class A, B, and C fires</strong>, providing effective protection against common combustible materials, flammable liquids, and energized electrical equipment.</p>
+                </div>
+              </div>
+              <div class="info-block">
+                <div class="info-block-icon"><i class="fa-solid fa-map-location-dot"></i></div>
+                <div class="info-block-content">
+                  <h5>Origin</h5>
+                  <p><strong>Made in the Philippines</strong> at Purok Mansanas, Sabang, Naic, Cavite. Heavy-duty cold-rolled steel construction with corrosion-resistant powder coating for industrial environments.</p>
+                </div>
+              </div>
+              <div class="info-block">
+                <div class="info-block-icon"><i class="fa-solid fa-clock-rotate-left"></i></div>
+                <div class="info-block-content">
+                  <h5>Valid Period</h5>
+                     <p><strong>1 year</strong> from production date for unused units. Annual pressure gauge inspection required. Recharge available through  8A .</p>
+                </div>
+              </div>
+              <div class="info-block">
+                <div class="info-block-icon"><i class="fa-solid fa-building"></i></div>
+                <div class="info-block-content">
+                  <h5>Applicable Scenarios</h5>
+                  <p>Built for <strong>industrial facilities, large warehouses, construction sites, manufacturing plants, and heavy commercial use</strong>. 28-second discharge time, 22 ft range. High-flow valve for rapid suppression.</p>
+                </div>
+              </div>
+              <div class="info-block">
+                <div class="info-block-icon"><i class="fa-solid fa-certificate"></i></div>
+                <div class="info-block-content">
+                  <h5>Certifications</h5>
+                  <p><strong>ISO 9001:2015</strong> Quality Management | <strong>Product Safety License No. Q-4096</strong> | 2.75 MPa hydrostatic test passed.</p>
+                </div>
+              </div>
+            </div>
+            <div class="product-meta-row">
+              <div class="meta-badge"><i class="fa-solid fa-weight-hanging"></i> 20.0 lbs Agent</div>
+               <div class="meta-badge"><i class="fa-solid fa-gauge-high"></i>2.75 MPa Test Pressure</div>
+              <div class="meta-badge"><i class="fa-solid fa-gauge-high"></i> 1344(kPA) at 28°C Working Pressure</div>
+        
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
--- Company Info
-INSERT INTO company_info (company_name, legal_name, tagline, description, address, city, region, zip_code, country, phone_primary, phone_secondary, email, website, iso_certificate, license_number, established_year) VALUES
-('8A Fire Safety', '8A Fire Safety Maintenance & Manufacturing Corporation', 'Protecting Lives and Property Since 2021', '8A Fire Safety is a Philippine-based manufacturer of fire extinguishers and fire safety equipment. We produce HFC-235 clean agent, ABC dry chemical, and AFFF foam fire extinguishers in capacities from 1 to 100 pounds. All products are manufactured under ISO 9001:2015 quality management systems and comply with Philippine BFP regulations.', 'Calumpang I, Lot 1, Tamaroc Street, Culait, Tandang Sora', 'Quezon City', 'National Capital Region', '1106', 'Philippines', '0967-661-5730', '0965-096-1966', 'info@8afiresafety.com', 'https://8agroup.org', 'ISO 9001:2015 License No. 0-0964', '0-0964', 2021);
+    <!-- 50 lbs Product Card -->
+    <div id="tab-50lb" class="product-detail-panel">
+      <div class="product-detail-card">
+        <div class="row g-4">
+          <div class="col-lg-4">
+            <div class="product-image-box">
+              <div class="product-size-badge">50 lbs</div>
+             <img class="anatomy-img" id="anatomyImg" src="img/DRYCHEM/50.png" alt="8A Fire Safety Dry Chemical Extinguisher Technical Drawing" />
+              <div class="product-agent-tag">ABC Dry Chemical</div>
+            </div>
+          </div>
+          <div class="col-lg-8">
+            <div class="product-info-grid">
+              <div class="info-block">
+                <div class="info-block-icon"><i class="fa-solid fa-fire-extinguisher"></i></div>
+                <div class="info-block-content">
+                    <h5>Fire Classification</h5>
+                    <p>Suitable for <strong>Class A, B, and C fires</strong>, providing effective protection against common combustible materials, flammable liquids, and energized electrical equipment.</p>
+                </div>
+              </div>
+              <div class="info-block">
+                <div class="info-block-icon"><i class="fa-solid fa-map-location-dot"></i></div>
+                <div class="info-block-content">
+                  <h5>Origin</h5>
+                  <p><strong>Made in the Philippines</strong> at Purok Mansanas, Sabang, Naic, Cavite. Heavy-duty steel construction with industrial-grade powder coating. Wheeled trolley design for mobility.</p>
+                </div>
+              </div>
+              <div class="info-block">
+                <div class="info-block-icon"><i class="fa-solid fa-clock-rotate-left"></i></div>
+                <div class="info-block-content">
+                  <h5>Valid Period</h5>
+                     <p><strong>1 year</strong> from production date for unused units. Annual pressure gauge inspection required. Recharge available through  8A .</p>
+                </div>
+              </div>
+              <div class="info-block">
+                <div class="info-block-icon"><i class="fa-solid fa-building"></i></div>
+                <div class="info-block-content">
+                  <h5>Applicable Scenarios</h5>
+                  <p>Engineered for <strong>large industrial plants, shipyards, airports, fuel depots, chemical facilities, and heavy manufacturing</strong>. Wheeled unit for rapid deployment. Extended discharge time for large fuel loads.</p>
+                </div>
+              </div>
+              <div class="info-block">
+                <div class="info-block-icon"><i class="fa-solid fa-certificate"></i></div>
+                <div class="info-block-content">
+                  <h5>Certifications</h5>
+                  <p><strong>ISO 9001:2015</strong> Quality Management | <strong>Product Safety License No. Q-4096</strong> | 2.75 MPa hydrostatic test passed.</p>
+                </div>
+              </div>
+            </div>
+            <div class="product-meta-row">
+              <div class="meta-badge"><i class="fa-solid fa-weight-hanging"></i> 50.0 lbs Agent</div>
+               <div class="meta-badge"><i class="fa-solid fa-gauge-high"></i>2.75 MPa Test Pressure</div>
+              <div class="meta-badge"><i class="fa-solid fa-gauge-high"></i> 1344(kPA) at 28°C Working Pressure</div>
+           
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
--- Certificates
-INSERT INTO certificates (title, issuer, cert_number, description, icon_class, status_label, issue_date, status) VALUES
-('ISO 9001:2015', 'International Organization for Standardization', '0-0964', 'Certified Quality Management System covering the full production lifecycle — from raw material sourcing to finished unit inspection.', 'award', 'CERTIFIED — ACTIVE', '2021-05-01', 'active'),
-('Product Safety License (PH)', 'Philippine Regulatory Authorities', '0-0964', 'Registered with Philippine regulatory authorities. Product Safety License No. 0-0964 issued under the Philippine Consumer Act.', 'shield', 'LICENSED', '2021-05-01', 'active'),
-('BFP Compliance', 'Bureau of Fire Protection (BFP) Philippines', 'BFP-2021-0964', 'Compliant with Bureau of Fire Protection (BFP) of the Philippines standards and requirements for fire suppression equipment.', 'check-circle', 'COMPLIANT', '2021-05-01', 'active'),
-('Technical Inspection Record', '8A Fire Safety QA Department', 'TIR-2021-001', 'Each unit undergoes hydraulic pressure testing, valve integrity check, and label verification before shipment. Monthly inspection recommended.', 'clipboard-check', 'TEST PASSED', '2021-05-01', 'active'),
-('Made in the Philippines', 'Philippine Economic Zone Authority', 'PEZA-2021-0964', 'Proudly manufactured locally at Culait, Tandang Sora, Quezon City. Supporting Philippine industry and local employment since 2021.', 'globe', 'LOCAL MANUFACTURE', '2021-05-01', 'active'),
-('Recharge & Service Certification', '8A Fire Safety Service Division', 'RSC-2021-001', 'After any discharge, a recharge service form must be completed and attached to the unit. Recharge available through 8A authorized service centers.', 'sync', 'SERVICE AVAILABLE', '2021-05-01', 'active');
+    <!-- 100 lbs Product Card -->
+    <div id="tab-100lb" class="product-detail-panel">
+      <div class="product-detail-card">
+        <div class="row g-4">
+          <div class="col-lg-4">
+            <div class="product-image-box">
+              <div class="product-size-badge">100 lbs</div>
+             <img class="anatomy-img" id="anatomyImg" src="img/DRYCHEM/100.png" alt="8A Fire Safety Dry Chemical Extinguisher Technical Drawing" />
+              <div class="product-agent-tag">ABC Dry Chemical</div>
+            </div>
+          </div>
+          <div class="col-lg-8">
+            <div class="product-info-grid">
+              <div class="info-block">
+                <div class="info-block-icon"><i class="fa-solid fa-fire-extinguisher"></i></div>
+                <div class="info-block-content">
+                    <h5>Fire Classification</h5>
+                    <p>Suitable for <strong>Class A, B, and C fires</strong>, providing effective protection against common combustible materials, flammable liquids, and energized electrical equipment.</p>
+                </div>
+              </div>
+              <div class="info-block">
+                <div class="info-block-icon"><i class="fa-solid fa-map-location-dot"></i></div>
+                <div class="info-block-content">
+                  <h5>Origin</h5>
+                  <p><strong>Made in the Philippines</strong> at Purok Mansanas, Sabang, Naic, Cavite. Industrial-grade steel construction with reinforced trolley and hose assembly. Built for the most demanding fire protection needs.</p>
+                </div>
+              </div>
+              <div class="info-block">
+                <div class="info-block-icon"><i class="fa-solid fa-clock-rotate-left"></i></div>
+                <div class="info-block-content">
+                  <h5>Valid Period</h5>
+                     <p><strong>1 year</strong> from production date for unused units. Annual pressure gauge inspection required. Recharge available through  8A .</p>
+                </div>
+              </div>
+              <div class="info-block">
+                <div class="info-block-icon"><i class="fa-solid fa-building"></i></div>
+                <div class="info-block-content">
+                  <h5>Applicable Scenarios</h5>
+                  <p>Designed for <strong>total-flood industrial protection, shipyards, airports, petrochemical plants, large warehouses, and military facilities</strong>. Wheeled unit with extended hose for operator safety. Maximum coverage area.</p>
+                </div>
+              </div>
+              <div class="info-block">
+                <div class="info-block-icon"><i class="fa-solid fa-certificate"></i></div>
+                <div class="info-block-content">
+                  <h5>Certifications</h5>
+                  <p><strong>ISO 9001:2015</strong> Quality Management | <strong>Product Safety License No. Q-4096</strong> | 2.75 MPa hydrostatic test passed.</p>
+                </div>
+              </div>
+            </div>
+            <div class="product-meta-row">
+              <div class="meta-badge"><i class="fa-solid fa-weight-hanging"></i> 100.0 lbs Agent</div>
+              <div class="meta-badge"><i class="fa-solid fa-gauge-high"></i>2.75 MPa Test Pressure</div>
+              <div class="meta-badge"><i class="fa-solid fa-temperature-half"></i>1344(kPA) 28°C Working Pressure</div>
+ 
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
--- Timeline
-INSERT INTO timeline_stages (stage_num, title, description, sort_order) VALUES
-('01', 'Material Sourcing', 'Monoammonium Phosphate (MAP) and HFC-236fa agents are sourced from certified international suppliers. Steel and stainless steel cylinder blanks are procured from ISO-certified local mills. Every batch undergoes incoming quality inspection.', 1),
-('02', 'Cylinder Fabrication & Testing', 'Cylinders are formed, welded, and hydraulically tested at 2.1 MPa to confirm structural integrity before any filling. Pressure vessels undergo non-destructive testing including ultrasonic and visual inspection.', 2),
-('03', 'Agent Filling & Pressurization', 'The specified amount of fire suppression agent is loaded precisely, then the unit is pressurized to the working level. Valves are sealed, safety pins installed, and pressure gauges calibrated to specification.', 3),
-('04', 'Quality Inspection & Labeling', 'Each unit receives comprehensive final inspection including pressure gauge calibration, valve operation test, ISO label application, manufacturing date stamp, expiry marking, and individual serial number engraving.', 4),
-('05', 'Distribution & Post-Sale Service', 'Units are carefully packaged and distributed from our Quezon City facility. Post-sale recharge, inspection, and recertification services are available through 8A authorized service centers nationwide.', 5);
+    <!-- Size Comparison Guide -->
+    <div class="weight-guide reveal-on-scroll" data-delay="400">
+      <h3 class="guide-title">Size Comparison — Actual Scale</h3>
+      <p style="font-size:0.8rem;color:var(--text-muted);margin:0 0 1rem;text-align:center;">
+        ABC Dry Chemical (MAP) · all drawn to the same scale so size differences are real
+      </p>
+
+      <div style="overflow-x:auto;">
+        <svg viewBox="0 0 680 340" style="width:100%;min-width:480px;display:block;" role="img" aria-label="Fire extinguisher size comparison from 1 lb to 100 lbs">
+
+          <!-- Ground line -->
+          <line x1="10" y1="300" x2="670" y2="300" stroke="#cbd5e1" stroke-width="0.8"/>
+
+          <!-- ══ 1 LB  cx=50, w=18, body h=70 ══ -->
+          <rect x="41" y="230" width="18" height="70" rx="3" fill="#b91c1c" stroke="#991b1b" stroke-width="0.8"/>
+          <path d="M41 230 Q41 222 50 220 Q59 222 59 230Z" fill="#b91c1c" stroke="#991b1b" stroke-width="0.8"/>
+          <rect x="46" y="213" width="8" height="9" rx="2" fill="#7f1d1d"/>
+          <path d="M47 215 Q37 211 37 220 Q37 225 47 224" fill="none" stroke="#7f1d1d" stroke-width="1.1" stroke-linecap="round"/>
+          <path d="M54 215 Q64 211 64 215 Q63 219 54 220" fill="none" stroke="#7f1d1d" stroke-width="1" stroke-linecap="round"/>
+          <circle cx="50" cy="252" r="3" fill="#1d4ed8"/>
+          <text x="50" y="313" text-anchor="middle" font-family="var(--font-display)" font-size="10" font-weight="700" fill="var(--accent)">1 lb</text>
+       
+          <text x="50" y="335" text-anchor="middle" font-family="var(--font-body)" font-size="8" fill="var(--text-faint)">Vehicle</text>
+
+          <!-- ══ 3 LB  cx=120, w=24, body h=90 ══ -->
+          <rect x="108" y="210" width="24" height="90" rx="4" fill="#b91c1c" stroke="#991b1b" stroke-width="0.9"/>
+          <path d="M108 210 Q108 200 120 198 Q132 200 132 210Z" fill="#b91c1c" stroke="#991b1b" stroke-width="0.9"/>
+          <rect x="114" y="191" width="10" height="10" rx="2" fill="#7f1d1d"/>
+          <path d="M115 193 Q103 189 103 199 Q103 205 115 204" fill="none" stroke="#7f1d1d" stroke-width="1.2" stroke-linecap="round"/>
+          <path d="M125 194 Q136 190 136 194 Q135 199 125 200" fill="none" stroke="#7f1d1d" stroke-width="1.1" stroke-linecap="round"/>
+          <circle cx="120" cy="237" r="3.5" fill="#1d4ed8"/>
+         
+          <text x="120" y="313" text-anchor="middle" font-family="var(--font-display)" font-size="10" font-weight="700" fill="var(--accent)">3 lbs</text>
+          <text x="120" y="335" text-anchor="middle" font-family="var(--font-body)" font-size="8" fill="var(--text-faint)">Small office</text>
+
+          <!-- ══ 5 LB  cx=196, w=30, body h=108 ══ -->
+          <rect x="181" y="192" width="30" height="108" rx="5" fill="#b91c1c" stroke="#991b1b" stroke-width="0.9"/>
+          <path d="M181 192 Q181 181 196 179 Q211 181 211 192Z" fill="#b91c1c" stroke="#991b1b" stroke-width="0.9"/>
+          <rect x="188" y="171" width="11" height="11" rx="2" fill="#7f1d1d"/>
+          <path d="M189 173 Q176 169 176 180 Q176 186 189 185" fill="none" stroke="#7f1d1d" stroke-width="1.3" stroke-linecap="round"/>
+          <path d="M200 174 Q212 170 212 174 Q210 179 200 180" fill="none" stroke="#7f1d1d" stroke-width="1.2" stroke-linecap="round"/>
+          <circle cx="196" cy="222" r="4" fill="#1d4ed8"/>
+         
+          <text x="196" y="313" text-anchor="middle" font-family="var(--font-display)" font-size="10" font-weight="700" fill="var(--accent)">5 lbs</text>
+         
+          <text x="196" y="335" text-anchor="middle" font-family="var(--font-body)" font-size="8" fill="var(--text-faint)">Residence</text>
+
+          <!-- ══ 10 LB  cx=278, w=36, body h=133 ══ -->
+          <rect x="260" y="167" width="36" height="133" rx="6" fill="#b91c1c" stroke="#991b1b" stroke-width="1"/>
+          <path d="M260 167 Q260 155 278 153 Q296 155 296 167Z" fill="#b91c1c" stroke="#991b1b" stroke-width="1"/>
+          <rect x="268" y="144" width="12" height="12" rx="2.5" fill="#7f1d1d"/>
+          <path d="M269 146 Q255 141 255 153 Q255 160 269 159" fill="none" stroke="#7f1d1d" stroke-width="1.4" stroke-linecap="round"/>
+          <path d="M281 147 Q295 143 295 147 Q293 153 281 154" fill="none" stroke="#7f1d1d" stroke-width="1.3" stroke-linecap="round"/>
+          <circle cx="278" cy="203" r="4.5" fill="#1d4ed8"/>
+          
+          <text x="278" y="313" text-anchor="middle" font-family="var(--font-display)" font-size="10" font-weight="700" fill="var(--accent)">10 lbs</text>
+
+          <text x="278" y="335" text-anchor="middle" font-family="var(--font-body)" font-size="8" fill="var(--text-faint)">Warehouse</text>
+
+          <!-- ══ 20 LB  cx=365, w=44, body h=165 ══ -->
+          <rect x="343" y="135" width="44" height="165" rx="7" fill="#b91c1c" stroke="#991b1b" stroke-width="1"/>
+          <path d="M343 135 Q343 122 365 120 Q387 122 387 135Z" fill="#b91c1c" stroke="#991b1b" stroke-width="1"/>
+          <rect x="353" y="110" width="14" height="13" rx="3" fill="#7f1d1d"/>
+          <path d="M354 112 Q338 107 338 120 Q338 128 354 127" fill="none" stroke="#7f1d1d" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M368 113 Q384 108 384 113 Q382 120 368 121" fill="none" stroke="#7f1d1d" stroke-width="1.4" stroke-linecap="round"/>
+          <circle cx="365" cy="181" r="5" fill="#1d4ed8"/>
+         
+          <text x="365" y="313" text-anchor="middle" font-family="var(--font-display)" font-size="10" font-weight="700" fill="var(--accent)">20 lbs</text>
+       
+          <text x="365" y="335" text-anchor="middle" font-family="var(--font-body)" font-size="8" fill="var(--text-faint)">Industrial</text>
+
+          <!-- ══ 50 LB WHEELED  cx=465, w=58, body h=165, sits on trolley ══ -->
+          <circle cx="445" cy="296" r="9" fill="none" stroke="#6b7280" stroke-width="1.3"/>
+          <circle cx="485" cy="296" r="9" fill="none" stroke="#6b7280" stroke-width="1.3"/>
+          <line x1="445" y1="296" x2="485" y2="296" stroke="#6b7280" stroke-width="1.3"/>
+          <path d="M445 296 L442 252 M485 296 L488 252" fill="none" stroke="#6b7280" stroke-width="1.1" stroke-linecap="round"/>
+          <line x1="442" y1="272" x2="488" y2="272" stroke="#6b7280" stroke-width="0.8"/>
+          <line x1="442" y1="252" x2="488" y2="252" stroke="#6b7280" stroke-width="0.8"/>
+          <rect x="436" y="87" width="58" height="165" rx="9" fill="#b91c1c" stroke="#991b1b" stroke-width="1.1"/>
+          <path d="M436 87 Q436 73 465 71 Q494 73 494 87Z" fill="#b91c1c" stroke="#991b1b" stroke-width="1.1"/>
+          <rect x="451" y="60" width="16" height="14" rx="3" fill="#7f1d1d"/>
+          <path d="M452 62 Q434 56 434 70 Q434 79 452 77" fill="none" stroke="#7f1d1d" stroke-width="1.6" stroke-linecap="round"/>
+          <path d="M468 63 Q486 58 486 63 Q484 71 468 72" fill="none" stroke="#7f1d1d" stroke-width="1.5" stroke-linecap="round"/>
+          <circle cx="465" cy="135" r="5.5" fill="#1d4ed8"/>
+          <text x="465" y="313" text-anchor="middle" font-family="var(--font-display)" font-size="10" font-weight="700" fill="var(--accent)">50 lbs</text>
+        
+          <text x="465" y="335" text-anchor="middle" font-family="var(--font-body)" font-size="8" fill="var(--text-faint)">Wheeled · factory</text>
+
+          <!-- ══ 100 LB WHEELED  cx=575, w=74, body h=215, sits on trolley ══ -->
+          <circle cx="549" cy="296" r="11" fill="none" stroke="#6b7280" stroke-width="1.4"/>
+          <circle cx="601" cy="296" r="11" fill="none" stroke="#6b7280" stroke-width="1.4"/>
+          <line x1="549" y1="296" x2="601" y2="296" stroke="#6b7280" stroke-width="1.4"/>
+          <path d="M549 296 L545 247 M601 296 L605 247" fill="none" stroke="#6b7280" stroke-width="1.3" stroke-linecap="round"/>
+          <line x1="545" y1="270" x2="605" y2="270" stroke="#6b7280" stroke-width="0.9"/>
+          <line x1="545" y1="247" x2="605" y2="247" stroke="#6b7280" stroke-width="0.9"/>
+          <rect x="538" y="32" width="74" height="215" rx="11" fill="#b91c1c" stroke="#991b1b" stroke-width="1.2"/>
+          <path d="M538 32 Q538 16 575 14 Q612 16 612 32Z" fill="#b91c1c" stroke="#991b1b" stroke-width="1.2"/>
+          <rect x="558" y="4" width="18" height="14" rx="3" fill="#7f1d1d"/>
+          <path d="M559 6 Q540 0 540 14 Q540 23 559 21" fill="none" stroke="#7f1d1d" stroke-width="1.8" stroke-linecap="round"/>
+          <path d="M577 7 Q596 1 596 6 Q594 15 577 16" fill="none" stroke="#7f1d1d" stroke-width="1.7" stroke-linecap="round"/>
+          <circle cx="575" cy="98" r="6.5" fill="#1d4ed8"/>
+          <text x="575" y="313" text-anchor="middle" font-family="var(--font-display)" font-size="10" font-weight="700" fill="var(--accent)">100 lbs</text>
+
+          <text x="575" y="335" text-anchor="middle" font-family="var(--font-body)" font-size="8" fill="var(--text-faint)">Wheeled · industrial</text>
+
+        </svg>
+      </div>
+    </div>
+
+  </div>
+</section>
+<!-- ══════════════════════════════════════════
+     SPECIFICATIONS — DRY CHEMICAL ONLY
+     ══════════════════════════════════════════ -->
+<section id="specifications" class="section-pad">
+  <div class="container">
+    <div class="section-label reveal-on-scroll">Technical Data</div>
+    <h2 class="section-title reveal-on-scroll" data-delay="100">Dry Chemical Specifications</h2>
+    <p class="section-sub reveal-on-scroll" data-delay="200">
+      All technical parameters per ISO 9001:2015 manufacturing standards. Specifications for ABC Dry Chemical (MAP) extinguishers across all capacity sizes.
+    </p>
+    <div class="spec-table-wrapper reveal-on-scroll" data-delay="300">
+      <table class="spec-table">
+        <thead><tr><th>Parameter</th><th>ABC Dry Chemical (MAP)</th></tr></thead>
+        <tbody>
+          <tr><td>Product Type</td><td>Dry Chemical Stored Pressure Fire Extinguisher</td></tr>
+          <tr><td>Agent</td><td>Monoammonium Phosphate (MAP) — 75%</td></tr>
+          <tr><td>Capacity Range</td><td>1, 3, 5, 10, 20, 50, 100 lbs</td></tr>
+          <tr><td>Fire Classes</td><td><span class="spec-badge green">Class A, B, C</span></td></tr>
+          <tr><td>Working Pressure</td><td>1344 (kPA) at 28°C</td></tr>
+          <tr><td>Test Pressure</td><td>2.75 MPa</td></tr>
+          <tr><td>Cylinder Material</td><td>Cold-rolled steel, powder-coated</td></tr>
+          <tr><td>Residue</td><td><span class="spec-badge orange">Powder Residue</span></td></tr>
+          <tr><td>Safe for Electronics</td><td><span class="spec-badge orange">Caution — Residue</span></td></tr>
+          <tr><td>Discharge Time</td><td>9–35 seconds (varies by capacity)</td></tr>
+          <tr><td>Effective Range</td><td>8–22 ft (varies by capacity)</td></tr>
+          <tr><td>Ideal Applications</td><td>Offices, warehouses, vehicles, general industry, manufacturing</td></tr>
+          <tr><td>ISO Certification</td><td><span class="spec-badge green">ISO 9001:2015</span></td></tr>
+          <tr><td>Product Safety License</td><td><span class="spec-badge green">No. Q-4096</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     ABOUT
+     ══════════════════════════════════════════ -->
+<section id="about" class="section-pad">
+  <div class="container">
+    <div class="section-label reveal-on-scroll">Company Overview</div>
+    <h2 class="section-title reveal-on-scroll" data-delay="100">Engineered for Safety.<br/>Manufactured in the Philippines.</h2>
+    <p class="section-sub reveal-on-scroll" data-delay="200">
+      Every 8A Fire Safety ABC Dry Chemical extinguisher is engineered to meet international standards while supporting local Philippine industry. From compact 1-lbs units to industrial 100-lbs systems — complete fire protection coverage.
+    </p>
+    <div class="info-grid" data-stagger>
+      <div class="info-card">
+        <div class="ic-icon"><i class="fa-solid fa-industry"></i></div>
+        <h4>Philippine Manufacturing</h4>
+        <p>Manufactured at <strong>Purok Mansanas Sabang Naic Cavite Philippines</strong> — 8QCM+PXV, Purok Mansanas, Naic, Cavite</p>
+      </div>
+      <div class="info-card">
+        <div class="ic-icon"><i class="fa-solid fa-flask"></i></div>
+        <h4>ABC Dry Chemical Agent</h4>
+        <p><strong>Monoammonium Phosphate (MAP)</strong> based agent — 75% concentration. Effective on Class A, B, and C fires with excellent knock-down capability.</p>
+      </div>
+      <div class="info-card">
+        <div class="ic-icon"><i class="fa-solid fa-weight-hanging"></i></div>
+        <h4>Seven Weight Classes</h4>
+        <p>Available in <strong>1, 3, 5, 10, 20, 50, and 100 lbs</strong> capacities. From personal vehicle units to industrial total-flood systems.</p>
+      </div>
+      <div class="info-card">
+        <div class="ic-icon"><i class="fa-solid fa-fire"></i></div>
+        <h4>Fire Classes Covered</h4>
+        <div class="class-badges mt-2">
+          <div class="class-badge a">A</div>
+          <div class="class-badge b">B</div>
+          <div class="class-badge c">C</div>
+        </div>
+        <p class="mt-2" style="font-size:0.78rem;">A = Ordinary Combustibles &middot; B = Flammable Liquids &middot; C = Electrical Equipment</p>
+      </div>
+      <div class="info-card">
+        <div class="ic-icon"><i class="fa-solid fa-gauge-high"></i></div>
+        <h4>Pressure Systems</h4>
+        <p><strong>Stored Pressure</strong> design — no separate cartridge. Working pressure: <strong>1344(kPA) at 28°C</strong>. Test pressure: <strong>2.75 MPa</strong>.</p>
+      </div>
+      <div class="info-card">
+        <div class="ic-icon"><i class="fa-solid fa-circle-check"></i></div>
+        <h4>Certifications</h4>
+        <p>
+          <strong>ISO 9001:2015</strong> Certified.
+          Product Safety License <strong>No. Q-4096</strong>.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     HOW TO USE (PASS)
+     ══════════════════════════════════════════ -->
+<section id="how-to-use" class="section-pad alt-bg">
+  <div class="container">
+    <div class="section-label reveal-on-scroll">Operating Guide</div>
+    <h2 class="section-title reveal-on-scroll" data-delay="100">The PASS Method</h2>
+    <p class="section-sub reveal-on-scroll" data-delay="200">Four standard operating steps for all 8A Fire Safety ABC Dry Chemical extinguishers. Remember: Pull, Aim, Squeeze, Sweep.</p>
+    <div class="pass-steps" data-stagger>
+      <div class="pass-step">
+        <div class="step-num">P</div>
+        <div class="step-icon"><i class="fa-solid fa-lock-open"></i></div>
+        <h4>PULL the Pin</h4>
+        <p>Break the tamper seal and pull the safety pin from the handle. This unlocks the operating lever.</p>
+      </div>
+      <div class="pass-step">
+        <div class="step-num">A</div>
+        <div class="step-icon"><i class="fa-solid fa-crosshairs"></i></div>
+        <h4>AIM at Base</h4>
+        <p>Stand 2–3 meters back. Point the nozzle at the <strong>base of the fire</strong>, not at the flames.</p>
+      </div>
+      <div class="pass-step">
+        <div class="step-num">S</div>
+        <div class="step-icon"><i class="fa-solid fa-hand-fist"></i></div>
+        <h4>SQUEEZE the Lever</h4>
+        <p>Squeeze the handle lever firmly to discharge the agent. Release to stop the flow.</p>
+      </div>
+      <div class="pass-step">
+        <div class="step-num">S</div>
+        <div class="step-icon"><i class="fa-solid fa-arrows-left-right"></i></div>
+        <h4>SWEEP Side to Side</h4>
+        <p>Move the nozzle slowly side-to-side across the base until the fire is completely out.</p>
+      </div>
+    </div>
+    <div class="row mt-5 g-4">
+      <div class="col-md-6 reveal-on-scroll">
+        <div class="neu-card p-4">
+          <h5 class="card-label"><i class="fa-solid fa-check-circle"></i> Suitable For</h5>
+          <ul class="check-list">
+            <li><i class="fa-solid fa-tree"></i> Class A — Wood, Paper, Cloth, Trash</li>
+            <li><i class="fa-solid fa-oil-can"></i> Class B — Flammable Liquids, Grease</li>
+            <li><i class="fa-solid fa-bolt"></i> Class C — Energized Electrical Equipment</li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-6 reveal-on-scroll" data-delay="100">
+        <div class="neu-card p-4">
+          <h5 class="card-label red"><i class="fa-solid fa-triangle-exclamation"></i> Do NOT Use On</h5>
+          <ul class="check-list red">
+            <li><i class="fa-solid fa-circle-xmark"></i> Combustible metal fires (Class D)</li>
+            <li><i class="fa-solid fa-circle-xmark"></i> Cooking oil fires without proper agent</li>
+            <li><i class="fa-solid fa-circle-xmark"></i> Do not test discharge unnecessarily</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     CERTIFICATES
+     ══════════════════════════════════════════ -->
+<section id="certificates" class="section-pad">
+  <div class="container">
+    <div class="section-label reveal-on-scroll">Compliance & Standards</div>
+    <h2 class="section-title reveal-on-scroll" data-delay="100">Certificates &amp; Documentation</h2>
+    <p class="section-sub reveal-on-scroll" data-delay="200">All 8A Fire Safety ABC Dry Chemical products are manufactured under strict quality management systems and Philippine regulatory compliance.</p>
+    <div class="cert-grid" data-stagger>
+      <div class="cert-card">
+        <div class="cert-icon-wrap"><i class="fa-solid fa-award"></i></div>
+        <div>
+          <h4>ISO 9001:2015</h4>
+          <p>Certified Quality Management System covering the full production lifecycle — from raw material sourcing to finished unit inspection.</p>
+          <small class="cert-number">Ref: License No. Q-4096</small>
+          <div class="cert-status">CERTIFIED — ACTIVE</div>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon-wrap"><i class="fa-solid fa-shield-halved"></i></div>
+        <div>
+          <h4>Product Safety License (PH)</h4>
+          <p>Registered with Philippine regulatory authorities. Product Safety License No. Q-4096 issued under the Philippine Consumer Act.</p>
+          <div class="cert-status">LICENSED</div>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon-wrap"><i class="fa-solid fa-fire-extinguisher"></i></div>
+        <div>
+          <h4>Technical Inspection Record</h4>
+          <p>Each unit undergoes hydraulic pressure testing at 2.75 MPa, valve integrity check, and label verification before shipment.</p>
+          <div class="cert-status">TEST PASSED</div>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon-wrap"><i class="fa-solid fa-globe"></i></div>
+        <div>
+          <h4>Made in the Philippines</h4>
+          <p>Proudly manufactured locally at Purok Manasanas Sabang Naic Cavite. Supporting Philippine industry and local employment since 2019.</p>
+          <div class="cert-status">LOCAL MANUFACTURE</div>
+        </div>
+      </div>  
+      <div class="cert-card">
+        <div class="cert-icon-wrap"><i class="fa-solid fa-sync"></i></div>
+        <div>
+          <h4>Recharge &amp; Service Certification</h4>
+          <p>After any discharge, a recharge service form must be completed. Recharge available through 8A authorized service centers.</p>
+          <div class="cert-status">SERVICE AVAILABLE</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     PRODUCTION TIMELINE
+     ══════════════════════════════════════════ -->
+<section id="timeline" class="section-pad alt-bg">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-5 reveal-on-scroll">
+        <div class="section-label">Production Process</div>
+        <h2 class="section-title">From Raw Materials<br/>to Your Facility</h2>
+        <p class="section-sub">Every 8A Fire Safety ABC Dry Chemical extinguisher undergoes a rigorous five-stage production process with quality checks at each stage.</p>
+        <div class="process-highlight">
+          <div class="ph-item"><span class="ph-num">Q-4096</span><span class="ph-unit">LICENSE</span><span class="ph-label">PS MARK</span></div>
+          <div class="ph-item"><span class="ph-num">100%</span><span class="ph-label">Gauge Check</span></div>
+          <div class="ph-item"><span class="ph-num">ISO</span><span class="ph-unit">9001</span><span class="ph-label">Quality Standard</span></div>
+        </div>
+      </div>
+      <div class="col-lg-7">
+        <div class="timeline">
+          <div class="tl-item reveal-on-scroll">
+            <span class="tl-year">Stage 01</span>
+            <h4>Material Sourcing</h4>
+            <p>Monoammonium Phosphate (MAP) agent sourced from certified international suppliers. Cold-rolled steel cylinder blanks procured from ISO-certified local Philippine mills.</p>
+          </div>
+          <div class="tl-item reveal-on-scroll" data-delay="100">
+            <span class="tl-year">Stage 02</span>
+            <h4>Cylinder Fabrication &amp; Testing</h4>
+            <p>Cylinders are formed, welded, and hydraulically tested at 2.75 MPa to confirm structural integrity before any filling. Shot-blasted and powder-coated for corrosion resistance.</p>
+          </div>
+          <div class="tl-item reveal-on-scroll" data-delay="200">
+            <span class="tl-year">Stage 03</span>
+            <h4>Agent Filling &amp; Pressurization</h4>
+            <p>Precise amount of ABC dry chemical agent loaded, then pressurized to 1344(kPA) at 28°C MPa working pressure. 100% leak tested.</p>
+          </div>
+          <div class="tl-item reveal-on-scroll" data-delay="300">
+            <span class="tl-year">Stage 04</span>
+            <h4>Quality Inspection &amp; Labeling</h4>
+            <p>Each unit receives comprehensive final inspection including pressure gauge calibration, ISO label, production date , and serial number.</p>
+          </div>
+          <div class="tl-item reveal-on-scroll" data-delay="400">
+            <span class="tl-year">Stage 05</span>
+            <h4>Distribution &amp; Post-Sale Service</h4>
+            <p>Units are carefully packaged and distributed. Post-sale recharge and recertification services available nationwide.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     CONTACT
+     ══════════════════════════════════════════ -->
+<section id="contact" class="section-pad">
+  <div class="container">
+    <div class="contact-box reveal-on-scroll">
+      <div class="section-label" style="justify-content:center;">Get In Touch</div>
+      <h2>Need a Quote or<br/>Recharge Service?</h2>
+      <p>Contact 8A Fire Safety Maintenance &amp; Manufacturing Corporation for product inquiries, volume pricing, recharge services, or certification documentation.</p>
+      <div class="d-flex justify-content-center gap-3 flex-wrap">
+        <a href="tel:09676615730" class="neu-btn neu-btn-accent"><i class="fa-solid fa-phone"></i> Call Us</a>
+        <a href="https://8agroup.org" target="_blank" class="neu-btn"><i class="fa-solid fa-globe"></i> Website</a>
+      </div>
+      <div class="contact-details">
+        <div class="contact-pill"><span class="icon"><i class="fa-solid fa-location-dot"></i></span><span>Purok Mansanas Sabang Naic Cavite</span></div>
+        <div class="contact-pill"><span class="icon"><i class="fa-solid fa-phone"></i></span><span>0956 001 8222</span></div>
+        <div class="contact-pill"><span class="icon"><i class="fa-solid fa-globe"></i></span><span>https://8agroup.org</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     FOOTER
+     ══════════════════════════════════════════ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="index.html" class="brand"><span class="brand-text">8A Fire Safety</span></a>
+      <p class="footer-tagline">Protecting Lives and Property Since 2019</p>
+    </div>
+    <div class="footer-links">
+      <a href="#about">About</a>
+      <a href="#products">Products</a>
+      <a href="#specifications">Specifications</a>
+      <a href="#how-to-use">How to Use</a>
+      <a href="#certificates">Certificates</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="footer-contact">
+      <a href="tel: 09560018222" class="footer-link"><i class="fa-solid fa-phone"></i> 0956 001 8222</a>
+      <a href="mailto: firextinguishier@8afire.com" class="footer-link"><i class="fa-solid fa-envelope"></i>firextinguishier@8afire.com</a>
+      <a href="https://8agroup.org" target="_blank" class="footer-link"><i class="fa-solid fa-globe"></i> 8agroup.org</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-badges">
+      <span class="footer-badge"><i class="fa-solid fa-certificate"></i> ISO 9001:2015</span>
+      <span class="footer-badge"><i class="fa-solid fa-flag"></i> Made in Philippines</span>
+    </div>
+    <p class="copyright">
+      <a href="https://payne11092001.github.io/Arman-Baldo/" target="_blank" rel="noopener noreferrer">
+        &copy; Developed by: ARMAN BALDO. All rights reserved.
+      </a>
+    </p>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc4s9bIOgUxi8T/AgQF0uTAlC2B7qCBx0u9P8xK2B0" crossorigin="anonymous"></script>
+<script src="js/main.js"></script>
+<script src="js/grid_animation.js"></script>
+</body>
+</html> 
