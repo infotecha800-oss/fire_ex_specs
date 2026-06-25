@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>8A Fire Safety — Carbon Dioxide (CO2) Fire Extinguishers</title>
+  <meta name="description" content="8A Fire Safety — Philippine-made Carbon Dioxide (CO2) fire extinguishers. Clean-agent, residue-free protection for electrical and flammable-liquid fires. Available in 5, 10, 15, 20, 50, and 100 lbs. ISO 9001:2015 certified." />
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/co2.css" />
+  <link rel="stylesheet" href="css/grid_animation.css" />
+<base target="_blank">
+</head>
+<body>
+<section id="hero" class="h8a-hero-section">
+
+  <!-- Ambient background grid + orbs -->
+  <div class="h8a-grid-bg"></div>
+  <div class="h8a-orb h8a-orb-1"></div>
+  <div class="h8a-orb h8a-orb-2"></div>
+
+  <div class="container h8a-inner">
+
+    <!-- ── Top text block ── -->
+    <div class="h8a-top-text reveal-on-scroll">
+      <div class="h8a-hero-label">
+        <span class="h8a-hero-label-dash"></span>
+        8A Fire Safety
+        <span class="h8a-hero-label-dash"></span>
+      </div>
+      <h1 class="h8a-hero-title">
+        Carbon Dioxide (CO2)<br>
+        <span class="h8a-hero-title-stroke">Extinguisher</span>
+      </h1>
+
+    </div>
+
+    <!-- ── Stage: floating cards + product center ── -->
+    <div class="h8a-stage reveal-on-scroll" data-delay="200" id="h8aStage">
+
+      <!-- Rotating rings -->
+      <div class="h8a-ring h8a-ring-outer"></div>
+      <div class="h8a-ring h8a-ring-inner"></div>
+
+      <!-- SVG connector lines (drawn by JS) -->
+      <svg id="h8aLines" class="h8a-svg-lines" xmlns="http://www.w3.org/2000/svg"></svg>
+
+      <!-- Pulse dots (anchor points on image perimeter) -->
+      <div class="h8a-dot-pulse h8a-dot-tl" style="animation-delay:0s"></div>
+      <div class="h8a-dot-pulse h8a-dot-tr" style="animation-delay:0.4s"></div>
+      <div class="h8a-dot-pulse h8a-dot-ml" style="animation-delay:0.8s"></div>
+      <div class="h8a-dot-pulse h8a-dot-mr" style="animation-delay:1.2s"></div>
+      <div class="h8a-dot-pulse h8a-dot-bl" style="animation-delay:1.6s"></div>
+      <div class="h8a-dot-pulse h8a-dot-br" style="animation-delay:2.0s"></div>
+
+      <!-- CARD 0: Warranty Coverage -->
+      <div class="h8a-card h8a-card-tl" id="h8a-card-0">
+        <div class="h8a-card-icon"><i class="fa-solid fa-shield-halved"></i></div>
+        <div class="h8a-card-title">Warranty Coverage</div>
+        <div class="h8a-card-value">1 Year Warranty</div>
+        <div class="h8a-card-detail">Guaranteed quality and performance backed by manufacturer support.</div>
+      </div>
+
+      <!-- CARD 1: Origin (top-right) -->
+      <div class="h8a-card h8a-card-tr" id="h8a-card-1">
+        <div class="h8a-card-icon"><i class="fa-solid fa-map-location-dot"></i></div>
+        <div class="h8a-card-title">Origin</div>
+        <div class="h8a-card-value">Made in Philippines</div>
+        <div class="h8a-card-detail">Naic, Cavite. 100% local manufacturing &amp; employment.</div>
+      </div>
+
+      <!-- CARD 2: Valid Period (mid-left) -->
+      <div class="h8a-card h8a-card-ml" id="h8a-card-2">
+        <div class="h8a-card-icon"><i class="fa-solid fa-clock-rotate-left"></i></div>
+        <div class="h8a-card-title">Valid Period</div>
+        <div class="h8a-card-value">5 Years</div>
+        <div class="h8a-card-detail">DOT hydrostatic retest interval for CO2 cylinders</div>
+      </div>
+
+      <!-- CARD 3: Applicable Scenarios (mid-right) -->
+      <div class="h8a-card h8a-card-mr" id="h8a-card-3">
+        <div class="h8a-card-icon"><i class="fa-solid fa-building"></i></div>
+        <div class="h8a-card-title">Scenarios</div>
+        <div class="h8a-card-value">Class B · C</div>
+        <div class="h8a-card-detail">Server rooms, labs, electrical panels, flammable liquids &amp; more.</div>
+      </div>
+
+      <!-- CARD 4: Certifications (bottom-left) -->
+      <div class="h8a-card h8a-card-bl" id="h8a-card-4">
+        <div class="h8a-card-icon">
+          <i class="fa-solid fa-certificate"></i>
+        </div>
+        <div class="h8a-card-title">Certification</div>
+        <div class="h8a-card-value">PS Mark</div>
+        <div class="h8a-card-detail">License No. Q-4096</div>
+      </div>
+
+      <!-- CARD 5: Working Pressure (bottom-right) -->
+      <div class="h8a-card h8a-card-br" id="h8a-card-5">
+        <div class="h8a-card-icon"><i class="fa-solid fa-gauge-high"></i></div>
+        <div class="h8a-card-title">Working Pressure</div>
+        <div class="h8a-card-value">5,780 kPa at 21°C</div>
+        <div class="h8a-card-detail">Cylinder hydrostatic test pressure 19,000 kPa. Range: 3–8 ft (varies by capacity)</div>
+      </div>
+
+      <!-- ── Centre product image ── -->
+      <div class="h8a-product-core">
+        <div class="h8a-img-wrap">
+          <img
+            src="img/org-co2.png"
+            alt="8A Fire Safety Carbon Dioxide CO2 Fire Extinguisher"
+            class="h8a-product-img"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
+          />
+          <!-- Fallback SVG (hidden unless img fails) -->
+          <div class="h8a-product-svg-fallback" style="display:none;">
+            <i class="fa-solid fa-fire-extinguisher" style="font-size:7rem;color:#16181c;filter:drop-shadow(0 8px 24px rgba(0,0,0,0.25));"></i>
+          </div>
+        </div>
+        <span class="h8a-product-badge">Carbon Dioxide · 99.5% CO2</span>
+      </div>
+
+    </div><!-- /.h8a-stage -->
+
+    <!-- ── Bottom cert pills ── -->
+    <div class="h8a-certs-row reveal-on-scroll" data-delay="350">
+      <div class="h8a-cert-pill"><span class="h8a-pill-dot green"></span>ISO 9001:2015</div>
+      <div class="h8a-cert-pill"><span class="h8a-pill-dot blue"></span>Made in Philippines</div>
+      <div class="h8a-cert-pill"><span class="h8a-pill-dot amber"></span>6 Weight Classes</div>
+    </div>
+
+  </div><!-- /.container -->
+</section>
+
+
+<!-- ── SECTION: KEY INFO ── -->
+<section id="product-info" class="section-pad alt-bg reveal-on-scroll" data-delay="200">
+  <div class="container h8a-inner">
+    <div class="section-eyebrow">Manufacturing &amp; Identity</div>
+    <h2 class="section-title">Product Information</h2>
+    <div class="info-grid">
+
+      <div class="info-card">
+        <div class="ic-icon">📅</div>
+        <div class="ic-label" style="font-weight:700;">Production Date</div>
+        <div class="ic-value">July 2025</div>
+        <div class="ic-detail">Manufacturing timestamp verified by QC inspector. Date embossed on cylinder neck ring.</div>
+      </div>
+
+      <div class="info-card">
+        <div class="ic-icon">🌏</div>
+        <div class="ic-label" style="font-weight:700;">Country of Manufacture</div>
+        <div class="ic-value">Philippines 🇵🇭</div>
+        <div class="ic-detail">Produced at Purok Mansanas, Sabang, Naic, Cavite — 100% locally manufactured, supporting Philippine industry.</div>
+      </div>
+
+      <div class="info-card">
+        <div class="ic-icon">🏭</div>
+        <div class="ic-label" style="font-weight:700;">Manufacturer</div>
+        <div class="ic-value">8A Fire Safety Maintenance &amp; Manufacturing Corp.</div>
+        <div class="ic-detail">Purok Mansanas Sabang Naic Cavite, Philippines. Established 2019. Product Safety License No. Q-4096.</div>
+      </div>
+
+      <div class="info-card">
+        <div class="ic-icon">🔍</div>
+        <div class="ic-label" style="font-weight:700;">Last Inspection Date</div>
+        <div class="ic-value">July 2025</div>
+        <div class="ic-detail">Performed by 8A authorized QC inspector. Cylinder weight, valve integrity, and label verification all passed.</div>
+      </div>
+
+      <div class="info-card">
+        <div class="ic-icon">📆</div>
+        <div class="ic-label" style="font-weight:700;">Next Service Due</div>
+        <div class="ic-value">July 2026</div>
+        <div class="ic-detail">Annual weight-check required by Philippine regulatory standards. No gauge to read — loss is detected by weighing the cylinder.</div>
+      </div>
+
+      <div class="info-card">
+        <div class="ic-icon">⚙️</div>
+        <div class="ic-label" style="font-weight:700;">Working Pressure</div>
+        <div class="ic-value">838 psi (5,780 kPa) at 21 °C</div>
+        <div class="ic-detail">Self-pressurized liquid CO2 — no separate propellant needed. Cylinder hydrostatic test pressure: 19,000 kPa (2,755 psi). All units 100% leak-tested before leaving the facility.</div>
+      </div>
+
+      <div class="info-card">
+        <div class="ic-icon">🧪</div>
+        <div class="ic-label" style="font-weight:700;">Agent</div>
+        <div class="ic-value">Carbon Dioxide (CO2), 99.5% purity</div>
+        <div class="ic-detail">Clean, non-conductive gaseous agent. Leaves zero residue after discharge — ideal for sensitive electronics and server equipment.</div>
+      </div>
+
+      <div class="info-card">
+        <div class="ic-icon">🔥</div>
+        <div class="ic-label" style="font-weight:700;">Fire Classes</div>
+        <div class="ic-value">Class B · C</div>
+        <div class="ic-detail">Flammable liquids and gases, and energized electrical equipment. Not rated for Class A (ordinary combustibles) or Class D (combustible metals).</div>
+      </div>
+
+      <div class="info-card">
+        <div class="ic-icon">🏅</div>
+        <div class="ic-label" style="font-weight:700;">Certification</div>
+        <div class="ic-value">ISO 9001:2015 · PS Mark</div>
+        <div class="ic-detail">Product Safety License No. Q-4096 under the Philippine Consumer Act.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+<!-- ══════════════════════════════════════════
+     PRODUCTS — CARBON DIOXIDE (CO2) ONLY
+     ══════════════════════════════════════════ -->
+<section id="products" class="section-pad alt-bg">
+  <div class="container">
+    <div class="section-label reveal-on-scroll">Product Catalog</div>
+    <h2 class="section-title reveal-on-scroll" data-delay="100">Carbon Dioxide (CO2) Extinguishers</h2>
+    <p class="section-sub reveal-on-scroll" data-delay="200">
+      Select your capacity below. Each unit includes production date, origin, valid period, applicable scenarios, and certification details.
+    </p>
+
+    <!-- Product Size Selector -->
+    <div class="product-tabs reveal-on-scroll" data-delay="300">
+      <button class="tab-btn active" data-tab="5lb">5 lbs</button>
+      <button class="tab-btn" data-tab="10lb">10 lbs</button>
+      <button class="tab-btn" data-tab="15lb">15 lbs</button>
+      <button class="tab-btn" data-tab="20lb">20 lbs</button>
+      <button class="tab-btn" data-tab="50lb">50 lbs</button>
+      <button class="tab-btn" data-tab="100lb">100 lbs</button>
+    </div>
+
+    <!-- 5 lbs Product Card -->
+    <div id="tab-5lb" class="product-detail-panel active">
+      <div class="product-detail-card">
+        <div class="row g-4 reveal-on-scroll" data-delay="200">
+          <div class="col-lg-4">
+            <div class="product-image-box">
+              <div class="product-size-badge">5 lbs</div>
+              <img class="anatomy-img" id="anatomyImg" src="img/CO2/5.png" alt="8A Fire Safety CO2 Extinguisher Technical Drawing" />
+              <div class="product-agent-tag">Carbon Dioxide</div>
+            </div>
+          </div>
+          <div class="col-lg-8">
+            <div class="product-info-grid">
+              <div class="info-block">
+                <div class="info-block-icon"><i class="fa-solid fa-fire-extinguisher"></i></div>
+                <div class="info-block-content">
+                    <h5>Fire Classification</h5>
+                    <p>Suitable for <strong>Class B and C fires</strong>, providing clean, residue-free protection against flammable liquids and energized electrical equipment.</p>
+                </div>
+              </div>
+              <div class="info-block">
+                <div class="info-block-icon"><i class="fa-solid fa-map-location-dot"></i></div>
+                <div class="info-block-content">
+                  <h5>Origin</h5>
+                  <p><strong>Made in the Philippines</strong> at Purok Mansanas, Sabang, Naic, Cavite. 100% local manufacturing supporting Philippine industry and employment.</p>
+                </div>
+              </div>
+              <div class="info-block">
+                <div class="info-block-icon"><i class="fa-solid fa-clock-rotate-left"></i></div>
+                <div class="info-block-content">
+                  <h5>Valid Period</h5>
+                  <p><strong>5 years</strong> hydrostatic retest interval for unused units. Annual weight-check required. Recharge service available after discharge.</p>
+                </div>
+              </div>
+              <div class="info-block">
+                <div class="info-block-icon"><i class="fa-solid fa-building"></i></div>
+                <div class="info-block-content">
+                  <h5>Applicable Scenarios</h5>
+                  <p>Ideal for <strong>computer rooms, electrical panels, small labs, and vehicles</strong>. Compact size fits under car seats or in cabinets. Leaves no residue — safe around sensitive equipment.</p>
+                </div>
+              </div>
+              <div class="info-block">
+                <div class="info-block-icon"><i class="fa-solid fa-certificate"></i></div>
+                <div class="info-block-content">
+                  <h5>Certifications</h5>
+                  <p><strong>ISO 9001:2015</strong> Quality Management | <strong>Product Safety License No. Q-4096</strong> | 19,000 kPa hydrostatic test passed.</p>
+                </div>
+              </div>
+            </div>
+            <div class="product-meta-row">
+              <div class="meta-badge"><i class="fa-solid fa-weight-hanging"></i> 5.0 lbs Agent</div>
+              <div class="meta-badge"><i class="fa-solid fa-gauge-high"></i> 19,000 kPa Test Pressure</div>
+              <div class="meta-badge"><i class="fa-solid fa-gauge-high"></i> 5,780 kPa at 21°C Working Pressure</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 10 lbs Product Card -->
+    <div id="tab-10lb" class="product-detail-panel">
+      <div class="product-detail-card">
+        <div class="row g-4">
+          <div class="col-lg-4">
+            <div class="product-image-box">
+              <div class="product-size-badge">10 lbs</div>
+              <img class="anatomy-img" id="anatomyImg" src="img/CO2/10.png" alt="8A Fire Safety CO2 Extinguisher Technical Drawing" />
+              <div class="product-agent-tag">Carbon Dioxide</div>
+            </div>
+          </div>
+          <div class="col-lg-8">
+            <div class="product-info-grid">
+              <div class="info-block">
+                <div class="info-block-icon"><i class="fa-solid fa-fire-extinguisher"></i></div>
+                <div class="info-block-content">
+                    <h5>Fire Classification</h5>
+                    <p>Suitable for <strong>Class B and C fires</strong>, providing clean, residue-free protection against flammable liquids and energized electrical equipment.</p>
+                </div>
+              </div>
+              <div class="info-block">
+                <div class="info-block-icon"><i class="fa-solid fa-map-location-dot"></i></div>
+                <div class="info-block-content">
+                  <h5>Origin</h5>
+                  <p><strong>Made in the Philippines</strong> at Purok Mansanas, Sabang, Naic, Cavite. High-pressure steel cylinders from ISO-certified local mills, rated for liquid CO2 storage.</p>
+                </div>
+              </div>
+              <div class="info-block">
+                <div class="info-block-icon"><i class="fa-solid fa-clock-rotate-left"></i></div>
+                <div class="info-block-content">
+                  <h5>Valid Period</h5>
+                  <p><strong>5 years</strong> hydrostatic retest interval for unused units. Annual weight-check required. Recharge available through 8A.</p>
+                </div>
+              </div>
+              <div class="info-block">
+                <div class="info-block-icon"><i class="fa-solid fa-building"></i></div>
+                <div class="info-block-content">
+                  <h5>Applicable Scenarios</h5>
+                  <p>Perfect for <strong>server rooms, laboratories, generator rooms, and electrical switchgear areas</strong>. Non-conductive discharge with 6–8 ft effective range on Class B and C fires.</p>
+                </div>
+              </div>
+              <div class="info-block">
+                <div class="info-block-icon"><i class="fa-solid fa-certificate"></i></div>
+                <div class="info-block-content">
+                  <h5>Certifications</h5>
+                  <p><strong>ISO 9001:2015</strong> Quality Management | <strong>Product Safety License No. Q-4096</strong> | 19,000 kPa hydrostatic test passed.</p>
+                </div>
+              </div>
+            </div>
+            <div class="product-meta-row">
+              <div class="meta-badge"><i class="fa-solid fa-weight-hanging"></i> 10.0 lbs Agent</div>
+              <div class="meta-badge"><i class="fa-solid fa-gauge-high"></i> 19,000 kPa Test Pressure</div>
+              <div class="meta-badge"><i class="fa-solid fa-gauge-high"></i> 5,780 kPa at 21°C Working Pressure</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 15 lbs Product Card -->
+    <div id="tab-15lb" class="product-detail-panel">
+      <div class="product-detail-card">
+        <div class="row g-4">
+          <div class="col-lg-4">
+            <div class="product-image-box">
+              <div class="product-size-badge">15 lbs</div>
+              <img class="anatomy-img" id="anatomyImg" src="img/CO2/15.png" alt="8A Fire Safety CO2 Extinguisher Technical Drawing" />
+              <div class="product-agent-tag">Carbon Dioxide</div>
+            </div>
+          </div>
+          <div class="col-lg-8">
+            <div class="product-info-grid">
+              <div class="info-block">
+                <div class="info-block-icon"><i class="fa-solid fa-fire-extinguisher"></i></div>
+                <div class="info-block-content">
+                    <h5>Fire Classification</h5>
+                    <p>Suitable for <strong>Class B and C fires</strong>, providing clean, residue-free protection against flammable liquids and energized electrical equipment.</p>
+                </div>
+              </div>
+              <div class="info-block">
+                <div class="info-block-icon"><i class="fa-solid fa-map-location-dot"></i></div>
+                <div class="info-block-content">
+                  <h5>Origin</h5>
+                  <p><strong>Made in the Philippines</strong> at Purok Mansanas, Sabang, Naic, Cavite. Reinforced high-pressure steel cylinder with insulated carry handle.</p>
+                </div>
+              </div>
+              <div class="info-block">
+                <div class="info-block-icon"><i class="fa-solid fa-clock-rotate-left"></i></div>
+                <div class="info-block-content">
+                  <h5>Valid Period</h5>
+                  <p><strong>5 years</strong> hydrostatic retest interval for unused units. Annual weight-check required. Recharge available through 8A.</p>
+                </div>
+              </div>
+              <div class="info-block">
+                <div class="info-block-icon"><i class="fa-solid fa-building"></i></div>
+                <div class="info-block-content">
+                  <h5>Applicable Scenarios</h5>
+                  <p>Recommended for <strong>data centers, telecom rooms, paint booths, and commercial kitchens' electrical panels</strong>. Insulated horn protects the operator's hand from frost during discharge.</p>
+                </div>
+              </div>
+              <div class="info-block">
+                <div class="info-block-icon"><i class="fa-solid fa-certificate"></i></div>
+                <div class="info-block-content">
+                  <h5>Certifications</h5>
+                  <p><strong>ISO 9001:2015</strong> Quality Management | <strong>Product Safety License No. Q-4096</strong> | 19,000 kPa hydrostatic test passed.</p>
+                </div>
+              </div>
+            </div>
+            <div class="product-meta-row">
+              <div class="meta-badge"><i class="fa-solid fa-weight-hanging"></i> 15.0 lbs Agent</div>
+              <div class="meta-badge"><i class="fa-solid fa-gauge-high"></i> 19,000 kPa Test Pressure</div>
+              <div class="meta-badge"><i class="fa-solid fa-gauge-high"></i> 5,780 kPa at 21°C Working Pressure</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 20 lbs Product Card -->
+    <div id="tab-20lb" class="product-detail-panel">
+      <div class="product-detail-card">
+        <div class="row g-4">
+          <div class="col-lg-4">
+            <div class="product-image-box">
+              <div class="product-size-badge">20 lbs</div>
+              <img class="anatomy-img" id="anatomyImg" src="img/CO2/20.png" alt="8A Fire Safety CO2 Extinguisher Technical Drawing" />
+              <div class="product-agent-tag">Carbon Dioxide</div>
+            </div>
+          </div>
+          <div class="col-lg-8">
+            <div class="product-info-grid">
+              <div class="info-block">
+                <div class="info-block-icon"><i class="fa-solid fa-fire-extinguisher"></i></div>
+                <div class="info-block-content">
+                    <h5>Fire Classification</h5>
+                    <p>Suitable for <strong>Class B and C fires</strong>, providing clean, residue-free protection against flammable liquids and energized electrical equipment.</p>
+                </div>
+              </div>
+              <div class="info-block">
+                <div class="info-block-icon"><i class="fa-solid fa-map-location-dot"></i></div>
+                <div class="info-block-content">
+                  <h5>Origin</h5>
+                  <p><strong>Made in the Philippines</strong> at Purok Mansanas, Sabang, Naic, Cavite. Heavy-duty high-pressure steel construction for industrial CO2 storage.</p>
+                </div>
+              </div>
+              <div class="info-block">
+                <div class="info-block-icon"><i class="fa-solid fa-clock-rotate-left"></i></div>
+                <div class="info-block-content">
+                  <h5>Valid Period</h5>
+                  <p><strong>5 years</strong> hydrostatic retest interval for unused units. Annual weight-check required. Recharge available through 8A.</p>
+                </div>
+              </div>
+              <div class="info-block">
+                <div class="info-block-icon"><i class="fa-solid fa-building"></i></div>
+                <div class="info-block-content">
+                  <h5>Applicable Scenarios</h5>
+                  <p>Built for <strong>industrial control rooms, transformer bays, printing presses, and manufacturing plants</strong>. High-flow valve for rapid knockdown of energized equipment fires.</p>
+                </div>
+              </div>
+              <div class="info-block">
+                <div class="info-block-icon"><i class="fa-solid fa-certificate"></i></div>
+                <div class="info-block-content">
+                  <h5>Certifications</h5>
+                  <p><strong>ISO 9001:2015</strong> Quality Management | <strong>Product Safety License No. Q-4096</strong> | 19,000 kPa hydrostatic test passed.</p>
+                </div>
+              </div>
+            </div>
+            <div class="product-meta-row">
+              <div class="meta-badge"><i class="fa-solid fa-weight-hanging"></i> 20.0 lbs Agent</div>
+              <div class="meta-badge"><i class="fa-solid fa-gauge-high"></i> 19,000 kPa Test Pressure</div>
+              <div class="meta-badge"><i class="fa-solid fa-gauge-high"></i> 5,780 kPa at 21°C Working Pressure</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 50 lbs Product Card -->
+    <div id="tab-50lb" class="product-detail-panel">
+      <div class="product-detail-card">
+        <div class="row g-4">
+          <div class="col-lg-4">
+            <div class="product-image-box">
+              <div class="product-size-badge">50 lbs</div>
+              <img class="anatomy-img" id="anatomyImg" src="img/CO2/50.png" alt="8A Fire Safety CO2 Extinguisher Technical Drawing" />
+              <div class="product-agent-tag">Carbon Dioxide</div>
+            </div>
+          </div>
+          <div class="col-lg-8">
+            <div class="product-info-grid">
+              <div class="info-block">
+                <div class="info-block-icon"><i class="fa-solid fa-fire-extinguisher"></i></div>
+                <div class="info-block-content">
+                    <h5>Fire Classification</h5>
+                    <p>Suitable for <strong>Class B and C fires</strong>, providing clean, residue-free protection against flammable liquids and energized electrical equipment.</p>
+                </div>
+              </div>
+              <div class="info-block">
+                <div class="info-block-icon"><i class="fa-solid fa-map-location-dot"></i></div>
+                <div class="info-block-content">
+                  <h5>Origin</h5>
+                  <p><strong>Made in the Philippines</strong> at Purok Mansanas, Sabang, Naic, Cavite. Heavy-duty high-pressure steel cylinder on a wheeled trolley for mobility.</p>
+                </div>
+              </div>
+              <div class="info-block">
+                <div class="info-block-icon"><i class="fa-solid fa-clock-rotate-left"></i></div>
+                <div class="info-block-content">
+                  <h5>Valid Period</h5>
+                  <p><strong>5 years</strong> hydrostatic retest interval for unused units. Annual weight-check required. Recharge available through 8A.</p>
+                </div>
+              </div>
+              <div class="info-block">
+                <div class="info-block-icon"><i class="fa-solid fa-building"></i></div>
+                <div class="info-block-content">
+                  <h5>Applicable Scenarios</h5>
+                  <p>Engineered for <strong>large electrical substations, generator plants, fuel-handling areas, and heavy manufacturing</strong>. Wheeled unit with extended hose for rapid deployment.</p>
+                </div>
+              </div>
+              <div class="info-block">
+                <div class="info-block-icon"><i class="fa-solid fa-certificate"></i></div>
+                <div class="info-block-content">
+                  <h5>Certifications</h5>
+                  <p><strong>ISO 9001:2015</strong> Quality Management | <strong>Product Safety License No. Q-4096</strong> | 19,000 kPa hydrostatic test passed.</p>
+                </div>
+              </div>
+            </div>
+            <div class="product-meta-row">
+              <div class="meta-badge"><i class="fa-solid fa-weight-hanging"></i> 50.0 lbs Agent</div>
+              <div class="meta-badge"><i class="fa-solid fa-gauge-high"></i> 19,000 kPa Test Pressure</div>
+              <div class="meta-badge"><i class="fa-solid fa-gauge-high"></i> 5,780 kPa at 21°C Working Pressure</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 100 lbs Product Card -->
+    <div id="tab-100lb" class="product-detail-panel">
+      <div class="product-detail-card">
+        <div class="row g-4">
+          <div class="col-lg-4">
+            <div class="product-image-box">
+              <div class="product-size-badge">100 lbs</div>
+              <img class="anatomy-img" id="anatomyImg" src="img/CO2/100.png" alt="8A Fire Safety CO2 Extinguisher Technical Drawing" />
+              <div class="product-agent-tag">Carbon Dioxide</div>
+            </div>
+          </div>
+          <div class="col-lg-8">
+            <div class="product-info-grid">
+              <div class="info-block">
+                <div class="info-block-icon"><i class="fa-solid fa-fire-extinguisher"></i></div>
+                <div class="info-block-content">
+                    <h5>Fire Classification</h5>
+                    <p>Suitable for <strong>Class B and C fires</strong>, providing clean, residue-free protection against flammable liquids and energized electrical equipment.</p>
+                </div>
+              </div>
+              <div class="info-block">
+                <div class="info-block-icon"><i class="fa-solid fa-map-location-dot"></i></div>
+                <div class="info-block-content">
+                  <h5>Origin</h5>
+                  <p><strong>Made in the Philippines</strong> at Purok Mansanas, Sabang, Naic, Cavite. Industrial-grade high-pressure steel construction with reinforced trolley and hose assembly.</p>
+                </div>
+              </div>
+              <div class="info-block">
+                <div class="info-block-icon"><i class="fa-solid fa-clock-rotate-left"></i></div>
+                <div class="info-block-content">
+                  <h5>Valid Period</h5>
+                  <p><strong>5 years</strong> hydrostatic retest interval for unused units. Annual weight-check required. Recharge available through 8A.</p>
+                </div>
+              </div>
+              <div class="info-block">
+                <div class="info-block-icon"><i class="fa-solid fa-building"></i></div>
+                <div class="info-block-content">
+                  <h5>Applicable Scenarios</h5>
+                  <p>Designed for <strong>total-flood protection of switchgear rooms, power plants, refineries, and large data centers</strong>. Wheeled unit with extended hose for operator safety at a distance.</p>
+                </div>
+              </div>
+              <div class="info-block">
+                <div class="info-block-icon"><i class="fa-solid fa-certificate"></i></div>
+                <div class="info-block-content">
+                  <h5>Certifications</h5>
+                  <p><strong>ISO 9001:2015</strong> Quality Management | <strong>Product Safety License No. Q-4096</strong> | 19,000 kPa hydrostatic test passed.</p>
+                </div>
+              </div>
+            </div>
+            <div class="product-meta-row">
+              <div class="meta-badge"><i class="fa-solid fa-weight-hanging"></i> 100.0 lbs Agent</div>
+              <div class="meta-badge"><i class="fa-solid fa-gauge-high"></i> 19,000 kPa Test Pressure</div>
+              <div class="meta-badge"><i class="fa-solid fa-temperature-half"></i> 5,780 kPa at 21°C Working Pressure</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Size Comparison Guide -->
+    <div class="weight-guide reveal-on-scroll" data-delay="400">
+      <h3 class="guide-title">Size Comparison — Actual Scale</h3>
+      <p style="font-size:0.8rem;color:var(--text-muted);margin:0 0 1rem;text-align:center;">
+        Carbon Dioxide (CO2) · all drawn to the same scale so size differences are real
+      </p>
+
+      <div style="overflow-x:auto;">
+        <svg viewBox="0 0 680 340" style="width:100%;min-width:480px;display:block;" role="img" aria-label="Fire extinguisher size comparison from 5 lbs to 100 lbs">
+
+          <!-- Ground line -->
+          <line x1="10" y1="300" x2="670" y2="300" stroke="#cbd5e1" stroke-width="0.8"/>
+
+          <!-- ══ 5 LB  cx=80, w=26, body h=96 ══ -->
+          <rect x="67" y="204" width="26" height="96" rx="4" fill="#16181c" stroke="#000000" stroke-width="0.9"/>
+          <path d="M67 204 Q67 193 80 191 Q93 193 93 204Z" fill="#16181c" stroke="#000000" stroke-width="0.9"/>
+          <rect x="74" y="183" width="11" height="11" rx="2" fill="#000000"/>
+          <path d="M75 185 Q62 181 62 191 Q62 197 75 196" fill="none" stroke="#000000" stroke-width="1.2" stroke-linecap="round"/>
+          <path d="M86 186 Q97 182 97 186 Q96 191 86 192" fill="none" stroke="#000000" stroke-width="1.1" stroke-linecap="round"/>
+          <circle cx="80" cy="231" r="3.5" fill="#1d4ed8"/>
+          <text x="80" y="313" text-anchor="middle" font-family="var(--font-display)" font-size="10" font-weight="700" fill="var(--accent)">5 lbs</text>
+          <text x="80" y="335" text-anchor="middle" font-family="var(--font-body)" font-size="8" fill="var(--text-faint)">Vehicle / small room</text>
+
+          <!-- ══ 10 LB  cx=170, w=32, body h=122 ══ -->
+          <rect x="154" y="178" width="32" height="122" rx="5" fill="#16181c" stroke="#000000" stroke-width="1"/>
+          <path d="M154 178 Q154 166 170 164 Q186 166 186 178Z" fill="#16181c" stroke="#000000" stroke-width="1"/>
+          <rect x="163" y="157" width="13" height="12" rx="2.5" fill="#000000"/>
+          <path d="M164 159 Q150 154 150 165 Q150 172 164 171" fill="none" stroke="#000000" stroke-width="1.3" stroke-linecap="round"/>
+          <path d="M177 160 Q190 156 190 160 Q188 166 177 167" fill="none" stroke="#000000" stroke-width="1.2" stroke-linecap="round"/>
+          <circle cx="170" cy="212" r="4" fill="#1d4ed8"/>
+          <text x="170" y="313" text-anchor="middle" font-family="var(--font-display)" font-size="10" font-weight="700" fill="var(--accent)">10 lbs</text>
+          <text x="170" y="335" text-anchor="middle" font-family="var(--font-body)" font-size="8" fill="var(--text-faint)">Server room</text>
+
+          <!-- ══ 15 LB  cx=268, w=37, body h=146 ══ -->
+          <rect x="249" y="154" width="37" height="146" rx="6" fill="#16181c" stroke="#000000" stroke-width="1"/>
+          <path d="M249 154 Q249 140 268 138 Q287 140 287 154Z" fill="#16181c" stroke="#000000" stroke-width="1"/>
+          <rect x="259" y="131" width="14" height="13" rx="3" fill="#000000"/>
+          <path d="M260 133 Q244 128 244 140 Q244 147 260 146" fill="none" stroke="#000000" stroke-width="1.4" stroke-linecap="round"/>
+          <path d="M274 134 Q289 129 289 134 Q287 141 274 142" fill="none" stroke="#000000" stroke-width="1.3" stroke-linecap="round"/>
+          <circle cx="268" cy="192" r="4.5" fill="#1d4ed8"/>
+          <text x="268" y="313" text-anchor="middle" font-family="var(--font-display)" font-size="10" font-weight="700" fill="var(--accent)">15 lbs</text>
+          <text x="268" y="335" text-anchor="middle" font-family="var(--font-body)" font-size="8" fill="var(--text-faint)">Data center</text>
+
+          <!-- ══ 20 LB  cx=375, w=44, body h=165 ══ -->
+          <rect x="353" y="135" width="44" height="165" rx="7" fill="#16181c" stroke="#000000" stroke-width="1"/>
+          <path d="M353 135 Q353 122 375 120 Q397 122 397 135Z" fill="#16181c" stroke="#000000" stroke-width="1"/>
+          <rect x="363" y="110" width="14" height="13" rx="3" fill="#000000"/>
+          <path d="M364 112 Q348 107 348 120 Q348 128 364 127" fill="none" stroke="#000000" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M378 113 Q394 108 394 113 Q392 120 378 121" fill="none" stroke="#000000" stroke-width="1.4" stroke-linecap="round"/>
+          <circle cx="375" cy="181" r="5" fill="#1d4ed8"/>
+          <text x="375" y="313" text-anchor="middle" font-family="var(--font-display)" font-size="10" font-weight="700" fill="var(--accent)">20 lbs</text>
+          <text x="375" y="335" text-anchor="middle" font-family="var(--font-body)" font-size="8" fill="var(--text-faint)">Industrial panel</text>
+
+          <!-- ══ 50 LB WHEELED  cx=475, w=58, body h=165, sits on trolley ══ -->
+          <circle cx="455" cy="296" r="9" fill="none" stroke="#6b7280" stroke-width="1.3"/>
+          <circle cx="495" cy="296" r="9" fill="none" stroke="#6b7280" stroke-width="1.3"/>
+          <line x1="455" y1="296" x2="495" y2="296" stroke="#6b7280" stroke-width="1.3"/>
+          <path d="M455 296 L452 252 M495 296 L498 252" fill="none" stroke="#6b7280" stroke-width="1.1" stroke-linecap="round"/>
+          <line x1="452" y1="272" x2="498" y2="272" stroke="#6b7280" stroke-width="0.8"/>
+          <line x1="452" y1="252" x2="498" y2="252" stroke="#6b7280" stroke-width="0.8"/>
+          <rect x="446" y="87" width="58" height="165" rx="9" fill="#16181c" stroke="#000000" stroke-width="1.1"/>
+          <path d="M446 87 Q446 73 475 71 Q504 73 504 87Z" fill="#16181c" stroke="#000000" stroke-width="1.1"/>
+          <rect x="461" y="60" width="16" height="14" rx="3" fill="#000000"/>
+          <path d="M462 62 Q444 56 444 70 Q444 79 462 77" fill="none" stroke="#000000" stroke-width="1.6" stroke-linecap="round"/>
+          <path d="M478 63 Q496 58 496 63 Q494 71 478 72" fill="none" stroke="#000000" stroke-width="1.5" stroke-linecap="round"/>
+          <circle cx="475" cy="135" r="5.5" fill="#1d4ed8"/>
+          <text x="475" y="313" text-anchor="middle" font-family="var(--font-display)" font-size="10" font-weight="700" fill="var(--accent)">50 lbs</text>
+          <text x="475" y="335" text-anchor="middle" font-family="var(--font-body)" font-size="8" fill="var(--text-faint)">Wheeled · substation</text>
+
+          <!-- ══ 100 LB WHEELED  cx=585, w=74, body h=215, sits on trolley ══ -->
+          <circle cx="559" cy="296" r="11" fill="none" stroke="#6b7280" stroke-width="1.4"/>
+          <circle cx="611" cy="296" r="11" fill="none" stroke="#6b7280" stroke-width="1.4"/>
+          <line x1="559" y1="296" x2="611" y2="296" stroke="#6b7280" stroke-width="1.4"/>
+          <path d="M559 296 L555 247 M611 296 L615 247" fill="none" stroke="#6b7280" stroke-width="1.3" stroke-linecap="round"/>
+          <line x1="555" y1="270" x2="615" y2="270" stroke="#6b7280" stroke-width="0.9"/>
+          <line x1="555" y1="247" x2="615" y2="247" stroke="#6b7280" stroke-width="0.9"/>
+          <rect x="548" y="32" width="74" height="215" rx="11" fill="#16181c" stroke="#000000" stroke-width="1.2"/>
+          <path d="M548 32 Q548 16 585 14 Q622 16 622 32Z" fill="#16181c" stroke="#000000" stroke-width="1.2"/>
+          <rect x="568" y="4" width="18" height="14" rx="3" fill="#000000"/>
+          <path d="M569 6 Q550 0 550 14 Q550 23 569 21" fill="none" stroke="#000000" stroke-width="1.8" stroke-linecap="round"/>
+          <path d="M587 7 Q606 1 606 6 Q604 15 587 16" fill="none" stroke="#000000" stroke-width="1.7" stroke-linecap="round"/>
+          <circle cx="585" cy="98" r="6.5" fill="#1d4ed8"/>
+          <text x="585" y="313" text-anchor="middle" font-family="var(--font-display)" font-size="10" font-weight="700" fill="var(--accent)">100 lbs</text>
+          <text x="585" y="335" text-anchor="middle" font-family="var(--font-body)" font-size="8" fill="var(--text-faint)">Wheeled · power plant</text>
+
+        </svg>
+      </div>
+    </div>
+
+  </div>
+</section>
+<!-- ══════════════════════════════════════════
+     SPECIFICATIONS — CARBON DIOXIDE (CO2) ONLY
+     ══════════════════════════════════════════ -->
+<section id="specifications" class="section-pad">
+  <div class="container">
+    <div class="section-label reveal-on-scroll">Technical Data</div>
+    <h2 class="section-title reveal-on-scroll" data-delay="100">Carbon Dioxide Specifications</h2>
+    <p class="section-sub reveal-on-scroll" data-delay="200">
+      All technical parameters per ISO 9001:2015 manufacturing standards. Specifications for Carbon Dioxide (CO2) extinguishers across all capacity sizes.
+    </p>
+    <div class="spec-table-wrapper reveal-on-scroll" data-delay="300">
+      <table class="spec-table">
+        <thead><tr><th>Parameter</th><th>Carbon Dioxide (CO2)</th></tr></thead>
+        <tbody>
+          <tr><td>Product Type</td><td>Carbon Dioxide Self-Pressurized Fire Extinguisher</td></tr>
+          <tr><td>Agent</td><td>Carbon Dioxide (CO2) — 99.5% purity, liquefied gas</td></tr>
+          <tr><td>Capacity Range</td><td>5, 10, 15, 20, 50, 100 lbs</td></tr>
+          <tr><td>Fire Classes</td><td><span class="spec-badge blue">Class B, C</span></td></tr>
+          <tr><td>Working Pressure</td><td>5,780 kPa (838 psi) at 21°C</td></tr>
+          <tr><td>Test Pressure</td><td>19,000 kPa (2,755 psi)</td></tr>
+          <tr><td>Cylinder Material</td><td>High-pressure seamless steel, DOT 3A/3AA rated</td></tr>
+          <tr><td>Residue</td><td><span class="spec-badge green">None — Clean Agent</span></td></tr>
+          <tr><td>Safe for Electronics</td><td><span class="spec-badge green">Yes — Non-Conductive, No Residue</span></td></tr>
+          <tr><td>Discharge Time</td><td>8–30 seconds (varies by capacity)</td></tr>
+          <tr><td>Effective Range</td><td>3–8 ft (varies by capacity)</td></tr>
+          <tr><td>Ideal Applications</td><td>Server rooms, labs, electrical panels, flammable-liquid storage, generator rooms</td></tr>
+          <tr><td>ISO Certification</td><td><span class="spec-badge green">ISO 9001:2015</span></td></tr>
+          <tr><td>Product Safety License</td><td><span class="spec-badge green">No. Q-4096</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     ABOUT
+     ══════════════════════════════════════════ -->
+<section id="about" class="section-pad">
+  <div class="container">
+    <div class="section-label reveal-on-scroll">Company Overview</div>
+    <h2 class="section-title reveal-on-scroll" data-delay="100">Engineered for Safety.<br/>Manufactured in the Philippines.</h2>
+    <p class="section-sub reveal-on-scroll" data-delay="200">
+      Every 8A Fire Safety Carbon Dioxide extinguisher is engineered to meet international standards while supporting local Philippine industry. From compact 5-lb units to industrial 100-lb systems — clean, residue-free fire protection for electrical and flammable-liquid hazards.
+    </p>
+    <div class="info-grid" data-stagger>
+      <div class="info-card">
+        <div class="ic-icon"><i class="fa-solid fa-industry"></i></div>
+        <h4>Philippine Manufacturing</h4>
+        <p>Manufactured at <strong>Purok Mansanas Sabang Naic Cavite Philippines</strong> — 8QCM+PXV, Purok Mansanas, Naic, Cavite</p>
+      </div>
+      <div class="info-card">
+        <div class="ic-icon"><i class="fa-solid fa-flask"></i></div>
+        <h4>Carbon Dioxide Agent</h4>
+        <p><strong>99.5% pure CO2</strong>, stored as a liquefied compressed gas. Effective on Class B and C fires with no residue and no clean-up required.</p>
+      </div>
+      <div class="info-card">
+        <div class="ic-icon"><i class="fa-solid fa-weight-hanging"></i></div>
+        <h4>Six Weight Classes</h4>
+        <p>Available in <strong>5, 10, 15, 20, 50, and 100 lbs</strong> capacities. From compact server-room units to industrial total-flood systems.</p>
+      </div>
+      <div class="info-card">
+        <div class="ic-icon"><i class="fa-solid fa-fire"></i></div>
+        <h4>Fire Classes Covered</h4>
+        <div class="class-badges mt-2">
+          <div class="class-badge b">B</div>
+          <div class="class-badge c">C</div>
+        </div>
+        <p class="mt-2" style="font-size:0.78rem;">B = Flammable Liquids &middot; C = Electrical Equipment</p>
+      </div>
+      <div class="info-card">
+        <div class="ic-icon"><i class="fa-solid fa-gauge-high"></i></div>
+        <h4>Pressure Systems</h4>
+        <p><strong>Self-Pressurized</strong> design — liquid CO2 generates its own vapor pressure. Working pressure: <strong>5,780 kPa at 21°C</strong>. Test pressure: <strong>19,000 kPa</strong>.</p>
+      </div>
+      <div class="info-card">
+        <div class="ic-icon"><i class="fa-solid fa-circle-check"></i></div>
+        <h4>Certifications</h4>
+        <p>
+          <strong>ISO 9001:2015</strong> Certified.
+          Product Safety License <strong>No. Q-4096</strong>.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     HOW TO USE (PASS)
+     ══════════════════════════════════════════ -->
+<section id="how-to-use" class="section-pad alt-bg">
+  <div class="container">
+    <div class="section-label reveal-on-scroll">Operating Guide</div>
+    <h2 class="section-title reveal-on-scroll" data-delay="100">The PASS Method</h2>
+    <p class="section-sub reveal-on-scroll" data-delay="200">Four standard operating steps for all 8A Fire Safety Carbon Dioxide extinguishers. Remember: Pull, Aim, Squeeze, Sweep.</p>
+    <div class="pass-steps" data-stagger>
+      <div class="pass-step">
+        <div class="step-num">P</div>
+        <div class="step-icon"><i class="fa-solid fa-lock-open"></i></div>
+        <h4>PULL the Pin</h4>
+        <p>Break the tamper seal and pull the safety pin from the handle. This unlocks the operating lever.</p>
+      </div>
+      <div class="pass-step">
+        <div class="step-num">A</div>
+        <div class="step-icon"><i class="fa-solid fa-crosshairs"></i></div>
+        <h4>AIM at Base</h4>
+        <p>Stand 1–2.5 meters back. Point the horn at the <strong>base of the fire</strong>, not at the flames. Hold the insulated handle, never the horn itself.</p>
+      </div>
+      <div class="pass-step">
+        <div class="step-num">S</div>
+        <div class="step-icon"><i class="fa-solid fa-hand-fist"></i></div>
+        <h4>SQUEEZE the Lever</h4>
+        <p>Squeeze the handle lever firmly to discharge the gas. Release to stop the flow.</p>
+      </div>
+      <div class="pass-step">
+        <div class="step-num">S</div>
+        <div class="step-icon"><i class="fa-solid fa-arrows-left-right"></i></div>
+        <h4>SWEEP Side to Side</h4>
+        <p>Move the horn slowly side-to-side across the base until the fire is completely out.</p>
+      </div>
+    </div>
+    <div class="row mt-5 g-4">
+      <div class="col-md-6 reveal-on-scroll">
+        <div class="neu-card p-4">
+          <h5 class="card-label"><i class="fa-solid fa-check-circle"></i> Suitable For</h5>
+          <ul class="check-list">
+            <li><i class="fa-solid fa-oil-can"></i> Class B — Flammable Liquids &amp; Gases</li>
+            <li><i class="fa-solid fa-bolt"></i> Class C — Energized Electrical Equipment</li>
+            <li><i class="fa-solid fa-server"></i> Sensitive equipment — leaves no residue</li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-6 reveal-on-scroll" data-delay="100">
+        <div class="neu-card p-4">
+          <h5 class="card-label red"><i class="fa-solid fa-triangle-exclamation"></i> Do NOT Use On</h5>
+          <ul class="check-list red">
+            <li><i class="fa-solid fa-circle-xmark"></i> Combustible metal fires (Class D)</li>
+            <li><i class="fa-solid fa-circle-xmark"></i> Not rated for Class A ordinary combustibles</li>
+            <li><i class="fa-solid fa-circle-xmark"></i> Never grip the bare horn — risk of frostbite</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     CERTIFICATES
+     ══════════════════════════════════════════ -->
+<section id="certificates" class="section-pad">
+  <div class="container">
+    <div class="section-label reveal-on-scroll">Compliance & Standards</div>
+    <h2 class="section-title reveal-on-scroll" data-delay="100">Certificates &amp; Documentation</h2>
+    <p class="section-sub reveal-on-scroll" data-delay="200">All 8A Fire Safety Carbon Dioxide products are manufactured under strict quality management systems and Philippine regulatory compliance.</p>
+    <div class="cert-grid" data-stagger>
+      <div class="cert-card">
+        <div class="cert-icon-wrap"><i class="fa-solid fa-award"></i></div>
+        <div>
+          <h4>ISO 9001:2015</h4>
+          <p>Certified Quality Management System covering the full production lifecycle — from cylinder sourcing to finished unit inspection.</p>
+          <small class="cert-number">Ref: License No. Q-4096</small>
+          <div class="cert-status">CERTIFIED — ACTIVE</div>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon-wrap"><i class="fa-solid fa-shield-halved"></i></div>
+        <div>
+          <h4>Product Safety License (PH)</h4>
+          <p>Registered with Philippine regulatory authorities. Product Safety License No. Q-4096 issued under the Philippine Consumer Act.</p>
+          <div class="cert-status">LICENSED</div>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon-wrap"><i class="fa-solid fa-fire-extinguisher"></i></div>
+        <div>
+          <h4>Technical Inspection Record</h4>
+          <p>Each cylinder undergoes high-pressure hydrostatic testing at 19,000 kPa, valve integrity check, and label verification before shipment.</p>
+          <div class="cert-status">TEST PASSED</div>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon-wrap"><i class="fa-solid fa-globe"></i></div>
+        <div>
+          <h4>Made in the Philippines</h4>
+          <p>Proudly manufactured locally at Purok Manasanas Sabang Naic Cavite. Supporting Philippine industry and local employment since 2019.</p>
+          <div class="cert-status">LOCAL MANUFACTURE</div>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon-wrap"><i class="fa-solid fa-sync"></i></div>
+        <div>
+          <h4>Recharge &amp; Service Certification</h4>
+          <p>After any discharge, a recharge service form must be completed. Recharge available through 8A authorized service centers.</p>
+          <div class="cert-status">SERVICE AVAILABLE</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     PRODUCTION TIMELINE
+     ══════════════════════════════════════════ -->
+<section id="timeline" class="section-pad alt-bg">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-5 reveal-on-scroll">
+        <div class="section-label">Production Process</div>
+        <h2 class="section-title">From Raw Materials<br/>to Your Facility</h2>
+        <p class="section-sub">Every 8A Fire Safety Carbon Dioxide extinguisher undergoes a rigorous five-stage production process with quality checks at each stage.</p>
+        <div class="process-highlight">
+          <div class="ph-item"><span class="ph-num">Q-4096</span><span class="ph-unit">LICENSE</span><span class="ph-label">PS MARK</span></div>
+          <div class="ph-item"><span class="ph-num">100%</span><span class="ph-label">Weight Check</span></div>
+          <div class="ph-item"><span class="ph-num">ISO</span><span class="ph-unit">9001</span><span class="ph-label">Quality Standard</span></div>
+        </div>
+      </div>
+      <div class="col-lg-7">
+        <div class="timeline">
+          <div class="tl-item reveal-on-scroll">
+            <span class="tl-year">Stage 01</span>
+            <h4>Material Sourcing</h4>
+            <p>Food-grade liquid CO2 sourced from certified suppliers. High-pressure seamless steel cylinder blanks procured from ISO-certified local Philippine mills.</p>
+          </div>
+          <div class="tl-item reveal-on-scroll" data-delay="100">
+            <span class="tl-year">Stage 02</span>
+            <h4>Cylinder Fabrication &amp; Testing</h4>
+            <p>Cylinders are formed, seamless-drawn, and hydraulically tested at 19,000 kPa to confirm structural integrity for high-pressure liquid CO2 storage.</p>
+          </div>
+          <div class="tl-item reveal-on-scroll" data-delay="200">
+            <span class="tl-year">Stage 03</span>
+            <h4>Liquid CO2 Filling</h4>
+            <p>Precise mass of liquid CO2 charged into each cylinder by weight, not volume, generating a self-pressurized vapor space of 5,780 kPa at 21°C. 100% leak tested.</p>
+          </div>
+          <div class="tl-item reveal-on-scroll" data-delay="300">
+            <span class="tl-year">Stage 04</span>
+            <h4>Quality Inspection &amp; Labeling</h4>
+            <p>Each unit receives comprehensive final inspection including precision weight verification, ISO label, production date, and serial number.</p>
+          </div>
+          <div class="tl-item reveal-on-scroll" data-delay="400">
+            <span class="tl-year">Stage 05</span>
+            <h4>Distribution &amp; Post-Sale Service</h4>
+            <p>Units are carefully packaged and distributed. Post-sale recharge and hydrostatic recertification services available nationwide.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     CONTACT
+     ══════════════════════════════════════════ -->
+<section id="contact" class="section-pad">
+  <div class="container">
+    <div class="contact-box reveal-on-scroll">
+      <div class="section-label" style="justify-content:center;">Get In Touch</div>
+      <h2>Need a Quote or<br/>Recharge Service?</h2>
+      <p>Contact 8A Fire Safety Maintenance &amp; Manufacturing Corporation for product inquiries, volume pricing, recharge services, or certification documentation.</p>
+      <div class="d-flex justify-content-center gap-3 flex-wrap">
+        <a href="tel:09676615730" class="neu-btn neu-btn-accent"><i class="fa-solid fa-phone"></i> Call Us</a>
+        <a href="https://8agroup.org" target="_blank" class="neu-btn"><i class="fa-solid fa-globe"></i> Website</a>
+      </div>
+      <div class="contact-details">
+        <div class="contact-pill"><span class="icon"><i class="fa-solid fa-location-dot"></i></span><span>Purok Mansanas Sabang Naic Cavite</span></div>
+        <div class="contact-pill"><span class="icon"><i class="fa-solid fa-phone"></i></span><span>0956 001 8222</span></div>
+        <div class="contact-pill"><span class="icon"><i class="fa-solid fa-globe"></i></span><span>https://8agroup.org</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     FOOTER
+     ══════════════════════════════════════════ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="index.html" class="brand"><span class="brand-text">8A Fire Safety</span></a>
+      <p class="footer-tagline">Protecting Lives and Property Since 2019</p>
+    </div>
+    <div class="footer-links">
+      <a href="#about">About</a>
+      <a href="#products">Products</a>
+      <a href="#specifications">Specifications</a>
+      <a href="#how-to-use">How to Use</a>
+      <a href="#certificates">Certificates</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="footer-contact">
+      <a href="tel: 09560018222" class="footer-link"><i class="fa-solid fa-phone"></i> 0956 001 8222</a>
+      <a href="mailto: firextinguishier@8afire.com" class="footer-link"><i class="fa-solid fa-envelope"></i>firextinguishier@8afire.com</a>
+      <a href="https://8agroup.org" target="_blank" class="footer-link"><i class="fa-solid fa-globe"></i> 8agroup.org</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-badges">
+      <span class="footer-badge"><i class="fa-solid fa-certificate"></i> ISO 9001:2015</span>
+      <span class="footer-badge"><i class="fa-solid fa-flag"></i> Made in Philippines</span>
+    </div>
+    <p class="copyright">
+      <a href="https://payne11092001.github.io/Arman-Baldo/" target="_blank" rel="noopener noreferrer">
+        &copy; Developed by: ARMAN BALDO. All rights reserved.
+      </a>
+    </p>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc4s9bIOgUxi8T/AgQF0uTAlC2B7qCBx0u9P8xK2B0" crossorigin="anonymous"></script>
+<script src="js/main.js"></script>
+<script src="js/co2_grid_animation.js"></script>
+</body>
+</html>
